@@ -2,7 +2,7 @@
 
 ---
 
-![echecs4.png](E%CC%81checs%20a%CC%80%204%20joueurs%201441363f093e80538d98f2b5c0eb8b59/echecs4.png)
+![echecs4.png](doc/echecs4.png)
 
 ## Règles du jeu
 
