@@ -55,39 +55,60 @@ sequenceDiagram
     Host ->> Guest4: YouAre(Color)
 
     loop While checkWin == False
+        Host ->> Guest1: YourTurn()
         Guest1 ->> Host: addMove(move1)
         Host ->> Host: validateMove(move1)
-        Host ->> Guest1: board(updated_board)
-        Host ->> Guest2: board(updated_board)
-        Host ->> Guest3: board(updated_board)
-        Host ->> Guest4: board(updated_board)
+        alt Move is valid
+            Host ->> Guest1: board(updated_board)
+            Host ->> Guest2: board(updated_board)
+            Host ->> Guest3: board(updated_board)
+            Host ->> Guest4: board(updated_board)
+        else Move is invalid
+            Host ->> Guest1: InvalidMove, try again
+        end
 
+        Host ->> Guest2: YourTurn()
         Guest2 ->> Host: addMove(move2)
         Host ->> Host: validateMove(move2)
-        Host ->> Guest1: board(updated_board)
-        Host ->> Guest2: board(updated_board)
-        Host ->> Guest3: board(updated_board)
-        Host ->> Guest4: board(updated_board)
+        alt Move is valid
+            Host ->> Guest1: board(updated_board)
+            Host ->> Guest2: board(updated_board)
+            Host ->> Guest3: board(updated_board)
+            Host ->> Guest4: board(updated_board)
+        else Move is invalid
+            Host ->> Guest2: InvalidMove, try again
+        end
 
+        Host ->> Guest3: YourTurn()
         Guest3 ->> Host: addMove(move3)
         Host ->> Host: validateMove(move3)
-        Host ->> Guest1: board(updated_board)
-        Host ->> Guest2: board(updated_board)
-        Host ->> Guest3: board(updated_board)
-        Host ->> Guest4: board(updated_board)
+        alt Move is valid
+            Host ->> Guest1: board(updated_board)
+            Host ->> Guest2: board(updated_board)
+            Host ->> Guest3: board(updated_board)
+            Host ->> Guest4: board(updated_board)
+        else Move is invalid
+            Host ->> Guest3: InvalidMove, try again
+        end
 
+        Host ->> Guest4: YourTurn()
         Guest4 ->> Host: addMove(move4)
         Host ->> Host: validateMove(move4)
-        Host ->> Guest1: board(updated_board)
-        Host ->> Guest2: board(updated_board)
-        Host ->> Guest3: board(updated_board)
-        Host ->> Guest4: board(updated_board)
+        alt Move is valid
+            Host ->> Guest1: board(updated_board)
+            Host ->> Guest2: board(updated_board)
+            Host ->> Guest3: board(updated_board)
+            Host ->> Guest4: board(updated_board)
+        else Move is invalid
+            Host ->> Guest4: InvalidMove, try again
+        end
     end
 
     Host ->> Guest1: winner(GuestX)
     Host ->> Guest2: winner(GuestX)
     Host ->> Guest3: winner(GuestX)
     Host ->> Guest4: winner(GuestX)
+
 ```
 
 
