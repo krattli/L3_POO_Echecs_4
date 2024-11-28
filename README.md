@@ -1,38 +1,94 @@
-# Règles
+# Échecs à 4 joueurs :
 
-Le jeu se joue à au moins deux joueurs et comporte un maitre du jeu non joueur.
+---
 
-## Mise en place
+![echecs4.png](E%CC%81checs%20a%CC%80%204%20joueurs%201441363f093e80538d98f2b5c0eb8b59/echecs4.png)
 
-Chaque joueur reçoit un nombre déterminé de cartes tirées aléatoirement, qu'il garde face cachée.
+## Règles du jeu
 
-## Déroulé de la partie
+---
 
-Les joueurs sont répartis dans l'ordre d'arrivée. Chaque joueur affronte le prochain dans un duel, à tour de rôle (le dernier joueur affronte le premier). Si un joueur n'a plus de carte, il perd la partie et ne peut plus joueur.
+Les échecs à 4 constituent une variante jouée par quatre personnes en même temps et sur le même échiquier.
 
-### Déroulé des duels
+Chaque joueur a une couleur différente pour son jeu de pièces, à savoir rouge, bleu, jaune et vert. La partie commence toujours par les rouges et se poursuit dans le sens des aiguilles d'une montre. Une autre différence majeure des échecs à 4 joueurs est l'échiquier, qui compte 160 cases car trois rangées supplémentaires sont ajoutées de chaque côté.
 
-* Lors d'un duel, chacun de joueur joue une carte de sa pile. Le joueur ayant joué la carte de plus haute valeur l'emporte et met sous sa pile les cartes jouées, en les mélangeant.
-* Si les deux joueurs ont joué une carte de même valeur, le duel recommence en accumulant les cartes jouées de telle sorte à ce que le gagnant empoche la totalité des cartes du duel.
+## **Règles standards des échecs à 4 joueurs en mode libre**
 
-## Fin de la partie
+---
 
-Le gagnant est le dernier joueur en lice.
+L'une des variantes les plus connues des échecs à 4 joueurs est le mode libre. Comme vous pouvez le deviner par son nom, dans ce type d'affrontement, chacun des quatre joueurs se bat seul contre les trois autres.
 
-### Détail des classes principales
+Le but de cette variante est de terminer la partie avec plus de points que ses adversaires. Il existe de nombreuses façons pour un joueur de gagner des points :
 
-Un exemple de jeu supportant le réseau
+- En matant un adversaire (+20)
+- En se mettant en situation de pat (+20)
+- En mettant en situation de pat un adversaire (+10 pour chaque joueur encore dans la partie)
+- En faisant échec à plus d'un roi simultanément avec la dame (+1 pour deux roi, +5 pour trois rois)
+- En faisant échec à plus d'un roi simultanément avec une autre pièce que la dame (+5 pour deux rois, +20 pour trois rois)
+- En capturant des pièces actives (+1 pour un pion ou une dame promue, +3 pour un cavalier, +5 pour un fou, +5 pour une tour et +9 pour la dame)
 
-* LocalWarGame la version du jeu supportant le jeu en local
-* WarGameEngine le moteur du jeu
-* WarGameNetorkPlayer le joueur distant en cas de partie réseau
-* WarGameNetworkEngine la version du jeu supportant le réseau
+Comme aux échecs classiques, les pions sont promus lorsqu'ils atteignent la huitième rangée d'un joueur. Cependant, dans les parties standard en mode libre, un pion est automatiquement promu en dame. Si elle est capturée, cette dame ne rapporte qu'un point au joueur qui la prend.
 
+Au cours de la partie, un joueur est éliminé s'il abandonne, s'il se retrouve pat, s'il se fait mater ou si son temps est écoulé.
+
+Lorsqu'un joueur abandonne ou perd au temps, son roi reste en vie et se déplace au hasard. Mater un roi rapporte 20 points au joueur qui l'exécute tandis que le pat est récompensé de 10 points pour chaque joueur actif restant.
+
+Lorsqu'un joueur se fait mater ou pater, toutes ses pièces deviennent inactives et sont grisées. La capture de ces pièces ne rapporte aucun point.
+
+En cas de nulle par triple répétition, par manque de matériel ou par la règle des 50 coups, tous les joueurs actifs reçoivent 10 points chacun.
+
+La partie se termine lorsque trois joueurs sont éliminés. En outre, une partie peut se terminer lorsqu'il ne reste que deux joueurs et que l'un d'entre eux a une avance de 21 points ou plus sur le tableau d'affichage. Ce joueur peut revendiquer la victoire en abandonnant et en accordant 20 points à l'autre joueur qui ne pourra pas le rattraper.
 
 # Protocole réseau
 
-> Le protocole réseau définit les séquences des commandes échangées entre les différentes parties prenantes. Il doit contenir, pour chaque commande, l'expéditeur, le destinataire, le nom de la commande et le contenu du corps de la commande.
+```mermaid
+sequenceDiagram
+    participant Host
+    participant Guest1
+    participant Guest2
+    participant Guest3
+    participant Guest4
 
-![protocole](doc/protocle.png)
+    Host ->> Guest1: YouAre(Color)
+    Host ->> Guest2: YouAre(Color)
+    Host ->> Guest3: YouAre(Color)
+    Host ->> Guest4: YouAre(Color)
+
+    loop While checkWin == False
+        Guest1 ->> Host: addMove(move1)
+        Host ->> Host: validateMove(move1)
+        Host ->> Guest1: board(updated_board)
+        Host ->> Guest2: board(updated_board)
+        Host ->> Guest3: board(updated_board)
+        Host ->> Guest4: board(updated_board)
+
+        Guest2 ->> Host: addMove(move2)
+        Host ->> Host: validateMove(move2)
+        Host ->> Guest1: board(updated_board)
+        Host ->> Guest2: board(updated_board)
+        Host ->> Guest3: board(updated_board)
+        Host ->> Guest4: board(updated_board)
+
+        Guest3 ->> Host: addMove(move3)
+        Host ->> Host: validateMove(move3)
+        Host ->> Guest1: board(updated_board)
+        Host ->> Guest2: board(updated_board)
+        Host ->> Guest3: board(updated_board)
+        Host ->> Guest4: board(updated_board)
+
+        Guest4 ->> Host: addMove(move4)
+        Host ->> Host: validateMove(move4)
+        Host ->> Guest1: board(updated_board)
+        Host ->> Guest2: board(updated_board)
+        Host ->> Guest3: board(updated_board)
+        Host ->> Guest4: board(updated_board)
+    end
+
+    Host ->> Guest1: winner(GuestX)
+    Host ->> Guest2: winner(GuestX)
+    Host ->> Guest3: winner(GuestX)
+    Host ->> Guest4: winner(GuestX)
+```
+
 
 
