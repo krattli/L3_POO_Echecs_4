@@ -15,6 +15,11 @@ public class SuperDame extends SuperPiece {
     }
 
     @Override
+    public boolean isOccupiedByThisPiece(Case position) {
+        return false;
+    }
+
+    @Override
     public ArrayList<Coup> getAllPossibleMoves() {
         return null;
     }

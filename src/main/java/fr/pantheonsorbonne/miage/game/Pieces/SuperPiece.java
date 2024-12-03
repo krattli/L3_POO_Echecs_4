@@ -10,4 +10,6 @@ public abstract class SuperPiece extends Piece {
         super(owner, position);
     }
 
+    public abstract boolean isOccupiedByThisPiece(Case position);
+
 }
