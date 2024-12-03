@@ -29,6 +29,10 @@ Le but de cette variante est de terminer la partie avec plus de points que ses a
 
 Comme aux échecs classiques, les pions sont promus lorsqu'ils atteignent la huitième rangée d'un joueur. Cependant, dans les parties standard en mode libre, un pion est automatiquement promu en dame. Si elle est capturée, cette dame ne rapporte qu'un point au joueur qui la prend.
 
+## **EndGame et conditions de victoire**
+
+---
+
 Au cours de la partie, un joueur est éliminé s'il abandonne, s'il se retrouve pat, s'il se fait mater ou si son temps est écoulé.
 
 Lorsqu'un joueur abandonne ou perd au temps, son roi reste en vie et se déplace au hasard. Mater un roi rapporte 20 points au joueur qui l'exécute tandis que le pat est récompensé de 10 points pour chaque joueur actif restant.
