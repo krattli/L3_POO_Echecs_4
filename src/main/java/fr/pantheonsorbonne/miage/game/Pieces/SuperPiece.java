@@ -12,4 +12,6 @@ public abstract class SuperPiece extends Piece {
 
     public abstract boolean isOccupiedByThisPiece(Case position);
 
+    public abstract ArrayList<Case> getCasesOccupiedByThisPiece();
+
 }
