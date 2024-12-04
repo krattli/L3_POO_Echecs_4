@@ -59,11 +59,4 @@ public class Case {
         coordinates[1] = y.ordinal();
         return coordinates;
     }
-
-    public static void main(String[] args) throws WrongCaseFormatException {
-        Case c = new Case(13,0);
-        System.out.println(c.x + "  " + c.y);
-        System.out.println(c.toString());
-        System.out.println(c.getCoordInt()[0] + " " + c.getCoordInt()[1]);
-    }
 }
