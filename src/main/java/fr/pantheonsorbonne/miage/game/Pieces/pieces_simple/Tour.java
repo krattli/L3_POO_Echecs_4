@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.game.Pieces;
+package fr.pantheonsorbonne.miage.game.Pieces.pieces_simple;
 
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
