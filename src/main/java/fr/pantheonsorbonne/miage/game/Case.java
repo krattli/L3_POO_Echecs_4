@@ -5,8 +5,8 @@ import fr.pantheonsorbonne.miage.enums.Ligne;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 
 public class Case {
-    public final Colonne x;
-    public final Ligne y;
+    private final Colonne x;
+    private final Ligne y;
 
     Case(Colonne x, Ligne y) {
         this.x = x;
