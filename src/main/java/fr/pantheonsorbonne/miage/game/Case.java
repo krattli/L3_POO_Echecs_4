@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.enums.Colonne;
 import fr.pantheonsorbonne.miage.enums.Ligne;
+import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 
 public class Case {
     public final Colonne x;
@@ -18,8 +19,26 @@ public class Case {
     }
 
     Case(int x, int y) {
-        this.x = Colonne.values()[x];
-        this.y = Ligne.values()[13 - y];
+        this.x = Colonne.values()[13 - x];
+        this.y = Ligne.values()[y];
+    }
+
+    public Case(String notation) throws WrongCaseFormatException {
+        if (notation == null || notation.length() < 2) {
+            throw new WrongCaseFormatException("La notation doit être au format algébrique classique");
+        }
+        String colonneStr = notation.substring(0, 1).toUpperCase();
+        String ligneStr = notation.substring(1);
+
+        try {
+            this.x = Colonne.valueOf(colonneStr);
+
+            int numeroLigne = Integer.parseInt(ligneStr);
+            this.y = Ligne.values()[numeroLigne - 1];
+
+        } catch (IllegalArgumentException e) {
+            throw new WrongCaseFormatException("Notation invalide : " + notation);
+        }
     }
 
     public String toString() {
@@ -36,13 +55,13 @@ public class Case {
 
     public int[] getCoordInt() {
         int[] coordinates = new int[2];
-        coordinates[0] = x.ordinal();
-        coordinates[1] = 13 - y.ordinal();
+        coordinates[0] = 13 - x.ordinal();
+        coordinates[1] = y.ordinal();
         return coordinates;
     }
 
-    public static void main(String[] args) {
-        Case c = new Case(Colonne.A, 1);
+    public static void main(String[] args) throws WrongCaseFormatException {
+        Case c = new Case(13,0);
         System.out.println(c.x + "  " + c.y);
         System.out.println(c.toString());
         System.out.println(c.getCoordInt()[0] + " " + c.getCoordInt()[1]);
