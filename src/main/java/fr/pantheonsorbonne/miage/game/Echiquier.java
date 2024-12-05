@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.miage.game;
 
+import fr.pantheonsorbonne.miage.enums.AffichagePieces;
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Pieces.pieces_simple.Pion;
@@ -13,6 +14,7 @@ public class Echiquier {
 
     private Echiquier() {}
 
+    //On verra si ça reste à la fin, peut être metre dans la classe partie jsp
     public static void addPlayers(Player joueur1, Player joueur2, Player joueur3, Player joueur4) throws WrongCaseFormatException {
         joueur1.setColor(Color.RED);
         joueur2.setColor(Color.GREEN);
@@ -33,6 +35,29 @@ public class Echiquier {
     }
     public static Piece[][] getPlateau() {
         return plateau;
+    }
+
+    public static void printPlateau() {
+        for (int i = 0; i < plateau.length; i++) {
+            for (int j = 0; j < plateau[i].length; j++) {
+                if (plateau[i][j] != null) {
+                    String CouleurAffichage;
+                    if (plateau[i][j].getOwner().getColor().ordinal() % 2 == 0){
+                        CouleurAffichage = "B";
+                    }
+                    else {
+                        CouleurAffichage = "N";
+                    }
+                    String nomComplet = plateau[i][j].getClass().toString();
+                    String nomClasse = nomComplet.substring(nomComplet.lastIndexOf('.') + 1) + CouleurAffichage;
+                    System.out.print("| "+AffichagePieces.getByAlias(nomClasse).getSymbol()+" ");
+                }
+                else {
+                    System.out.print("|___");
+                }
+            }
+            System.out.println("|");
+        }
     }
 
     public static void setPieceToPosition(Piece piece, Case position){
@@ -91,5 +116,17 @@ public class Echiquier {
         //verifier si les lignes sont bien les bonnes
         int[] coord = position.getCoordInt();
         return plateau[coord[0]][coord[1]];
+    }
+
+    public static void main (String[] args) throws WrongCaseFormatException {
+
+        PlayerBot j1 = new PlayerBot("j1");
+        PlayerBot j2 = new PlayerBot("j2");
+        PlayerBot j3 = new PlayerBot("j3");
+        PlayerBot j4 = new PlayerBot("j4");
+
+        Echiquier.addPlayers(j1, j2, j3, j4);
+        Echiquier.initAllPieces();
+        Echiquier.printPlateau();
     }
 }
