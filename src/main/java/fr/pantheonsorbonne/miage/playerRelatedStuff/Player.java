@@ -26,6 +26,7 @@ public abstract class Player{
     public void setColor (Color color){
         this.color = color;
     }
+    public Color getColor(){return this.color;}
     public void addPoints(int points){
         this.points+=points;
     }
