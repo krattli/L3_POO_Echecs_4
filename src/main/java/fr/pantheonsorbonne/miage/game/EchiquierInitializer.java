@@ -9,7 +9,7 @@ import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import java.util.Arrays;
 
 public class EchiquierInitializer {
-    public static void initialiser() throws WrongCaseFormatException {
+    public static void initialiser(){
         Player[] players = Echiquier.getPlayers();
         for (Piece[] pieces : Echiquier.getPlateau()) {
             for (Piece piece : pieces) {
@@ -18,7 +18,10 @@ public class EchiquierInitializer {
                 }
             }
         }
-        for(Player player : players) initialiserPlayer(player);
+        try {
+            for (Player player : players) initialiserPlayer(player);
+        }
+        catch (WrongCaseFormatException e) {}
     }
 
     private static void initialiserPlayer(Player player) throws WrongCaseFormatException {

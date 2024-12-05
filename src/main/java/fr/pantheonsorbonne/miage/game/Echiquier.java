@@ -15,7 +15,7 @@ public class Echiquier {
     private Echiquier() {}
 
     //On verra si ça reste à la fin, peut être metre dans la classe partie jsp
-    public static void addPlayers(Player joueur1, Player joueur2, Player joueur3, Player joueur4) throws WrongCaseFormatException {
+    public static void addPlayers(Player joueur1, Player joueur2, Player joueur3, Player joueur4){
         joueur1.setColor(Color.RED);
         joueur2.setColor(Color.GREEN);
         joueur3.setColor(Color.YELLOW);
@@ -23,7 +23,7 @@ public class Echiquier {
         Echiquier.players = new Player[]{joueur1, joueur2, joueur3, joueur4};
     }
 
-    public static void initAllPieces () throws WrongCaseFormatException {
+    public static void initAllPieces (){
         if (players.length == 4) {
             plateau = new Piece[TAILLE][TAILLE];
             EchiquierInitializer.initialiser();
