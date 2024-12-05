@@ -20,6 +20,11 @@ public class SuperDame extends SuperPiece {
     }
 
     @Override
+    public ArrayList<Case> getCasesOccupiedByThisPiece() {
+        return null;
+    }
+
+    @Override
     public ArrayList<Coup> getAllPossibleMoves() {
         return null;
     }
