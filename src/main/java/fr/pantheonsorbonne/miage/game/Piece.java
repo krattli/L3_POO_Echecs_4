@@ -9,11 +9,8 @@ public abstract class Piece {
     public Piece(Player owner, Case position) {
         this.owner = owner;
         this.position = position;
+        Echiquier.setPieceToPosition(this, position);
     }
-
-    public abstract ArrayList<Coup> getAllPossibleMoves();
-
-    public abstract Boolean isTheMoveLegal();
 
     public Case getPosition() {
         return position;
@@ -27,4 +24,12 @@ public abstract class Piece {
         return owner;
     }
 
+    public abstract ArrayList<Coup> getAllPossibleMoves();
+
+    public abstract Boolean isTheMoveLegal();
+
+    public void kill(){
+        Case caseLocation = this.getPosition();
+        Echiquier.setPieceToPosition(this, null);
+    }
 }
