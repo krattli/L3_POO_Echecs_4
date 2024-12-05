@@ -8,16 +8,6 @@ public class Case {
     private final Colonne x;
     private final Ligne y;
 
-    Case(Colonne x, Ligne y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    Case(Colonne x, int y) {
-        this.x = x;
-        this.y = Ligne.values()[y-1];
-    }
-
     Case(int x, int y) {
         this.x = Colonne.values()[13 - x];
         this.y = Ligne.values()[y];
@@ -41,6 +31,16 @@ public class Case {
         }
     }
 
+    Case(Colonne x, Ligne y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    Case(Colonne x, int y) {
+        this.x = x;
+        this.y = Ligne.values()[y-1];
+    }
+
     public String toString() {
         return this.x.toString() + (this.y.ordinal() + 1);
     }
@@ -48,7 +48,6 @@ public class Case {
     public Colonne getColonne() {
         return x;
     }
-
     public Ligne getLigne() {
         return y;
     }
@@ -58,5 +57,19 @@ public class Case {
         coordinates[0] = 13 - x.ordinal();
         coordinates[1] = y.ordinal();
         return coordinates;
+    }
+
+    public Case getCorespondingCoordRotatedBy90(int n){
+        int[] coordInt = getCoordInt();
+        for (int i = 0; i < n; i++) {
+            int tempVar = coordInt[0];
+            coordInt[0] = 13 - coordInt[1];
+            coordInt[1] = tempVar;
+        }
+        return new Case(coordInt[0], coordInt[1]);
+    }
+
+    public Case getCorespondingCoordRotatedBy90(){
+        return getCorespondingCoordRotatedBy90(1);
     }
 }
