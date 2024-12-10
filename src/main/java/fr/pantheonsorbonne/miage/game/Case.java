@@ -8,6 +8,8 @@ public class Case {
     private final Colonne X;
     private final Ligne Y;
 
+    //Constructeur renvoie des valeurs incompréhensible
+    //à débeuger ou supprimer vu que de toute manière il est innutile
     public Case(int Y, int X) {
         this.X = Colonne.values()[13 - Y];
         this.Y = Ligne.values()[X];
@@ -31,13 +33,14 @@ public class Case {
         }
     }
 
+    //Ce constructeur est un peu useless en vrai (et flemme de débug le this.X=Y;)
     public Case(Colonne Y, Ligne X) {
         this.X = Y;
         this.Y = X;
     }
 
+    //Lui aussi il est super useless
     public Case(Colonne X, int Y) {
-        //Case(Y,Ligne.values()[X-1]);
         this.X = X;
         this.Y = Ligne.values()[Y - 1];
     }
@@ -46,13 +49,8 @@ public class Case {
         return this.X.toString() + (this.Y.ordinal() + 1);
     }
 
-    public Colonne getColonne() {
-        return this.X;
-    }
-
-    public Ligne getLigne() {
-        return this.Y;
-    }
+    public Colonne getColonne() {return this.X;}
+    public Ligne getLigne() {return this.Y;}
 
     public int[] getCoordInt() {
         int[] coordinates = new int[2];
@@ -85,7 +83,7 @@ public class Case {
         int newCaseX = coordInt[0] + X;
         int newCaseY = coordInt[1] + Y;
         if (isValidCoord(newCaseX, newCaseY)) {
-            return new Case(newCaseX, newCaseY);
+            return new Case(newCaseY, newCaseX);
         } else {
             return null;
         }
