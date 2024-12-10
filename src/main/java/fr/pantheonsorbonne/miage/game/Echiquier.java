@@ -110,4 +110,20 @@ public class Echiquier {
         int[] coord = position.getCoordInt();
         return plateau[coord[0]][coord[1]];
     }
+
+    //A supprimer des que possible
+    private static void setupAndPrint () {
+        PlayerBot j1 = new PlayerBot("j1");
+        PlayerBot j2 = new PlayerBot("j2");
+        PlayerBot j3 = new PlayerBot("j3");
+        PlayerBot j4 = new PlayerBot("j4");
+
+        Echiquier.addPlayers(j1, j2, j3, j4);
+        Echiquier.initAllPieces();
+
+        Echiquier.printPlateau();
+    }
+    public static void main (String[] args) {
+        //Echiquier.setupAndPrint();
+    }
 }
