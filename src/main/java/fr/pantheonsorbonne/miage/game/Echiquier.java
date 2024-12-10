@@ -3,7 +3,6 @@ package fr.pantheonsorbonne.miage.game;
 import fr.pantheonsorbonne.miage.enums.AffichagePieces;
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
-import fr.pantheonsorbonne.miage.game.Pieces.pieces_simple.Pion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 
@@ -30,12 +29,8 @@ public class Echiquier {
         }
     }
     
-    public static Player[] getPlayers() {
-        return players;
-    }
-    public static Piece[][] getPlateau() {
-        return plateau;
-    }
+    public static Player[] getPlayers() {return players;}
+    public static Piece[][] getPlateau() {return plateau;}
 
     public static void printPlateau() {
         for (int i = 0; i < plateau.length; i++) {
@@ -61,12 +56,10 @@ public class Echiquier {
     }
 
     public static void setPieceToPosition(Piece piece, Case position){
-
         if(piece.getPosition() != null) {
             int[] coordDepart = piece.getPosition().getCoordInt();
             plateau[coordDepart[0]][coordDepart[1]] = null;
         }
-
         if(position == null){
             piece.setPosition(null);
         }
@@ -116,17 +109,5 @@ public class Echiquier {
         //verifier si les lignes sont bien les bonnes
         int[] coord = position.getCoordInt();
         return plateau[coord[0]][coord[1]];
-    }
-
-    public static void main (String[] args) throws WrongCaseFormatException {
-
-        PlayerBot j1 = new PlayerBot("j1");
-        PlayerBot j2 = new PlayerBot("j2");
-        PlayerBot j3 = new PlayerBot("j3");
-        PlayerBot j4 = new PlayerBot("j4");
-
-        Echiquier.addPlayers(j1, j2, j3, j4);
-        Echiquier.initAllPieces();
-        Echiquier.printPlateau();
     }
 }

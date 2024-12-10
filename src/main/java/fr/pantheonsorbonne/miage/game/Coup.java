@@ -13,6 +13,10 @@ public class Coup {
         //pieceMangee = null;
     }
 
+    public Coup(String coup){
+
+    }
+
     public String toString(){
         String prise = this.pieceMangee!=null ? "x" : "-";
         return this.piece.getClass().getSimpleName().substring(0,1)+this.depart.toString()+prise+this.arrivee.toString();
