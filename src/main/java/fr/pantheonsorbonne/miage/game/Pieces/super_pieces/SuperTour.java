@@ -30,7 +30,7 @@ public class SuperTour extends SuperPiece {
     }
 
     @Override
-    public Boolean isTheMoveLegal() {
+    public boolean isTheMoveLegal(Coup coup) {
         return false;
     }
 }

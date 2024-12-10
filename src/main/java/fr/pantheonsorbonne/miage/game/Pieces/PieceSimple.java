@@ -15,6 +15,6 @@ public abstract class PieceSimple extends Piece {
     public abstract ArrayList<Coup> getAllPossibleMoves();
 
     @Override
-    public abstract Boolean isTheMoveLegal();
+    public abstract boolean isTheMoveLegal(Coup coup);
 
 }

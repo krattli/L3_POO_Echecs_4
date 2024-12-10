@@ -15,7 +15,7 @@ public class Fou extends Piece {
         return null;
     }
 
-    public Boolean isTheMoveLegal() {
-        return null;
+    public boolean isTheMoveLegal(Coup coup) {
+        return false;
     }
 }
