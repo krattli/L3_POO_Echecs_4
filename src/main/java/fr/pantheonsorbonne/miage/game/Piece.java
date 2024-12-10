@@ -12,21 +12,14 @@ public abstract class Piece {
         Echiquier.setPieceToPosition(this, position);
     }
 
-    public Case getPosition() {
-        return position;
-    }
-
-    public void setPosition(Case position) {
-        this.position = position;
-    }
-
+    public Case getPosition() {return position;}
+    public void setPosition(Case position) {this.position = position;}
     public Player getOwner() {
         return owner;
     }
 
     public abstract ArrayList<Coup> getAllPossibleMoves();
-
-    public abstract Boolean isTheMoveLegal();
+    public abstract boolean isTheMoveLegal(Coup coup);
 
     public void kill(){
         Case caseLocation = this.getPosition();
