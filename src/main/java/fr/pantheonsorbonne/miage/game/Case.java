@@ -8,11 +8,9 @@ public class Case {
     private final Colonne X;
     private final Ligne Y;
 
-    //Constructeur renvoie des valeurs incompréhensible
-    //à débeuger ou supprimer vu que de toute manière il est innutile
-    public Case(int Y, int X) {
-        this.X = Colonne.values()[13 - Y];
-        this.Y = Ligne.values()[X];
+    public Case(int X, int Y) {
+        this.X = Colonne.values()[X];
+        this.Y = Ligne.values()[13 - Y];
     }
 
     public Case(String notation) throws WrongCaseFormatException {
@@ -81,9 +79,9 @@ public class Case {
     public Case getValidTranslatedCase(int X, int Y) {
         int[] coordInt = this.getCoordInt();
         int newCaseX = coordInt[0] + X;
-        int newCaseY = coordInt[1] + Y;
+        int newCaseY = coordInt[1] - Y;
         if (isValidCoord(newCaseX, newCaseY)) {
-            return new Case(newCaseY, newCaseX);
+            return new Case(newCaseX, newCaseY);
         } else {
             return null;
         }
@@ -101,5 +99,16 @@ public class Case {
 
     public Case getCorrespondingCoordRotatedBy90() {
         return getCorrespondingCoordRotatedBy90(1);
+    }
+
+    public static void main (String[] args) throws WrongCaseFormatException {
+        Case c = new Case("F8");
+        Case c2 = c.getValidTranslatedCase(5,6);
+        //Case c2 = new Case(0,0);
+        String str = "non";
+        if(c2 != null) {
+            str = c2.toString();
+        }
+        System.out.println(str);
     }
 }

@@ -51,8 +51,8 @@ class CasesPlateauTest {
         Case c = new Case("F8");
 
         Case c1 = c.getValidTranslatedCase(0, 0);
-        Case c2 = c.getValidTranslatedCase(6, 5);
-        Case c3 = c.getValidTranslatedCase(-7, -2);
+        Case c2 = c.getValidTranslatedCase(5, 6);
+        Case c3 = c.getValidTranslatedCase(-2, -7);
         Case c4 = c.getValidTranslatedCase(8, -4);
 
         Case c5 = c.getValidTranslatedCase(40, -40);
