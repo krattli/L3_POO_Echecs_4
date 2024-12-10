@@ -87,7 +87,7 @@ public class Case {
         }
     }
 
-    public Case getCorrespondingCoordRotatedBy90(int n) {
+    public Case getCoordRotatedBy90(int n) {
         int[] coordInt = getCoordInt();
         for (int i = 0; i < n; i++) {
             int tempVar = coordInt[0];
@@ -97,8 +97,8 @@ public class Case {
         return new Case(coordInt[0], coordInt[1]);
     }
 
-    public Case getCorrespondingCoordRotatedBy90() {
-        return getCorrespondingCoordRotatedBy90(1);
+    public Case getCoordRotatedBy90() {
+        return getCoordRotatedBy90(1);
     }
 
     public static void main (String[] args) throws WrongCaseFormatException {
