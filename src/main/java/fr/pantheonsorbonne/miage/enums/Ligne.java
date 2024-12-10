@@ -15,12 +15,7 @@ public enum Ligne {
     TWELVE(2,12),
     THIRTEEN(1,13),
     FOURTEEN(0,14);
-    @SuppressWarnings("unused")
-    private final int coordPlateau;
-    private final int coordAlgebrique;
 
     Ligne (int i, int j) {
-        this.coordPlateau=i;
-        this.coordAlgebrique=j;
     }
 }

@@ -16,10 +16,6 @@ public enum Colonne {
     M(12),
     N(13);
 
-    @SuppressWarnings("unused")
-    private final int code;
-
     Colonne (int i){
-        this.code=i;
     }
 }
