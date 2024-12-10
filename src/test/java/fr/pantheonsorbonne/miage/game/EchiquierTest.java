@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 class EchiquierTest {
     private PlayerBot j1;
     private PlayerBot j2;
@@ -27,15 +28,15 @@ class EchiquierTest {
     @Test
     void setAPieceOnBoard() throws WrongCaseFormatException {
         Case c = new Case("A1");
-        Pion p = new Pion(j1,c);
+        Pion p = new Pion(j1, c);
         assertEquals(Echiquier.getPieceAt(c), p);
     }
 
     @Test
     void rotateCopyToRightBy90() throws WrongCaseFormatException {
         Case c = new Case("A1");
-        Pion p = new Pion(j1,c);
-        assertEquals(1,1);
+        Pion p = new Pion(j1, c);
+        assertEquals(1, 1);
     }
 
     @Test
@@ -44,26 +45,26 @@ class EchiquierTest {
     }
 
     @Test
-    void setPieceToPosition(){
-        assertEquals(1,1);
+    void setPieceToPosition() {
+        assertEquals(1, 1);
     }
 
     @Test
     void setpieceToPositionNull() throws WrongCaseFormatException {
         Case c = new Case("A1");
-        Pion p = new Pion(j1,c);
-        Echiquier.setPieceToPosition(p,null);
-        assertTrue(Echiquier.getPieceAt(c) == null && p.getPosition() == null );
+        Pion p = new Pion(j1, c);
+        Echiquier.setPieceToPosition(p, null);
+        assertTrue(Echiquier.getPieceAt(c) == null && p.getPosition() == null);
     }
 
     @Test
     void jouerCoup() {
-        assertEquals(1,1);
+        assertEquals(1, 1);
     }
 
     @Test
     void emptyCell() {
-        assertEquals(1,1);
+        assertEquals(1, 1);
     }
 
     @Test
