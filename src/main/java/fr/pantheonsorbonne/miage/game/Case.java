@@ -91,7 +91,7 @@ public class Case {
         }
     }
 
-    public Case getCorespondingCoordRotatedBy90(int n) {
+    public Case getCorrespondingCoordRotatedBy90(int n) {
         int[] coordInt = getCoordInt();
         for (int i = 0; i < n; i++) {
             int tempVar = coordInt[0];
@@ -101,7 +101,7 @@ public class Case {
         return new Case(coordInt[0], coordInt[1]);
     }
 
-    public Case getCorespondingCoordRotatedBy90() {
-        return getCorespondingCoordRotatedBy90(1);
+    public Case getCorrespondingCoordRotatedBy90() {
+        return getCorrespondingCoordRotatedBy90(1);
     }
 }
