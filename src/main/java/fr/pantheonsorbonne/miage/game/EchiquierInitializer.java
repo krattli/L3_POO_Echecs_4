@@ -23,7 +23,7 @@ public class EchiquierInitializer {
 
     private static void initialiserPlayer(Player player) throws WrongCaseFormatException {
 
-        int numberOfRotation = player.getColor().ordinal();
+        int numberOfRotation = (player.getColor().ordinal() + 3 ) % 4;
 
         Case posRoiInit = new Case("H1").getCorrespondingCoordRotatedBy90(numberOfRotation);
         Roi roi = new Roi(player, posRoiInit);

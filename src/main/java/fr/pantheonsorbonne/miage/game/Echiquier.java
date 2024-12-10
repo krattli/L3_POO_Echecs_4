@@ -35,23 +35,28 @@ public class Echiquier {
     public static void printPlateau() {
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[i].length; j++) {
-                if (plateau[i][j] != null) {
-                    String CouleurAffichage;
-                    if (plateau[i][j].getOwner().getColor().ordinal() % 2 == 0){
-                        CouleurAffichage = "B";
-                    }
-                    else {
-                        CouleurAffichage = "N";
-                    }
-                    String nomComplet = plateau[i][j].getClass().toString();
-                    String nomClasse = nomComplet.substring(nomComplet.lastIndexOf('.') + 1) + CouleurAffichage;
-                    System.out.print("| "+AffichagePieces.getByAlias(nomClasse).getSymbol()+" ");
-                }
-                else {
-                    System.out.print("|___");
-                }
+                //if (plateau[i][j] != null) {System.out.print(plateau[i][j].getOwner().getColor().name());}
+                printPiece(plateau[i][j]);
             }
             System.out.println("|");
+        }
+    }
+
+    public static void printPiece(Piece piece) {
+        if (piece != null) {
+            String CouleurAffichage;
+            if (piece.getOwner().getColor().ordinal() % 2 == 0){
+                CouleurAffichage = "B";
+            }
+            else {
+                CouleurAffichage = "N";
+            }
+            String nomComplet = piece.getClass().toString();
+            String nomClasse = nomComplet.substring(nomComplet.lastIndexOf('.') + 1) + CouleurAffichage;
+            System.out.print("| "+AffichagePieces.getByAlias(nomClasse).getSymbol()+" ");
+        }
+        else {
+            System.out.print("|___");
         }
     }
 
@@ -124,6 +129,6 @@ public class Echiquier {
         Echiquier.printPlateau();
     }
     public static void main (String[] args) {
-        //Echiquier.setupAndPrint();
+        Echiquier.setupAndPrint();
     }
 }
