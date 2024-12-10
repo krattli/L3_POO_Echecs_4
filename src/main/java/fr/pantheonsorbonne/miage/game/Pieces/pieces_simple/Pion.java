@@ -18,50 +18,43 @@ public class Pion extends Piece {
     @Override
     public ArrayList<Coup> getAllPossibleMoves() {
         ArrayList<Coup> coups = new ArrayList<>();
-        /*
-        Case positionActuelle = this.getPosition();
-        int[] coords = positionActuelle.getCoordInt();
 
-        // Directions principales pour avancer
+        Case positionActuelle = this.getPosition();
+        int[] coordsActuelles = positionActuelle.getCoordInt();
+
         int deltaX = 0, deltaY = 0;
         switch (this.getOwner().getColor()) {
-            case RED:    deltaY = 1;  break;  // Bas
-            case GREEN:  deltaX = 1;  break;  // Droite
-            case YELLOW: deltaY = -1; break;  // Haut
-            case BLUE:   deltaX = -1; break;  // Gauche
+            case RED:    deltaY = 1;  break;
+            case GREEN:  deltaX = -1;  break;
+            case YELLOW: deltaY = -1; break;
+            case BLUE:   deltaX = 1; break;
         }
 
-        // Mouvement simple vers l'avant
-        Case caseAvant = new Case(coords[0] + deltaX, coords[1] + deltaY);
-        if (isTheMoveLegal(caseAvant) && Echiquier.getPieceAt(caseAvant) == null) {
+        Case caseAvant = new Case(coordsActuelles[0] + deltaX, coordsActuelles[1] + deltaY);
+        if (caseAvant.isValid() && Echiquier.getPieceAt(caseAvant) == null) {
             coups.add(new Coup(caseAvant, this));
         }
 
-        // Captures diagonales (gauche et droite)
-        // Les directions sont définies en fonction de la couleur du joueur
         int[][] diagonales = {
-                {1, 1}, {1, -1},   // RED: Bas-droite, Bas-gauche
-                {1, 1}, {-1, 1},   // GREEN: Droite-haut, Droite-bas
-                {-1, -1}, {1, -1}, // YELLOW: Haut-gauche, Haut-droite
-                {-1, 1}, {-1, -1}  // BLUE: Gauche-haut, Gauche-bas
+                {-1, 1}, {1, 1},
+                {-1, -1}, {-1, 1},
+                {-1, -1}, {1, -1},
+                {1, -1}, {1, 1}
         };
 
-        // Récupérer l'index de la couleur
-        int colorIndex = this.getOwner().getColor().ordinal(); // RED=0, GREEN=1, YELLOW=2, BLUE=3
+        int colorIndex = this.getOwner().getColor().ordinal();
 
-        // Vérifier les cases de capture diagonale
         for (int i = 0; i < 2; i++) {
             int dx = diagonales[colorIndex * 2 + i][0];
             int dy = diagonales[colorIndex * 2 + i][1];
-            Case captureCase = new Case(coords[0] + dx, coords[1] + dy);
-            if (isTheMoveLegal(captureCase)) {
+            Case captureCase = positionActuelle.getValidTranslatedCase(dx, dy);
+            if (captureCase != null && Echiquier.getPieceAt(captureCase) != null) {
                 Piece targetPiece = Echiquier.getPieceAt(captureCase);
-                if (targetPiece != null && !targetPiece.getOwner().equals(this.getOwner())) {
+                if (!targetPiece.getOwner().equals(this.getOwner())) {
                     coups.add(new Coup(captureCase, this));
                 }
             }
         }
-        */
         return coups;
     }
 
@@ -83,6 +76,7 @@ public class Pion extends Piece {
                 }
                 break;
                 case GREEN:
+                    //finir de coder ça lmao
 
         }
         return isPromu;
