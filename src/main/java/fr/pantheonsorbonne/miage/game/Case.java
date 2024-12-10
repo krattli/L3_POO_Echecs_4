@@ -5,12 +5,12 @@ import fr.pantheonsorbonne.miage.enums.Ligne;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 
 public class Case {
-    private final Colonne x;
-    private final Ligne y;
+    private final Colonne X;
+    private final Ligne Y;
 
-    public Case(int x, int y) {
-        this.x = Colonne.values()[13 - x];
-        this.y = Ligne.values()[y];
+    public Case(int Y, int X) {
+        this.X = Colonne.values()[13 - Y];
+        this.Y = Ligne.values()[X];
     }
 
     public Case(String notation) throws WrongCaseFormatException {
@@ -21,78 +21,77 @@ public class Case {
         String ligneStr = notation.substring(1);
 
         try {
-            this.x = Colonne.valueOf(colonneStr);
+            this.X = Colonne.valueOf(colonneStr);
 
             int numeroLigne = Integer.parseInt(ligneStr);
-            this.y = Ligne.values()[numeroLigne - 1];
+            this.Y = Ligne.values()[numeroLigne - 1];
 
         } catch (IllegalArgumentException e) {
             throw new WrongCaseFormatException("Notation invalide : " + notation);
         }
     }
 
-    public Case(Colonne x, Ligne y) {
-        this.x = x;
-        this.y = y;
+    public Case(Colonne Y, Ligne X) {
+        this.X = Y;
+        this.Y = X;
     }
 
-    public Case(Colonne x, int y) {
-        //Case(x,Ligne.values()[y-1]);
-        this.x = x;
-        this.y = Ligne.values()[y-1];
+    public Case(Colonne X, int Y) {
+        //Case(Y,Ligne.values()[X-1]);
+        this.X = X;
+        this.Y = Ligne.values()[Y - 1];
     }
 
     public String toString() {
-        return this.x.toString() + (this.y.ordinal() + 1);
+        return this.X.toString() + (this.Y.ordinal() + 1);
     }
 
     public Colonne getColonne() {
-        return x;
+        return this.X;
     }
+
     public Ligne getLigne() {
-        return y;
+        return this.Y;
     }
 
     public int[] getCoordInt() {
         int[] coordinates = new int[2];
-        coordinates[0] = 13 - y.ordinal();
-        coordinates[1] = x.ordinal();
+        coordinates[0] = X.ordinal();
+        coordinates[1] = 13 - Y.ordinal();
         return coordinates;
     }
 
     public boolean isValid() {
         boolean valid = true;
         int[] coordInt = this.getCoordInt();
-        int x = coordInt[0];
-        int y = coordInt[1];
-        if ((x < 3 && y < 3) || (x > 10 && y > 10) || (x > 10 && y < 3) || (x < 3 && y > 10)) {
+        int Y = coordInt[0];
+        int X = coordInt[1];
+        if ((Y < 3 && X < 3) || (Y > 10 && X > 10) || (Y > 10 && X < 3) || (Y < 3 && X > 10)) {
             valid = false;
         }
         return valid;
     }
 
-    public static boolean isValidCoord(int x, int y) {
-        if (x < 14 && y < 14 && x >= 0 && y >= 0) {
-            return new Case(x, y).isValid();
-        }
-        else{
+    public static boolean isValidCoord(int Y, int X) {
+        if (Y < 14 && X < 14 && Y >= 0 && X >= 0) {
+            return new Case(Y, X).isValid();
+        } else {
             return false;
         }
     }
 
-    public Case getValidTranslatedCase(int x, int y ){
+    public Case getValidTranslatedCase(int X, int Y) {
         int[] coordInt = this.getCoordInt();
-        int newCaseX = coordInt[0] + x;
-        int newCaseY = coordInt[1] + y;
-        if (isValidCoord(newCaseX,newCaseY)){
-            return new Case(newCaseX,newCaseY);
-        }
-        else{
+        int newCaseX = coordInt[0] + X;
+        int newCaseY = coordInt[1] + Y;
+        if (isValidCoord(newCaseX, newCaseY)) {
+            return new Case(newCaseX, newCaseY);
+        } else {
             return null;
         }
     }
 
-    public Case getCorespondingCoordRotatedBy90(int n){
+    public Case getCorespondingCoordRotatedBy90(int n) {
         int[] coordInt = getCoordInt();
         for (int i = 0; i < n; i++) {
             int tempVar = coordInt[0];
@@ -102,7 +101,7 @@ public class Case {
         return new Case(coordInt[0], coordInt[1]);
     }
 
-    public Case getCorespondingCoordRotatedBy90(){
+    public Case getCorespondingCoordRotatedBy90() {
         return getCorespondingCoordRotatedBy90(1);
     }
 }

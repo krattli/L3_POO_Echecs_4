@@ -48,13 +48,32 @@ class CasesPlateauTest {
 
     @Test
     void validTranslation() throws WrongCaseFormatException {
-        Case c = new Case("D1");
+        Case c = new Case("F8");
 
         Case c1 = c.getValidTranslatedCase(0, 0);
-        Case c2 = c.getValidTranslatedCase(8, 0);
-        Case c3 = c.getValidTranslatedCase(0, 0);
-        Case c4 = c.getValidTranslatedCase(0, 0);
+        Case c2 = c.getValidTranslatedCase(6, 5);
+        Case c3 = c.getValidTranslatedCase(-7, -2);
+        Case c4 = c.getValidTranslatedCase(8, -4);
 
-        assertNotNull(c2);
+        Case c5 = c.getValidTranslatedCase(40, -40);
+        Case c6 = c.getValidTranslatedCase(7, 5);
+        Case c7 = c.getValidTranslatedCase(-12, 5);
+        Case c8 = c.getValidTranslatedCase(6, -5);
+
+        Case[] bonnesCases = {c1,c2,c3,c4};
+        Case[] mauvaisesCases = {c5,c6,c7,c8};
+
+        boolean testCases = true;
+        for (Case k : bonnesCases){
+            if (k == null){
+                testCases = false;
+            }
+        }
+        for (Case k : mauvaisesCases){
+            if (k != null){
+                testCases = false;
+            }
+        }
+        assertTrue(testCases);
     }
 }

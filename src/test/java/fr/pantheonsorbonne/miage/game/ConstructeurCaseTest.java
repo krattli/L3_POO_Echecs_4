@@ -18,7 +18,7 @@ class ConstructeurCaseTest {
     @Test
     void Constructeur1CoordPlateau() {
         Case c1 = new Case(Colonne.A, Ligne.ONE);
-        int[] expectedCoordinates = {13, 0};
+        int[] expectedCoordinates = {0, 13};
         assertArrayEquals(expectedCoordinates, c1.getCoordInt());
     }
 
@@ -31,7 +31,7 @@ class ConstructeurCaseTest {
     @Test
     void Constructeur2CoordPlateau() {
         Case c1 = new Case(Colonne.A, 1);
-        int[] expectedCoordinates = {13, 0};
+        int[] expectedCoordinates = {0, 13};
         assertArrayEquals(expectedCoordinates, c1.getCoordInt());
     }
 
@@ -44,7 +44,7 @@ class ConstructeurCaseTest {
     @Test
     void Constructeur3CoordPlateau() {
         Case c1 = new Case(13, 0);
-        int[] expectedCoordinates = {13, 0};
+        int[] expectedCoordinates = {0, 13};
         assertArrayEquals(expectedCoordinates, c1.getCoordInt());
     }
 
@@ -57,7 +57,7 @@ class ConstructeurCaseTest {
     @Test
     void Constructeur4CoordPlateau() throws WrongCaseFormatException {
         Case c1 = new Case("N14");
-        int[] expectedCoordinates = {0, 13};
+        int[] expectedCoordinates = {13, 0};
         assertArrayEquals(expectedCoordinates, c1.getCoordInt());
     }
 }
