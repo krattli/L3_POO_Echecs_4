@@ -8,7 +8,7 @@ public class Case {
     private final Colonne x;
     private final Ligne y;
 
-    Case(int x, int y) {
+    public Case(int x, int y) {
         this.x = Colonne.values()[13 - x];
         this.y = Ligne.values()[y];
     }
@@ -31,12 +31,13 @@ public class Case {
         }
     }
 
-    Case(Colonne x, Ligne y) {
+    public Case(Colonne x, Ligne y) {
         this.x = x;
         this.y = y;
     }
 
-    Case(Colonne x, int y) {
+    public Case(Colonne x, int y) {
+        //Case(x,Ligne.values()[y-1]);
         this.x = x;
         this.y = Ligne.values()[y-1];
     }
@@ -57,6 +58,38 @@ public class Case {
         coordinates[0] = 13 - x.ordinal();
         coordinates[1] = y.ordinal();
         return coordinates;
+    }
+
+    public boolean isValid() {
+        boolean valid = true;
+        int[] coordInt = this.getCoordInt();
+        int x = coordInt[0];
+        int y = coordInt[1];
+        if ((x < 3 && y < 3) || (x > 10 && y > 10) || (x > 10 && y < 3) || (x < 3 && y > 10)) {
+            valid = false;
+        }
+        return valid;
+    }
+
+    public static boolean isValidCoord(int x, int y) {
+        if (x < 14 && y < 14 && x >= 0 && y >= 0) {
+            return new Case(x, y).isValid();
+        }
+        else{
+            return false;
+        }
+    }
+
+    public Case getValidTranslatedCase(int x, int y ){
+        int[] coordInt = this.getCoordInt();
+        int newCaseX = coordInt[0] + x;
+        int newCaseY = coordInt[1] + y;
+        if (isValidCoord(newCaseX,newCaseY)){
+            return new Case(newCaseX,newCaseY);
+        }
+        else{
+            return null;
+        }
     }
 
     public Case getCorespondingCoordRotatedBy90(int n){
