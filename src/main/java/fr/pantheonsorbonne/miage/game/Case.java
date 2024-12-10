@@ -55,8 +55,8 @@ public class Case {
 
     public int[] getCoordInt() {
         int[] coordinates = new int[2];
-        coordinates[0] = 13 - x.ordinal();
-        coordinates[1] = y.ordinal();
+        coordinates[0] = 13 - y.ordinal();
+        coordinates[1] = x.ordinal();
         return coordinates;
     }
 
