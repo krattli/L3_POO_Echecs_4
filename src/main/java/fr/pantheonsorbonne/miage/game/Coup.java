@@ -19,12 +19,15 @@ public class Coup {
     }
 
     public Coup(String coup){
-
     }
 
     public String toString(){
         if (this == null) return "|--|";
         String prise = this.pieceMangee!=null ? "x" : "-";
         return this.piece.getClass().getSimpleName().substring(0,1)+this.depart.toString()+prise+this.arrivee.toString();
+    }
+
+    public Piece getPiecePrise() {
+        return this.pieceMangee;
     }
 }

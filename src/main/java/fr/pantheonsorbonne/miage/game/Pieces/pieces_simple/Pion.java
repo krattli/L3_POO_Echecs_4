@@ -2,15 +2,14 @@ package fr.pantheonsorbonne.miage.game.Pieces.pieces_simple;
 
 import fr.pantheonsorbonne.miage.enums.Colonne;
 import fr.pantheonsorbonne.miage.enums.Ligne;
-import fr.pantheonsorbonne.miage.game.Echiquier;
-import fr.pantheonsorbonne.miage.game.Piece;
+import fr.pantheonsorbonne.miage.game.Pieces.PieceSimple;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 
 import java.util.ArrayList;
 
-public class Pion extends Piece {
+public class Pion extends PieceSimple {
     private static int[][] directions;
 
     public Pion(Player owner, Case position) {
@@ -35,58 +34,42 @@ public class Pion extends Piece {
     public ArrayList<Coup> getAllPossibleMoves() {
         ArrayList<Coup> coups = new ArrayList<>();
 
-        Coup CoupCaseAvant = this.getCoupCaseAvant();
-        if (CoupCaseAvant != null) {
-            coups.add(CoupCaseAvant);
+        int nbCoupsDevant = 1;
+        if(this.isFirstTime()){nbCoupsDevant = 2;}
+        ArrayList<Coup> enAvant = this.computeLinesOfMoves(new int[][] {Pion.directions[0]},nbCoupsDevant);
+
+        for(Coup coup : enAvant){
+            if(coup.getPiecePrise() != null){break;}
+            else{coups.add(coup);}
         }
 
-        Coup CoupDouble = this.getCoupCaseAvant();
-        if (CoupCaseAvant != null) {
-            coups.add(CoupDouble);
-        }
-
-        Coup[] coupsDiagonaux = this.getCoupsDiagonaux();
-        for (Coup coup : coupsDiagonaux) {
-            if (coup != null) {
-                coups.add(coup);
-            }
+        ArrayList<Coup> prisesDiagonales = this.computeLinesOfMoves(new int[][] {Pion.directions[1],Pion.directions[2]},1);
+        for(Coup coup : prisesDiagonales){
+            if(coup.getPiecePrise() == null){break;}
+            else{coups.add(coup);}
         }
 
         return coups;
     }
 
-    private Coup getCoupCaseAvant() {
-        int[] coordsActuelles = this.getPosition().getCoordInt();
-        //Case caseAvant = new Case(coordsActuelles[0] + this.direction[0], coordsActuelles[1] + this.direction[1]);
-        Coup coup = null;
-        /*
-        if (caseAvant.isValid() && Echiquier.getPieceAt(caseAvant) == null) {
-            coup = new Coup(this, caseAvant);
-        }*/
-        return coup;
-    }
-
-    private Coup getCoupDouble() {
-        int[] coordsActuelles = this.getPosition().getCoordInt();
-        Coup coupDouble = null;
-        return coupDouble;
-    }
-
-    private Coup[] getCoupsDiagonaux() {
-        Coup[] coups = new Coup[2];
-        /*
-        for (int i = 0; i < 2; i++) {
-            int dx = this.diagonales[i][0];
-            int dy = this.diagonales[i][1];
-            Case captureCase = this.position.getValidTranslatedCase(dx, dy);
-            if (captureCase != null && Echiquier.getPieceAt(captureCase) != null) {
-                Piece targetPiece = Echiquier.getPieceAt(captureCase);
-                if (!targetPiece.getOwner().equals(this.getOwner())) {
-                    coups[i] = new Coup(this,captureCase);
-                }
-            }
-        }*/
-        return coups;
+    private boolean isFirstTime(){
+        switch (this.getOwner().getColor()) {
+            case RED:
+                if(this.getPosition().getLigne() == Ligne.TWO){return true;}
+                break;
+            case GREEN:
+                if (this.getPosition().getColonne() == Colonne.M){return true;}
+                break;
+            case YELLOW:
+                if (this.getPosition().getLigne() == Ligne.THIRTEEN){return true;}
+                break;
+            case BLUE:
+                if (this.getPosition().getColonne() == Colonne.B) {return true;}
+                break;
+            default:
+                return false;
+        }
+        return false;
     }
 
     public boolean isTheMoveLegal(Coup coup) {
