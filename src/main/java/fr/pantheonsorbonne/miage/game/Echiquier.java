@@ -24,9 +24,13 @@ public class Echiquier {
 
     public static void initAllPieces (){
         if (players.length == 4) {
-            plateau = new Piece[TAILLE][TAILLE];
+            resetPlateau();
             EchiquierInitializer.initialiser();
         }
+    }
+
+    public static void resetPlateau(){
+        plateau = new Piece[TAILLE][TAILLE];
     }
     
     public static Player[] getPlayers() {return players;}
