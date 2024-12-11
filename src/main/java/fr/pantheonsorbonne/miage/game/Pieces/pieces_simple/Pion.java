@@ -11,27 +11,22 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Pion extends Piece {
-    private int[] direction;
-    private int[][] diagonales;
+    private static int[][] directions;
 
     public Pion(Player owner, Case position) {
         super(owner, position);
         switch (this.getOwner().getColor()) {
             case RED:
-                direction = new int[]{0, 1};
-                diagonales = new int[][]{{-1, 1}, {1, 1}};
+                directions = new int[][]{{0, 1},{-1, 1}, {1, 1}};
                 break;
             case GREEN:
-                direction = new int[]{-1, 0};
-                diagonales = new int[][]{{-1, -1}, {-1, 1}};
+                directions = new int[][]{{-1, 0},{-1, -1}, {-1, 1}};
                 break;
             case YELLOW:
-                direction = new int[]{0, -1};
-                diagonales = new int[][]{{-1, -1}, {1, -1}};
+                directions = new int[][]{{0, -1},{-1, -1}, {1, -1}};
                 break;
             case BLUE:
-                direction = new int[]{1, 1};
-                diagonales = new int[][]{{1, -1}, {1, 1}};
+                directions = new int[][]{{1, 1},{1, -1}, {1, 1}};
                 break;
         }
     }
@@ -62,11 +57,12 @@ public class Pion extends Piece {
 
     private Coup getCoupCaseAvant() {
         int[] coordsActuelles = this.getPosition().getCoordInt();
-        Case caseAvant = new Case(coordsActuelles[0] + this.direction[0], coordsActuelles[1] + this.direction[1]);
+        //Case caseAvant = new Case(coordsActuelles[0] + this.direction[0], coordsActuelles[1] + this.direction[1]);
         Coup coup = null;
+        /*
         if (caseAvant.isValid() && Echiquier.getPieceAt(caseAvant) == null) {
             coup = new Coup(this, caseAvant);
-        }
+        }*/
         return coup;
     }
 
@@ -78,6 +74,7 @@ public class Pion extends Piece {
 
     private Coup[] getCoupsDiagonaux() {
         Coup[] coups = new Coup[2];
+        /*
         for (int i = 0; i < 2; i++) {
             int dx = this.diagonales[i][0];
             int dy = this.diagonales[i][1];
@@ -88,7 +85,7 @@ public class Pion extends Piece {
                     coups[i] = new Coup(this,captureCase);
                 }
             }
-        }
+        }*/
         return coups;
     }
 

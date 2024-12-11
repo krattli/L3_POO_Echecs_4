@@ -7,7 +7,7 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Fou extends Piece {
-    static int[][] directions = {{1, 1}, {1, -1}, {-1, -1}, {-1, 1}};
+    private static final int[][] directions = {{1, 1}, {1, -1}, {-1, -1}, {-1, 1}};
     public Fou(Player owner, Case position) {
         super(owner, position);
     }
