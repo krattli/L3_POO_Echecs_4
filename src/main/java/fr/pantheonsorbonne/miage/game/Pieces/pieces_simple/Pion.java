@@ -11,47 +11,81 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Pion extends Piece {
+    private int[] direction;
+    private int[][] diagonales;
+
     public Pion(Player owner, Case position) {
         super(owner, position);
+        switch (this.getOwner().getColor()) {
+            case RED:
+                direction = new int[]{0, 1};
+                diagonales = new int[][]{{-1, 1}, {1, 1}};
+                break;
+            case GREEN:
+                direction = new int[]{-1, 0};
+                diagonales = new int[][]{{-1, -1}, {-1, 1}};
+                break;
+            case YELLOW:
+                direction = new int[]{0, -1};
+                diagonales = new int[][]{{-1, -1}, {1, -1}};
+                break;
+            case BLUE:
+                direction = new int[]{1, 1};
+                diagonales = new int[][]{{1, -1}, {1, 1}};
+                break;
+        }
     }
 
     @Override
     public ArrayList<Coup> getAllPossibleMoves() {
         ArrayList<Coup> coups = new ArrayList<>();
 
-        Case positionActuelle = this.getPosition();
-        int[] coordsActuelles = positionActuelle.getCoordInt();
-
-        int deltaX = 0, deltaY = 0;
-        switch (this.getOwner().getColor()) {
-            case RED:    deltaY = 1;  break;
-            case GREEN:  deltaX = -1;  break;
-            case YELLOW: deltaY = -1; break;
-            case BLUE:   deltaX = 1; break;
+        Coup CoupCaseAvant = this.getCoupCaseAvant();
+        if (CoupCaseAvant != null) {
+            coups.add(CoupCaseAvant);
         }
 
-        Case caseAvant = new Case(coordsActuelles[0] + deltaX, coordsActuelles[1] + deltaY);
+        Coup CoupDouble = this.getCoupCaseAvant();
+        if (CoupCaseAvant != null) {
+            coups.add(CoupDouble);
+        }
+
+        Coup[] coupsDiagonaux = this.getCoupsDiagonaux();
+        for (Coup coup : coupsDiagonaux) {
+            if (coup != null) {
+                coups.add(coup);
+            }
+        }
+
+        return coups;
+    }
+
+    private Coup getCoupCaseAvant() {
+        int[] coordsActuelles = this.getPosition().getCoordInt();
+        Case caseAvant = new Case(coordsActuelles[0] + this.direction[0], coordsActuelles[1] + this.direction[1]);
+        Coup coup = null;
         if (caseAvant.isValid() && Echiquier.getPieceAt(caseAvant) == null) {
-            coups.add(new Coup(caseAvant, this));
+            coup = new Coup(this, caseAvant);
         }
+        return coup;
+    }
 
-        int[][] diagonales = {
-                {-1, 1}, {1, 1},
-                {-1, -1}, {-1, 1},
-                {-1, -1}, {1, -1},
-                {1, -1}, {1, 1}
-        };
+    private Coup getCoupDouble() {
+        int[] coordsActuelles = this.getPosition().getCoordInt();
+        Coup coupDouble = null;
+        return coupDouble;
+    }
 
-        int colorIndex = this.getOwner().getColor().ordinal();
-
+    private Coup[] getCoupsDiagonaux() {
+        Coup[] coups = new Coup[2];
         for (int i = 0; i < 2; i++) {
-            int dx = diagonales[colorIndex * 2 + i][0];
-            int dy = diagonales[colorIndex * 2 + i][1];
-            Case captureCase = positionActuelle.getValidTranslatedCase(dx, dy);
+            int dx = this.diagonales[i][0];
+            int dy = this.diagonales[i][1];
+            Case captureCase = this.position.getValidTranslatedCase(dx, dy);
             if (captureCase != null && Echiquier.getPieceAt(captureCase) != null) {
                 Piece targetPiece = Echiquier.getPieceAt(captureCase);
                 if (!targetPiece.getOwner().equals(this.getOwner())) {
-                    coups.add(new Coup(captureCase, this));
+                    coups[i] = new Coup(this,captureCase);
                 }
             }
         }
@@ -75,8 +109,8 @@ public class Pion extends Piece {
                     isPromu = true;
                 }
                 break;
-                case GREEN:
-                    //finir de coder ça lmao
+            case GREEN:
+                //finir de coder ça lmao
 
         }
         return isPromu;

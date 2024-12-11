@@ -7,12 +7,13 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Tour extends Piece {
+    static int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     public Tour(Player owner, Case position) {
         super(owner, position);
     }
 
     public ArrayList<Coup> getAllPossibleMoves() {
-        return null;
+        return this.computeLinesOfMoves(Tour.directions);
     }
 
     public boolean isTheMoveLegal(Coup coup) {
