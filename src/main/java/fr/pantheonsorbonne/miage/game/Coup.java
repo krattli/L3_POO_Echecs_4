@@ -5,12 +5,17 @@ public class Coup {
     private Case arrivee;
     private Piece piece;
     private Piece pieceMangee;
+    private boolean isFusion;
 
-    public Coup(Case arrivee, Piece piece) {
+    public Coup(Piece piece, Case arrivee) {
         this.depart = piece.getPosition();
         this.arrivee = arrivee;
         this.piece = piece;
-        //pieceMangee = null;
+    }
+
+    public Coup(Piece piece, Case arrivee, Piece pieceMangee) {
+        Coup coup = new Coup(piece, arrivee);
+        this.pieceMangee = pieceMangee;
     }
 
     public Coup(String coup){
@@ -18,6 +23,7 @@ public class Coup {
     }
 
     public String toString(){
+        if (this == null) return "|--|";
         String prise = this.pieceMangee!=null ? "x" : "-";
         return this.piece.getClass().getSimpleName().substring(0,1)+this.depart.toString()+prise+this.arrivee.toString();
     }
