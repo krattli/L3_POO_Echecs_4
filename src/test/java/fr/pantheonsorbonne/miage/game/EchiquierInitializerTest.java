@@ -16,7 +16,7 @@ class EchiquierInitializerTest {
     private Echiquier plateau;
 
     @BeforeAll
-    static void setUpgeneral() throws WrongCaseFormatException {
+    static void setUpgeneral() {
         PlayerBot j1 = new PlayerBot("Joueur1");
         PlayerBot j2 = new PlayerBot("Joueur2");
         PlayerBot j3 = new PlayerBot("Joueur3");
