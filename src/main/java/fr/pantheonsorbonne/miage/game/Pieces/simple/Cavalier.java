@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.game.Pieces.pieces_simple;
+package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Piece;

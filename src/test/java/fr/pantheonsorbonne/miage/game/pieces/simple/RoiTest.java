@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.game.Pieces.pieces_simple;
+package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Coup;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-class CavalierTest {
+class RoiTest {
     static PlayerBot j1 = new PlayerBot("Joueur1");
     static PlayerBot j2 = new PlayerBot("Joueur2");
     static PlayerBot j3 = new PlayerBot("Joueur3");
@@ -28,8 +28,8 @@ class CavalierTest {
 
     @Test
     void getAllPossibleMoves() throws WrongCaseFormatException {
-        Cavalier c = new Cavalier(j1,"B4");
-        ArrayList<Coup> moves = c.getAllPossibleMoves();
+        Roi r = new Roi(j1,"F8");
+        ArrayList<Coup> moves = r.getAllPossibleMoves();
         for (Coup coup : moves) {
             if (coup != null) {
                 System.out.println(coup.toString());

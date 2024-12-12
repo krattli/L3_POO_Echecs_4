@@ -1,7 +1,7 @@
-package fr.pantheonsorbonne.miage.game.Pieces.pieces_simple;
+package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
-import fr.pantheonsorbonne.miage.game.Pieces.PieceSimple;
+import fr.pantheonsorbonne.miage.game.pieces.PieceSimple;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;

@@ -2,10 +2,13 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.enums.Colonne;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
-import fr.pantheonsorbonne.miage.game.Pieces.pieces_simple.*;
+import fr.pantheonsorbonne.miage.game.pieces.simple.*;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 public class EchiquierInitializer {
+
+    public static final String H_1 = "H1";
+
     public static void initialiser(){
         Player[] players = Echiquier.getPlayers();
         for (Piece[] pieces : Echiquier.getPlateau()) {
@@ -25,7 +28,9 @@ public class EchiquierInitializer {
 
         int numberOfRotation = (player.getColor().ordinal() + 3 ) % 4;
 
-        Case posRoiInit = new Case("H1").getCoordRotatedBy90(numberOfRotation);
+        //H1 faut que se foit une constante
+
+        Case posRoiInit = new Case(H_1).getCoordRotatedBy90(numberOfRotation);
         Roi roi = new Roi(player, posRoiInit);
 
         Case posDameInit = new Case("G1").getCoordRotatedBy90(numberOfRotation);

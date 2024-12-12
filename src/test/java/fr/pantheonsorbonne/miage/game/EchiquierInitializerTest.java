@@ -1,13 +1,12 @@
 package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
-import fr.pantheonsorbonne.miage.game.Pieces.pieces_simple.Pion;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 class EchiquierInitializerTest {
     private PlayerBot j1;
     private PlayerBot j2;

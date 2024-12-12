@@ -1,16 +1,14 @@
-package fr.pantheonsorbonne.miage.game.Pieces.super_pieces;
+package fr.pantheonsorbonne.miage.game.pieces.super_pieces;
 
-import fr.pantheonsorbonne.miage.game.Piece;
-import fr.pantheonsorbonne.miage.game.Pieces.PieceSimple;
-import fr.pantheonsorbonne.miage.game.Pieces.SuperPiece;
+import fr.pantheonsorbonne.miage.game.pieces.SuperPiece;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
-public class SuperFou extends SuperPiece {
+public class SuperPion extends SuperPiece {
 
-    public SuperFou(Player owner, Case position) {
+    public SuperPion(Player owner, Case position) {
         super(owner, position);
     }
 

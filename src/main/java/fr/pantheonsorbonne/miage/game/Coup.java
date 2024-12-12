@@ -13,6 +13,8 @@ public class Coup {
         this.piece = piece;
     }
 
+    //Plusieurs classes de sous coup déplacement/fusion/rock/etc...
+
     public Coup(Piece piece, Case arrivee, Piece pieceMangee) {
         Coup coup = new Coup(piece, arrivee);
         this.pieceMangee = pieceMangee;

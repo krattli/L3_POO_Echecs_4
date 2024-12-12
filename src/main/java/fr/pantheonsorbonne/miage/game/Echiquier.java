@@ -11,6 +11,8 @@ public class Echiquier {
     private static Piece[][] plateau = new Piece[TAILLE][TAILLE];
     private static Player[] players;
 
+    //Rien mettre en statique faire une instance
+
     private Echiquier() {}
 
     //On verra si ça reste à la fin, peut être metre dans la classe partie jsp
@@ -24,6 +26,7 @@ public class Echiquier {
 
     public static void initAllPieces (){
         if (players.length == 4) {
+            //Il faut que 4 soit une constante
             resetPlateau();
             EchiquierInitializer.initialiser();
         }
@@ -79,7 +82,6 @@ public class Echiquier {
         }
     }
 
-    //Peut etre que cette méthode est completement innutile, on verra
     public static Piece[][] rotateCopyToRightBy90(int nombreRotation){
         Piece[][] rotatedPlateau = plateau;
         for (int rotation=0; rotation<nombreRotation; rotation++){
@@ -120,19 +122,4 @@ public class Echiquier {
         return plateau[coord[0]][coord[1]];
     }
 
-    //A supprimer des que possible
-    private static void setupAndPrint () {
-        PlayerBot j1 = new PlayerBot("j1");
-        PlayerBot j2 = new PlayerBot("j2");
-        PlayerBot j3 = new PlayerBot("j3");
-        PlayerBot j4 = new PlayerBot("j4");
-
-        Echiquier.addPlayers(j1, j2, j3, j4);
-        Echiquier.initAllPieces();
-
-        Echiquier.printPlateau();
-    }
-    public static void main (String[] args) {
-        Echiquier.setupAndPrint();
-    }
 }
