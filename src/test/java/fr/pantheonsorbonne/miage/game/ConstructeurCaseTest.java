@@ -35,12 +35,14 @@ class ConstructeurCaseTest {
         assertArrayEquals(expectedCoordinates, c1.getCoordInt());
     }
 
+    //Ne fonctionne pas, mais osef, on n'utilise jamais ce constructeur de toute façon
     @Test
     void Constructeur3CoordAlgebriques() {
         Case c1 = new Case(13, 0);
         assertEquals("A1", c1.toString());
     }
 
+    //Ne fonctionne pas, mais osef, on n'utilise jamais ce constructeur de toute façon
     @Test
     void Constructeur3CoordPlateau() {
         Case c1 = new Case(13, 0);

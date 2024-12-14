@@ -35,7 +35,7 @@ public class Pion extends PieceSimple {
             if(coup.getClass() == Prise.class){break;}
             else{
                 if (isPromoted()){
-                    coups.add(new Promotion(this, coup.getDepart()));
+                    coups.add( new Promotion(this, coup.getArrivee()));
                 }
                 else {coups.add(coup);}
             }
@@ -43,8 +43,7 @@ public class Pion extends PieceSimple {
 
         ArrayList<Coup> prisesDiagonales = this.computeLinesOfMoves(new int[][] {getDirections()[1],getDirections()[2]},1);
         for(Coup coup : prisesDiagonales){
-            if(coup.getClass() == Deplacement.class){continue;}
-            else{coups.add(coup);}
+            if(coup.getClass() != Deplacement.class){coups.add(coup);}
         }
         return coups;
     }
@@ -70,22 +69,12 @@ public class Pion extends PieceSimple {
     }
 
     private int[][] getDirections() {
-        int[][] directions = new int[3][2];
-        switch (this.getOwner().getColor()) {
-            case RED:
-                directions = new int[][]{{0, 1},{-1, 1}, {1, 1}};
-                break;
-            case GREEN:
-                directions = new int[][]{{-1, 0},{-1, -1}, {-1, 1}};
-                break;
-            case YELLOW:
-                directions = new int[][]{{0, -1},{-1, -1}, {1, -1}};
-                break;
-            case BLUE:
-                directions = new int[][]{{1, 0},{1, -1}, {1, 1}};
-                break;
-        }
-        return directions;
+        return switch (this.getOwner().getColor()) {
+            case RED -> new int[][]{{0, 1}, {-1, 1}, {1, 1}};
+            case GREEN -> new int[][]{{-1, 0}, {-1, -1}, {-1, 1}};
+            case YELLOW -> new int[][]{{0, -1}, {-1, -1}, {1, -1}};
+            case BLUE -> new int[][]{{1, 0}, {1, -1}, {1, 1}};
+        };
     }
 
     public boolean isPromoted() {

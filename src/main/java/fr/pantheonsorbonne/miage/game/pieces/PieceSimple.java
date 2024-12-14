@@ -2,7 +2,6 @@ package fr.pantheonsorbonne.miage.game.pieces;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
-import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
@@ -33,7 +32,7 @@ public abstract class PieceSimple extends Piece {
         for (int i = 1; i <= porteePiece; i++) {
             Case caseStep = this.position.getValidTranslatedCase(i*direction[0],i*direction[1]);
             if (caseStep != null) {
-                Piece piecePrise = Echiquier.getPieceAt(caseStep);
+                Piece piecePrise = this.getOwner().getEchiquier().getPieceAt(caseStep);
                 if (piecePrise == null) {
                     traceLine.add(new Deplacement(this,caseStep));
                 }

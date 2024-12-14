@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.game.Coup;
+import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
 
 public abstract class Player{
@@ -11,12 +12,14 @@ public abstract class Player{
     private int points;
     private Color color;
     private Boolean isAlive;
+    private Echiquier echiquier;
 
     public Player (String nom) {
         this.nom = nom;
         this.points = 0;
         this.isAlive = true;
     }
+
     public String getNom(){
         return this.nom;
     }
@@ -29,6 +32,12 @@ public abstract class Player{
     public Color getColor(){return this.color;}
     public void addPoints(int points){
         this.points+=points;
+    }
+    public Echiquier getEchiquier() {
+        return echiquier;
+    }
+    public void setEchiquier(Echiquier echiquier) {
+        this.echiquier = echiquier;
     }
 
     public Boolean isAlive(){

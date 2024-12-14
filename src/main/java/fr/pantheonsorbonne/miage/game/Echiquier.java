@@ -2,48 +2,55 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.enums.AffichagePieces;
 import fr.pantheonsorbonne.miage.enums.Color;
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 
 public class Echiquier {
     private static final int TAILLE = 14;
-    private static Piece[][] plateau = new Piece[TAILLE][TAILLE];
-    private static Player[] players;
+    private static final int NB_JOUEURS = 4;
+    private Piece[][] plateau = new Piece[TAILLE][TAILLE];
+    private Player[] players;
 
-    //Rien mettre en statique faire une instance
-
-    private Echiquier() {}
-
-    //On verra si ça reste à la fin, peut être metre dans la classe partie jsp
-    public static void addPlayers(Player joueur1, Player joueur2, Player joueur3, Player joueur4){
-        joueur1.setColor(Color.RED);
-        joueur2.setColor(Color.GREEN);
-        joueur3.setColor(Color.YELLOW);
-        joueur4.setColor(Color.BLUE);
-        Echiquier.players = new Player[]{joueur1, joueur2, joueur3, joueur4};
-    }
-
-    public static void initAllPieces (){
-        if (players.length == 4) {
-            //Il faut que 4 soit une constante
-            resetPlateau();
-            EchiquierInitializer.initialiser();
+    public Echiquier(Player [] players) {
+        if (players.length != NB_JOUEURS) {
+            System.out.println("Le jeu se joue à " + NB_JOUEURS);
+        }
+        else {
+            this.players = new Player[NB_JOUEURS];
+            plateau = new Piece[TAILLE][TAILLE];
+            this.addPlayers(players);
         }
     }
 
-    public static void resetPlateau(){
-        plateau = new Piece[TAILLE][TAILLE];
+    //On verra si ça reste à la fin, peut être metre dans la classe partie jsp
+    private void addPlayers(Player[] joueurs){
+        for ( int i = 0; i < NB_JOUEURS; i++){
+            joueurs[i].setColor(Color.values()[i]);
+            joueurs[i].setEchiquier(this);
+            this.players[i] = joueurs[i];
+        }
+    }
+
+    public void initAllPieces (){
+        if (this.players.length == 4) {
+            //Il faut que 4 soit une constante
+            resetPlateau();
+            EchiquierInitializer.initialiser(this);
+        }
+    }
+
+    //Maintenant que c'est plus statique, je suis perplexe sur l'utilité de cette méthode... afuera !
+    public void resetPlateau(){
+        this.plateau = new Piece[TAILLE][TAILLE];
     }
     
-    public static Player[] getPlayers() {return players;}
-    public static Piece[][] getPlateau() {return plateau;}
+    public Player[] getPlayers() {return this.players;}
+    public Piece[][] getPlateau() {return this.plateau;}
 
-    public static void printPlateau() {
-        for (int i = 0; i < plateau.length; i++) {
-            for (int j = 0; j < plateau[i].length; j++) {
+    public void printPlateau() {
+        for (Piece[] pieces : plateau) {
+            for (Piece piece : pieces) {
                 //if (plateau[i][j] != null) {System.out.print(plateau[i][j].getOwner().getColor().name());}
-                printPiece(plateau[i][j]);
+                printPiece(piece);
             }
             System.out.println("|");
         }
@@ -67,7 +74,7 @@ public class Echiquier {
         }
     }
 
-    public static void setPieceToPosition(Piece piece, Case position){
+    public void setPieceToPosition(Piece piece, Case position){
         if(piece.getPosition() != null) {
             int[] coordDepart = piece.getPosition().getCoordInt();
             plateau[coordDepart[0]][coordDepart[1]] = null;
@@ -82,7 +89,7 @@ public class Echiquier {
         }
     }
 
-    public static Piece[][] rotateCopyToRightBy90(int nombreRotation){
+    public Piece[][] rotateCopyToRightBy90(int nombreRotation){
         Piece[][] rotatedPlateau = plateau;
         for (int rotation=0; rotation<nombreRotation; rotation++){
             for (int i=0; i<TAILLE; i++){
@@ -111,12 +118,12 @@ public class Echiquier {
         // Implémenter la logique pour jouer un coup
     }
 
-    public static void emptyCell(Case position) {
+    public void emptyCell(Case position) {
         //verifier si les lignes sont bien les bonnes
         plateau[position.getColonne().ordinal()][position.getLigne().ordinal()] = null;
     }
 
-    public static Piece getPieceAt(Case position) {
+    public Piece getPieceAt(Case position) {
         //verifier si les lignes sont bien les bonnes
         int[] coord = position.getCoordInt();
         return plateau[coord[0]][coord[1]];

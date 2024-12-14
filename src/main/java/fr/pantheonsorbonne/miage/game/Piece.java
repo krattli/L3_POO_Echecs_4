@@ -3,7 +3,6 @@ import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public abstract class Piece {
     private final Player owner;
@@ -12,7 +11,7 @@ public abstract class Piece {
     public Piece(Player owner, Case position) {
         this.owner = owner;
         this.position = position;
-        Echiquier.setPieceToPosition(this, position);
+        owner.getEchiquier().setPieceToPosition(this, position);
     }
 
     public Piece(Player owner, String position) throws WrongCaseFormatException {
@@ -28,11 +27,12 @@ public abstract class Piece {
 
     public abstract ArrayList<Coup> getAllPossibleMoves();
 
+    //never used, donc faire attention à bien supp
     public Coup getNewCoup(Case destination) {
         return new Deplacement(this, destination);
     }
 
     public void kill(){
-        Echiquier.setPieceToPosition(this, null);
+        owner.getEchiquier().setPieceToPosition(this, null);
     }
 }
