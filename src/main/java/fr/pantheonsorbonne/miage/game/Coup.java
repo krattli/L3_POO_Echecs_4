@@ -1,11 +1,10 @@
 package fr.pantheonsorbonne.miage.game;
 
-public class Coup {
+public abstract class Coup {
     private Case depart;
     private Case arrivee;
     private Piece piece;
     private Piece pieceMangee;
-    private boolean isFusion;
 
     public Coup(Piece piece, Case arrivee) {
         this.depart = piece.getPosition();
@@ -15,21 +14,12 @@ public class Coup {
 
     //Plusieurs classes de sous coup déplacement/fusion/rock/etc...
 
-    public Coup(Piece piece, Case arrivee, Piece pieceMangee) {
-        Coup coup = new Coup(piece, arrivee);
-        this.pieceMangee = pieceMangee;
-    }
-
     public Coup(String coup){
     }
 
-    public String toString(){
-        if (this == null) return "|--|";
-        String prise = this.pieceMangee!=null ? "x" : "-";
-        return this.piece.getClass().getSimpleName().substring(0,1)+this.depart.toString()+prise+this.arrivee.toString();
-    }
+    public Case getDepart() {return depart;}
+    public Case getArrivee() {return arrivee;}
+    public Piece getPiece() {return piece;}
 
-    public Piece getPiecePrise() {
-        return this.pieceMangee;
-    }
+    public abstract String toString();
 }

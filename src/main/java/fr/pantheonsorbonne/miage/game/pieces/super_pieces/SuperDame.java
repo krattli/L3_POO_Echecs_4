@@ -26,9 +26,4 @@ public class SuperDame extends SuperPiece {
     public ArrayList<Coup> getAllPossibleMoves() {
         return null;
     }
-
-    @Override
-    public boolean isTheMoveLegal(Coup coup) {
-        return false;
-    }
 }

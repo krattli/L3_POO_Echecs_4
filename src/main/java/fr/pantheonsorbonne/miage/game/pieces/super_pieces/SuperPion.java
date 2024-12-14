@@ -27,8 +27,4 @@ public class SuperPion extends SuperPiece {
         return null;
     }
 
-    @Override
-    public boolean isTheMoveLegal(Coup coup) {
-        return false;
-    }
 }
