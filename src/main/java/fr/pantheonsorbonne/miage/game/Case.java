@@ -100,15 +100,4 @@ public class Case {
     public Case getCoordRotatedBy90() {
         return getCoordRotatedBy90(1);
     }
-
-    public static void main (String[] args) throws WrongCaseFormatException {
-        Case c = new Case("F8");
-        Case c2 = c.getValidTranslatedCase(5,6);
-        //Case c2 = new Case(0,0);
-        String str = "non";
-        if(c2 != null) {
-            str = c2.toString();
-        }
-        System.out.println(str);
-    }
 }

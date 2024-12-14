@@ -85,10 +85,8 @@ class PionTest {
         Coup cp1 = p1.getAllPossibleMoves().get(1);
         Coup cp2 = p2.getAllPossibleMoves().get(1);
 
-        System.out.println(cp2);
-
-        boolean cond1 = cp1.toString().hashCode() == "PG6xH7".hashCode();
-        boolean cond2 = cp2.toString().hashCode() == "PI8xH7".hashCode();
+        boolean cond1 = cp1.toString().contains("PG6xH7");
+        boolean cond2 = cp2.toString().contains("PI8xH7");
 
         assertTrue(cond1 && cond2);
     }
@@ -111,7 +109,10 @@ class PionTest {
     }
     @Test
     void isPromuToQueen() throws WrongCaseFormatException {
-        Pion p1 = new Pion(j1,"H7");
+        Pion p1 = new Pion(j1,"H13");
 
+        ArrayList<Coup> c = p1.getAllPossibleMoves();
+
+        assertTrue(c.toString().contains("PH13-H14D"));
     }
 }

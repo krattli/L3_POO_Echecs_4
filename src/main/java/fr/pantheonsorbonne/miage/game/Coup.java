@@ -4,15 +4,12 @@ public abstract class Coup {
     private Case depart;
     private Case arrivee;
     private Piece piece;
-    private Piece pieceMangee;
 
     public Coup(Piece piece, Case arrivee) {
         this.depart = piece.getPosition();
         this.arrivee = arrivee;
         this.piece = piece;
     }
-
-    //Plusieurs classes de sous coup déplacement/fusion/rock/etc...
 
     public Coup(String coup){
     }
