@@ -26,6 +26,7 @@ public abstract class Piece {
     }
 
     public abstract ArrayList<Coup> getAllPossibleMoves();
+    protected abstract int[][] getDirections();
 
     //never used, donc faire attention à bien supp
     public Coup getNewCoup(Case destination) {
