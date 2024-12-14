@@ -8,7 +8,6 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Roi extends PieceSimple {
-    private static final int[][] directions = {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
     public Roi(Player owner, Case position) {
         super(owner, position);
     }
@@ -16,11 +15,19 @@ public class Roi extends PieceSimple {
         super(owner, position);
     }
 
+    protected int[][] getDirections() {return new int[][] {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};}
+
     public ArrayList<Coup> getAllPossibleMoves() {
-        return this.computeLinesOfMoves(Roi.directions,1);
+        ArrayList<Coup> coupsWithoutEchecCheck =  this.computeLinesOfMoves(this.getDirections(),1);
+        return getCheckCheckedMoves(coupsWithoutEchecCheck);
     }
 
-    public boolean isTheMoveLegal(Coup coup) {
-        return false;
+    private ArrayList<Coup> getCheckCheckedMoves(ArrayList<Coup> coupsWithoutEchecCheck) {
+        ArrayList<Coup> checkMoves = new ArrayList<>();
+        return checkMoves;
     }
+
+    private int[][] getDirectionDiagonales() {return new int[][] {{1, 1}, {1, -1}, {-1, -1}, {-1, 1}};}
+    private int[][] getDirectionsLignesDroites() {return new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};}
+    private int[][] getDirectionsCavalier() {return new int[][] {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};}
 }

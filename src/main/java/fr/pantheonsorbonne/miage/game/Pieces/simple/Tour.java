@@ -8,16 +8,18 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Tour extends PieceSimple {
-    private static final int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     public Tour(Player owner, Case position) {
+        super(owner, position);
+    }
+    public Tour(Player owner, String position) throws WrongCaseFormatException {
         super(owner, position);
     }
 
     public ArrayList<Coup> getAllPossibleMoves() {
-        return this.computeLinesOfMoves(Tour.directions);
+        return this.computeLinesOfMoves(this.getDirections());
     }
-    public Tour(Player owner, String position) throws WrongCaseFormatException {
-        super(owner, position);
+    protected int[][] getDirections() {
+        return new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     }
 
     public boolean isTheMoveLegal(Coup coup) {

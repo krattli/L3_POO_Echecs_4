@@ -9,7 +9,6 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Dame extends PieceSimple {
-    private static final int[][] directions = {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
 
     // méthode abstraite pour avoir les directions (dans piece simple)
 
@@ -21,7 +20,10 @@ public class Dame extends PieceSimple {
     }
 
     public ArrayList<Coup> getAllPossibleMoves() {
-        return this.computeLinesOfMoves(Dame.directions);
+        return this.computeLinesOfMoves(this.getDirections());
+    }
+    protected int[][] getDirections() {
+        return new int[][] {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
     }
 
     public boolean isTheMoveLegal(Coup coup) {
