@@ -26,4 +26,7 @@ public class SuperDame extends SuperPiece {
     public ArrayList<Coup> getAllPossibleMoves() {
         return null;
     }
+
+    @Override
+    protected int[][] getDirections() {return new int[][]{};}
 }

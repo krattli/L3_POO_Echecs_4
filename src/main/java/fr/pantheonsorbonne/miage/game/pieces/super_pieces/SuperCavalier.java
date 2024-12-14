@@ -27,4 +27,7 @@ public class SuperCavalier extends SuperPiece {
         return null;
     }
 
+    @Override
+    protected int[][] getDirections() {return new int[][]{};}
+
 }

@@ -27,4 +27,6 @@ public class SuperPion extends SuperPiece {
         return null;
     }
 
+    @Override
+    protected int[][] getDirections() {return new int[][]{};}
 }
