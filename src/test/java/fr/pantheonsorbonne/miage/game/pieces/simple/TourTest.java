@@ -25,7 +25,7 @@ class TourTest {
 
     @BeforeEach
     void reset() {
-        echiquier.resetPlateau();
+        echiquier.emptyPlateau();
     }
 
     @Test
