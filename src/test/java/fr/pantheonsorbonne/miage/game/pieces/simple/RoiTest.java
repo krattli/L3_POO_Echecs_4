@@ -30,15 +30,13 @@ class RoiTest {
 
     @Test
     void getAllPossibleMoves() throws WrongCaseFormatException {
+        Tour t = new Tour(j2, "H9");
+        echiquier.computeMenaces();
         Roi r = new Roi(j1,"F8");
+        echiquier.computeMenaces();
+
         ArrayList<Coup> moves = r.getAllPossibleMoves();
-        for (Coup coup : moves) {
-            if (coup != null) {
-                System.out.println(coup.toString());
-            }
-            else {
-                System.out.println("null");
-            }
-        }
+
+        assert !moves.toString().contains("9");
     }
 }
