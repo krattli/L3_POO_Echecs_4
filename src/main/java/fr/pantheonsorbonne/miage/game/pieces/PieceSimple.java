@@ -41,6 +41,7 @@ public abstract class PieceSimple extends Piece {
                 }
                 else {
                     traceLine.add( new Prise(this,caseStep,piecePrise) );
+                    return traceLine;
                 }
             }
             else {
