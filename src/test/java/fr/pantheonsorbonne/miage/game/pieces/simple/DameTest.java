@@ -29,16 +29,11 @@ class DameTest {
     }
 
     @Test
-    void getAllPossibleMoves() throws WrongCaseFormatException {
+    void dontmoveThroughPiece() throws WrongCaseFormatException {
         Dame d = new Dame(j1,"F8");
+        Pion p = new Pion(j2,"F4");
         ArrayList<Coup> moves = d.getAllPossibleMoves();
-        for (Coup coup : moves) {
-            if (coup != null) {
-                System.out.println(coup.toString());
-            }
-            else {
-                System.out.println("null");
-            }
-        }
+
+        assert !moves.toString().contains("DF8-F2");
     }
 }

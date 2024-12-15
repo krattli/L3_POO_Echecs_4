@@ -32,13 +32,7 @@ class FouTest {
     void getAllPossibleMoves() throws WrongCaseFormatException {
         Fou f = new Fou(j1,"F8");
         ArrayList<Coup> moves = f.getAllPossibleMoves();
-        for (Coup coup : moves) {
-            if (coup != null) {
-                System.out.println(coup.toString());
-            }
-            else {
-                System.out.println("null");
-            }
-        }
+
+        assert moves.toString().contains("FF8-G9");
     }
 }

@@ -32,13 +32,7 @@ class TourTest {
     void getAllPossibleMoves() throws WrongCaseFormatException {
         Tour t = new Tour(j1,"F8");
         ArrayList<Coup> moves = t.getAllPossibleMoves();
-        for (Coup coup : moves) {
-            if (coup != null) {
-                System.out.println(coup.toString());
-            }
-            else {
-                System.out.println("null");
-            }
-        }
+
+        assert moves.toString().contains("TF8-F1");
     }
 }
