@@ -35,7 +35,7 @@ class EchiquierTest {
 
     @Test
     void initAllPieces() throws WrongCaseFormatException {
-        plateau.initAllPieces();
+        plateau.initBoard();
     }
 
     @Test

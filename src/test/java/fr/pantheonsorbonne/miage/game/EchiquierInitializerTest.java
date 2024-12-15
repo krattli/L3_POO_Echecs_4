@@ -26,14 +26,14 @@ class EchiquierInitializerTest {
     }
     @BeforeEach
     void setUp() {
-        echiquier.initAllPieces();
+        echiquier.initBoard();
     }
 
     @Test
     void VerifyIfPreviousPiecesAreKilled() throws WrongCaseFormatException {
         Case c = new Case("B3");
         Pion p = new Pion(j1,c);
-        echiquier.initAllPieces();
+        echiquier.initBoard();
         echiquier.printPlateau();
     }
 

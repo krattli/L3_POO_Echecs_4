@@ -16,24 +16,22 @@ public class EchiquierInitializer {
     public static final String D_1 = "D1";
     public static final String K_1 = "K1";
 
+    private EchiquierInitializer() {
+    }
+
     public static void initialiser(Echiquier echiquier) {
+        echiquier.emptyPlateau();
         Player[] players = echiquier.getPlayers();
-        for (Piece[] pieces : echiquier.getPlateau()) {
-            for (Piece piece : pieces) {
-                if(piece != null) {
-                    piece.kill();
-                }
-            }
+        for (int i = 0; i < Echiquier.getInfosAboutThat()[1]; i++) {
+            try {
+                initialiserPlayer(players[i]);
+            } catch (WrongCaseFormatException ignored) {}
         }
-        try {
-            for (Player player : players) initialiserPlayer(player);
-        }
-        catch (WrongCaseFormatException ignored) {}
     }
 
     private static void initialiserPlayer(Player player) throws WrongCaseFormatException {
 
-        int numberOfRotation = (player.getColor().ordinal() + 3 ) % 4;
+        int numberOfRotation = 4 - player.getColor().ordinal();
 
         Case posRoiInit = new Case(H_1).getCoordRotatedBy90(numberOfRotation);
         Roi roi = new Roi(player, posRoiInit);
@@ -56,8 +54,8 @@ public class EchiquierInitializer {
         Tour tour1 = new Tour(player, posTour1Init);
         Tour tour2 = new Tour(player, posTour2Init);
 
-        for (int i = 3 ; i <= 10 ; i++){
-            Case posPionInit = new Case(Colonne.values()[i].toString()+"2").getCoordRotatedBy90(numberOfRotation);
+        for (int i = 3; i <= 10; i++) {
+            Case posPionInit = new Case(Colonne.values()[i].toString() + "2").getCoordRotatedBy90(numberOfRotation);
             Pion pion = new Pion(player, posPionInit);
         }
     }
