@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game.pieces.simple;
 
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
@@ -29,7 +28,7 @@ class FouTest {
     }
 
     @Test
-    void getAllPossibleMoves() throws WrongCaseFormatException {
+    void getAllPossibleMoves() {
         Fou f = new Fou(j1,"F8");
         ArrayList<Coup> moves = f.getAllPossibleMoves();
 

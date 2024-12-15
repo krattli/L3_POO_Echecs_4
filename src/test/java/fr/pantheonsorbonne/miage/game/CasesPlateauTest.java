@@ -1,15 +1,12 @@
 package fr.pantheonsorbonne.miage.game;
 
-import fr.pantheonsorbonne.miage.enums.Colonne;
-import fr.pantheonsorbonne.miage.enums.Ligne;
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CasesPlateauTest {
     @Test
-    void areValidCases() throws WrongCaseFormatException {
+    void areValidCases() {
 
         //Dans les coins (faux)
         Case c1 = new Case("C3");
@@ -47,33 +44,18 @@ class CasesPlateauTest {
     }
 
     @Test
-    void validTranslation() throws WrongCaseFormatException {
+    void validTranslation() {
         Case c = new Case("F8");
 
-        Case c1 = c.getValidTranslatedCase(0, 0);
-        Case c2 = c.getValidTranslatedCase(5, 6);
-        Case c3 = c.getValidTranslatedCase(-2, -7);
-        Case c4 = c.getValidTranslatedCase(8, -4);
+        assert null != c.getValidTranslatedCase(0, 0);
+        assert null != c.getValidTranslatedCase(5, 6);
+        assert null != c.getValidTranslatedCase(-2, -7);
+        assert null != c.getValidTranslatedCase(8, -4);
 
-        Case c5 = c.getValidTranslatedCase(40, -40);
-        Case c6 = c.getValidTranslatedCase(7, 5);
-        Case c7 = c.getValidTranslatedCase(-12, 5);
-        Case c8 = c.getValidTranslatedCase(6, -5);
+        assert null == c.getValidTranslatedCase(40, -40);
+        assert null == c.getValidTranslatedCase(7, 5);
+        assert null == c.getValidTranslatedCase(-12, 5);
+        assert null == c.getValidTranslatedCase(6, -5);
 
-        Case[] bonnesCases = {c1,c2,c3,c4};
-        Case[] mauvaisesCases = {c5,c6,c7,c8};
-
-        boolean testCases = true;
-        for (Case k : bonnesCases){
-            if (k == null){
-                testCases = false;
-            }
-        }
-        for (Case k : mauvaisesCases){
-            if (k != null){
-                testCases = false;
-            }
-        }
-        assertTrue(testCases);
     }
 }

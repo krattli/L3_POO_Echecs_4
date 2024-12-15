@@ -13,7 +13,7 @@ public abstract class PieceSimple extends Piece {
     public PieceSimple(Player owner, Case position) {
         super(owner, position);
     }
-    public PieceSimple(Player owner, String position) throws WrongCaseFormatException {
+    public PieceSimple(Player owner, String position) {
         super(owner, new Case(position));
     }
 

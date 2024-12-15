@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game;
 
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
@@ -30,7 +29,7 @@ class EchiquierInitializerTest {
     }
 
     @Test
-    void VerifyIfPreviousPiecesAreKilled() throws WrongCaseFormatException {
+    void VerifyIfPreviousPiecesAreKilled() {
         Case c = new Case("B3");
         Pion p = new Pion(j1,c);
         echiquier.initBoard();

@@ -13,22 +13,16 @@ public class Case {
         this.Y = Ligne.values()[13 - Y];
     }
 
-    public Case(String notation) throws WrongCaseFormatException {
+    public Case(String notation) {
         if (notation == null || notation.length() < 2) {
-            throw new WrongCaseFormatException("La notation doit être au format algébrique classique");
+            System.out.println("mauvais format de caes : " + notation);
         }
         String colonneStr = notation.substring(0, 1).toUpperCase();
         String ligneStr = notation.substring(1);
 
-        try {
-            this.X = Colonne.valueOf(colonneStr);
-
-            int numeroLigne = Integer.parseInt(ligneStr);
-            this.Y = Ligne.values()[numeroLigne - 1];
-
-        } catch (IllegalArgumentException e) {
-            throw new WrongCaseFormatException("Notation invalide : " + notation);
-        }
+        this.X = Colonne.valueOf(colonneStr);
+        int numeroLigne = Integer.parseInt(ligneStr);
+        this.Y = Ligne.values()[numeroLigne - 1];
     }
 
     //Ce constructeur est un peu useless en vrai (et flemme de débug le this.X=Y;)
@@ -47,8 +41,13 @@ public class Case {
         return this.X.toString() + (this.Y.ordinal() + 1);
     }
 
-    public Colonne getColonne() {return this.X;}
-    public Ligne getLigne() {return this.Y;}
+    public Colonne getColonne() {
+        return this.X;
+    }
+
+    public Ligne getLigne() {
+        return this.Y;
+    }
 
     public int[] getCoordInt() {
         int[] coordinates = new int[2];

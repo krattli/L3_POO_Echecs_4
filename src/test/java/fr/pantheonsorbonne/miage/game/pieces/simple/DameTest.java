@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game.pieces.simple;
 
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
@@ -29,7 +28,7 @@ class DameTest {
     }
 
     @Test
-    void dontmoveThroughPiece() throws WrongCaseFormatException {
+    void dontmoveThroughPiece() {
         Dame d = new Dame(j1,"F8");
         Pion p = new Pion(j2,"F4");
         ArrayList<Coup> moves = d.getAllPossibleMoves();

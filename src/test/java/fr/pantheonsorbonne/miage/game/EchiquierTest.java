@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game;
 
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
@@ -27,19 +26,19 @@ class EchiquierTest {
     }
 
     @Test
-    void setAPieceOnBoard() throws WrongCaseFormatException {
+    void setAPieceOnBoard() {
         Case c = new Case("A1");
         Pion p = new Pion(j1, c);
         assertEquals(plateau.getPieceAt(c), p);
     }
 
     @Test
-    void initAllPieces() throws WrongCaseFormatException {
+    void initAllPieces() {
         plateau.initBoard();
     }
 
     @Test
-    void setpieceToPositionNull() throws WrongCaseFormatException {
+    void setpieceToPositionNull() {
         Case c = new Case("A1");
         Pion p = new Pion(j1, c);
         plateau.setPieceToPosition(p, null);

@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game.pieces.simple;
 
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
@@ -31,7 +30,7 @@ class PionTest {
     }
 
     @Test
-    void firstMoves() throws WrongCaseFormatException {
+    void firstMoves() {
         Pion p1 = new Pion(j1,"F2");
         Pion p2 = new Pion(j2,"M7");
         Pion p3 = new Pion(j3,"H13");
@@ -60,7 +59,7 @@ class PionTest {
     }
 
     @Test
-    void notFirstMove() throws WrongCaseFormatException {
+    void notFirstMove() {
         Pion p1 = new Pion(j1,"F3");
         Pion p2 = new Pion(j2,"L8");
         Pion p3 = new Pion(j3,"H12");
@@ -77,7 +76,7 @@ class PionTest {
     }
 
     @Test
-    void prisesEnnemies() throws WrongCaseFormatException {
+    void prisesEnnemies() {
         Pion p1 = new Pion(j1,"G6");
         Pion p2 = new Pion(j2,"I8");
 
@@ -93,7 +92,7 @@ class PionTest {
     }
 
     @Test
-    void avancementBloquado() throws WrongCaseFormatException {
+    void avancementBloquado() {
         Pion p1 = new Pion(j1,"H7");
         Pion p2 = new Pion(j2,"H10");
         Pion p3 = new Pion(j3,"H8");
@@ -109,7 +108,7 @@ class PionTest {
         assertTrue(test);
     }
     @Test
-    void isPromuToQueen() throws WrongCaseFormatException {
+    void isPromuToQueen() {
         Pion p1 = new Pion(j1,"H13");
 
         ArrayList<Coup> c = p1.getAllPossibleMoves();

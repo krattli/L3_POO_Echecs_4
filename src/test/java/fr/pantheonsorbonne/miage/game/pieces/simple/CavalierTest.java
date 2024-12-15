@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game.pieces.simple;
 
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
@@ -31,19 +30,19 @@ class CavalierTest {
     }
 
     @Test
-    void getAllMovesCenterBoard() throws WrongCaseFormatException {
+    void getAllMovesCenterBoard() {
         Cavalier c = new Cavalier(j1,"G8");
         ArrayList<Coup> moves = c.getAllPossibleMoves();
 
-        boolean c1 = moves.toString().contains("I9");
-        boolean c2 = moves.toString().contains("I7");
-        boolean c3 = moves.toString().contains("H6");
-        boolean c4 = moves.toString().contains("F6");
-        boolean c5 = moves.toString().contains("E7");
-        boolean c6 = moves.toString().contains("E9");
-        boolean c7 = moves.toString().contains("F10");
-        boolean c8 = moves.toString().contains("H10");
+        assert moves.toString().contains("I9");
+        assert moves.toString().contains("I7");
+        assert moves.toString().contains("H6");
+        assert moves.toString().contains("F6");
+        assert moves.toString().contains("E7");
+        assert moves.toString().contains("E9");
+        assert moves.toString().contains("F10");
+        assert moves.toString().contains("H10");
 
-       assertTrue( c1 && c2 && c3 && c4 && c5 && c6 && c7 && c8 );
+
     }
 }
