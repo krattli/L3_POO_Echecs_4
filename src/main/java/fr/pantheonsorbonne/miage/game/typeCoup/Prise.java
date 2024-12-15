@@ -17,7 +17,7 @@ public class Prise extends Coup {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName().charAt(0) + this.getDepart().toString() + "x" + this.getArrivee().toString();
+        return this.getPiece().getClass().getSimpleName().charAt(0) + this.getDepart().toString() + "x" + this.getArrivee().toString();
     }
 
     public Prise(Piece piece, Case arrivee, Piece prise) {
