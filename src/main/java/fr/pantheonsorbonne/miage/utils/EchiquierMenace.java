@@ -27,7 +27,7 @@ public class EchiquierMenace {
         for (Coup coup : coups) {
             Case c = coup.getArrivee();
             int[] coords = c.getCoordInt();
-            menaces[coords[0]][coords[1]] = true;
+            menaces[coords[1]][coords[0]] = true;
         }
         return menaces;
     }
