@@ -1,77 +1,53 @@
 package fr.pantheonsorbonne.miage.game;
 
-import fr.pantheonsorbonne.miage.enums.AffichagePieces;
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.utils.EchiquierMenace;
+import fr.pantheonsorbonne.miage.utils.PrintEchiquier;
 
 public class Echiquier {
     private static final int TAILLE = 14;
-    private static final int NB_JOUEURS = 4;
+    static final int NB_JOUEURS = 4;
     private Piece[][] plateau = new Piece[TAILLE][TAILLE];
     private Player[] players;
+    private boolean[][][] casesMenacees = new boolean[NB_JOUEURS][TAILLE][TAILLE];
 
     public Echiquier(Player [] players) {
         if (players.length != NB_JOUEURS) {
             System.out.println("Le jeu se joue à " + NB_JOUEURS);
         }
         else {
-            this.players = new Player[NB_JOUEURS];
+            this.players = players;
             plateau = new Piece[TAILLE][TAILLE];
-            this.addPlayers(players);
+            for (int i = 0; i < NB_JOUEURS; i++) {
+                players[i].setColor(Color.values()[i]);
+                players[i].setEchiquier(this);
+            }
         }
     }
 
-    //On verra si ça reste à la fin, peut être metre dans la classe partie jsp
-    private void addPlayers(Player[] joueurs){
-        for ( int i = 0; i < NB_JOUEURS; i++){
-            joueurs[i].setColor(Color.values()[i]);
-            joueurs[i].setEchiquier(this);
-            this.players[i] = joueurs[i];
-        }
+    public void initBoard(){
+        EchiquierInitializer.initialiser(this);
     }
 
-    public void initAllPieces (){
-        if (this.players.length == 4) {
-            //Il faut que 4 soit une constante
-            resetPlateau();
-            EchiquierInitializer.initialiser(this);
-        }
-    }
-
-    //Maintenant que c'est plus statique, je suis perplexe sur l'utilité de cette méthode... afuera !
-    public void resetPlateau(){
+    public void emptyPlateau(){
         this.plateau = new Piece[TAILLE][TAILLE];
     }
     
     public Player[] getPlayers() {return this.players;}
     public Piece[][] getPlateau() {return this.plateau;}
+    public static int[] getInfosAboutThat() {return new int[] {TAILLE, NB_JOUEURS};}
+    public boolean[][][] getCasesMenacees() {return this.casesMenacees;}
 
     public void printPlateau() {
-        for (Piece[] pieces : plateau) {
-            for (Piece piece : pieces) {
-                //if (plateau[i][j] != null) {System.out.print(plateau[i][j].getOwner().getColor().name());}
-                printPiece(piece);
-            }
-            System.out.println("|");
-        }
+        PrintEchiquier.printEchiquier(this);
+    }
+    public void printCasesMenacees(Player p) {
+        PrintEchiquier.printMenaces(this, p);
     }
 
-    public static void printPiece(Piece piece) {
-        if (piece != null) {
-            String CouleurAffichage;
-            if (piece.getOwner().getColor().ordinal() % 2 == 0){
-                CouleurAffichage = "B";
-            }
-            else {
-                CouleurAffichage = "N";
-            }
-            String nomComplet = piece.getClass().toString();
-            String nomClasse = nomComplet.substring(nomComplet.lastIndexOf('.') + 1) + CouleurAffichage;
-            System.out.print("| "+AffichagePieces.getByAlias(nomClasse).getSymbol()+" ");
-        }
-        else {
-            System.out.print("|___");
-        }
+    public void computeMenaces() {
+        this.casesMenacees = EchiquierMenace.computeMenace(this);
     }
 
     public void setPieceToPosition(Piece piece, Case position){
@@ -119,14 +95,19 @@ public class Echiquier {
     }
 
     public void emptyCell(Case position) {
-        //verifier si les lignes sont bien les bonnes
         plateau[position.getColonne().ordinal()][position.getLigne().ordinal()] = null;
     }
 
     public Piece getPieceAt(Case position) {
-        //verifier si les lignes sont bien les bonnes
         int[] coord = position.getCoordInt();
         return plateau[coord[0]][coord[1]];
+    }
+    public Piece getPieceAt(String position) {
+        try {
+            return this.getPieceAt(new Case(position));
+        }
+        catch (Exception ignored) {}
+        return null;
     }
 
 }
