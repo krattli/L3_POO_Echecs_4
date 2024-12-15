@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game.pieces.simple;
 
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
@@ -29,7 +28,7 @@ class RoiTest {
     }
 
     @Test
-    void getAllPossibleMoves() throws WrongCaseFormatException {
+    void doesntGoToMenacedCases() {
         Tour t = new Tour(j2, "H9");
         echiquier.computeMenaces();
         Roi r = new Roi(j1,"F8");
@@ -38,5 +37,17 @@ class RoiTest {
         ArrayList<Coup> moves = r.getAllPossibleMoves();
 
         assert !moves.toString().contains("9");
+    }
+
+    @Test
+    void testRoques() {
+        Roi r = new Roi(j1,"H1");
+        Tour tourPetitRoque = new Tour(j1, "K1");
+        Tour tourGrandRoque = new Tour(j1, "D1");
+
+        ArrayList<Coup> moves = r.getAllPossibleMoves();
+
+        System.out.println(moves.toString());
+
     }
 }
