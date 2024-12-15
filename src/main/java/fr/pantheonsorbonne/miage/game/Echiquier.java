@@ -65,31 +65,6 @@ public class Echiquier {
         }
     }
 
-    public Piece[][] rotateCopyToRightBy90(int nombreRotation){
-        Piece[][] rotatedPlateau = plateau;
-        for (int rotation=0; rotation<nombreRotation; rotation++){
-            for (int i=0; i<TAILLE; i++){
-                for (int j=0; j<TAILLE; j++){
-                    if(i!=j){
-                        Piece tempVar = rotatedPlateau[i][j];
-                        rotatedPlateau[i][j] = rotatedPlateau[j][i];
-                        rotatedPlateau[j][i] = tempVar;
-                    }
-                }
-            }
-            for (int i=0; i<TAILLE; i++){
-                for (int j=0; j<TAILLE; j++){
-                    if(i!=j){
-                        Piece tempVar = rotatedPlateau[i][j];
-                        plateau[i][j] = plateau[i][TAILLE - i - 1];
-                        plateau[i][TAILLE - j - 1] = tempVar;
-                    }
-                }
-            }
-        }
-        return rotatedPlateau;
-    }
-
     public static void jouerCoup(Coup coup) {
         // Implémenter la logique pour jouer un coup
     }
