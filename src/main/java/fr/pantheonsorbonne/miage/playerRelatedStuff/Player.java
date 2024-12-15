@@ -51,12 +51,24 @@ public abstract class Player{
 
     public ArrayList<Coup> getAllPossibleMoves(){
         ArrayList<Coup> coups = new ArrayList<>();
-        // Implémenter tout ça
+        ArrayList<Piece> pieces = this.getAllPieces();
+        for (Piece piece : pieces) {
+            coups.addAll(piece.getAllPossibleMoves());
+        }
         return coups;
     }
 
     public ArrayList<Piece> getAllPieces(){
         ArrayList<Piece> pieces = new ArrayList<>();
+        Piece[][] plateau = echiquier.getPlateau();
+        for (Piece[] row : plateau ) {
+            for (Piece piece : row) {
+                if (piece != null && piece.getOwner() == this) {
+                    pieces.add(piece);
+                }
+
+            }
+        }
         return pieces;
     }
 }
