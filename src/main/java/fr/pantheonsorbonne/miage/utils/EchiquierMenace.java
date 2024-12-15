@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 public class EchiquierMenace {
-    private static int[] stats = Echiquier.getInfosAboutThat();
+    private static final int[] stats = Echiquier.getInfosAboutThat();
     private EchiquierMenace() {}
 
     public static boolean[][][] computeMenace(Echiquier echiquier) {

@@ -1,14 +1,10 @@
 package fr.pantheonsorbonne.miage.utils;
 
 import fr.pantheonsorbonne.miage.game.Echiquier;
-import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EchiquierMenaceTest {
 
@@ -32,10 +28,10 @@ class EchiquierMenaceTest {
     void menaces() {
         plateau.initBoard();
         boolean[][][] menaces = EchiquierMenace.computeMenace(plateau);
-        for(int p = 0 ; p < menaces.length ; p++) {
+        for (boolean[][] booleans : menaces) {
             for (int i = 0; i < menaces[0].length; i++) {
                 for (int j = 0; j < menaces[1].length; j++) {
-                    boolean menace = menaces[p][j][i];
+                    boolean menace = booleans[j][i];
                     if (menace) {
                         System.out.print(" 0 ");
                     } else {

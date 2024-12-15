@@ -2,7 +2,6 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.enums.Colonne;
 import fr.pantheonsorbonne.miage.enums.Ligne;
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 
 public class Case {
     private final Colonne X;
@@ -17,24 +16,13 @@ public class Case {
         if (notation == null || notation.length() < 2) {
             System.out.println("mauvais format de caes : " + notation);
         }
+        assert notation != null;
         String colonneStr = notation.substring(0, 1).toUpperCase();
         String ligneStr = notation.substring(1);
 
         this.X = Colonne.valueOf(colonneStr);
         int numeroLigne = Integer.parseInt(ligneStr);
         this.Y = Ligne.values()[numeroLigne - 1];
-    }
-
-    //Ce constructeur est un peu useless en vrai (et flemme de débug le this.X=Y;)
-    public Case(Colonne Y, Ligne X) {
-        this.X = Y;
-        this.Y = X;
-    }
-
-    //Lui aussi il est super useless
-    public Case(Colonne X, int Y) {
-        this.X = X;
-        this.Y = Ligne.values()[Y - 1];
     }
 
     public String toString() {

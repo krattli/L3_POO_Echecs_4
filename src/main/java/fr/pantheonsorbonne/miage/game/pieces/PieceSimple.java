@@ -1,5 +1,4 @@
 package fr.pantheonsorbonne.miage.game.pieces;
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Piece;

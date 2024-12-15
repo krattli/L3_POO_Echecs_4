@@ -7,7 +7,7 @@ import fr.pantheonsorbonne.miage.game.Piece;
 public class Prise extends Coup {
     Piece prise;
 
-    private Prise(Piece piece, Case arrivee) {
+    public Prise(Piece piece, Case arrivee) {
         super(piece, arrivee);
     }
 
