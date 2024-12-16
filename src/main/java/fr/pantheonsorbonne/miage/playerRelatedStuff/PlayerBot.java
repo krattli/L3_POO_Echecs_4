@@ -15,26 +15,9 @@ public class PlayerBot extends Player{
     }
 
     public Coup getNextCoup(){
-        ArrayList<Piece> allPieces=  this.getAllPieces();
-        if (!allPieces.isEmpty()) {
-            ArrayList<Coup> allCoups;
-            do {
-                int randIndexPieces = random.nextInt(allPieces.size());
-                Piece randPiece = allPieces.get(randIndexPieces);
-                allCoups = randPiece.getAllPossibleMoves();
-                if (!allCoups.isEmpty()) {
-                    int randIndexCoups = random.nextInt(allCoups.size());
-                    return allCoups.get(randIndexCoups);
-                }
-            } while (!allCoups.isEmpty());
+        ArrayList<Coup> coups = this.getAllPossibleMoves();
 
-        }
         return null;
     }
 
-    public ArrayList<Piece> getAllPlayerPieces(){
-        ArrayList<Piece> allPlayerPieces= new ArrayList<>();
-        //Implémenter
-        return allPlayerPieces;
-    }
 }
