@@ -1,7 +1,9 @@
-package fr.pantheonsorbonne.miage.game;
+package fr.pantheonsorbonne.miage.echiquierRelatedStuff;
 
 import fr.pantheonsorbonne.miage.enums.Colonne;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
+import fr.pantheonsorbonne.miage.game.Case;
+import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.pieces.simple.*;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 

@@ -2,8 +2,9 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.utils.EchiquierMenace;
-import fr.pantheonsorbonne.miage.utils.PrintEchiquier;
+import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierInitializer;
+import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierMenace;
+import fr.pantheonsorbonne.miage.echiquierRelatedStuff.PrintEchiquier;
 
 public class Echiquier {
     private static final int TAILLE = 14;

@@ -2,7 +2,6 @@ package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.enums.Colonne;
 import fr.pantheonsorbonne.miage.enums.Ligne;
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.pieces.PieceSimple;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
@@ -19,7 +18,7 @@ public class Pion extends PieceSimple {
         super(owner, position);
     }
 
-    public Pion(Player owner, String position) throws WrongCaseFormatException {
+    public Pion(Player owner, String position) {
         super(owner, position);
     }
 

@@ -6,6 +6,7 @@ import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
 
 public abstract class Player{
     private final String nom;
@@ -70,5 +71,18 @@ public abstract class Player{
             }
         }
         return pieces;
+    }
+
+    public Roi getHisKing() {
+        Piece[][] plateau = echiquier.getPlateau();
+        for (Piece[] row : plateau ) {
+            for (Piece piece : row) {
+                if (piece != null && piece.getClass() == Roi.class && piece.getOwner() == this) {
+                    return (Roi) piece;
+                }
+
+            }
+        }
+        return null;
     }
 }

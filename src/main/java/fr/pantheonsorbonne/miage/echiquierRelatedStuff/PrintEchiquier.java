@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.utils;
+package fr.pantheonsorbonne.miage.echiquierRelatedStuff;
 
 import fr.pantheonsorbonne.miage.enums.AffichagePieces;
 import fr.pantheonsorbonne.miage.game.Echiquier;
