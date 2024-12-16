@@ -48,7 +48,7 @@ public class Echiquier {
     }
 
     public void computeMenaces() {
-        this.casesMenacees = EchiquierMenace.computeMenace(this);
+        this.casesMenacees = EchiquierMenace.computeAllMenaces(this);
     }
 
     public void setPieceToPosition(Piece piece, Case position){

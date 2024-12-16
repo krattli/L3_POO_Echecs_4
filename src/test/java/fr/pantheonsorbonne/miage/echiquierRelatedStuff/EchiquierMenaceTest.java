@@ -1,6 +1,8 @@
 package fr.pantheonsorbonne.miage.echiquierRelatedStuff;
 
+import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Echiquier;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,22 +27,18 @@ class EchiquierMenaceTest {
     }
 
     @Test
-    void menaces() {
-        plateau.initBoard();
-        boolean[][][] menaces = EchiquierMenace.computeMenace(plateau);
-        for (boolean[][] booleans : menaces) {
-            for (int i = 0; i < menaces[0].length; i++) {
-                for (int j = 0; j < menaces[1].length; j++) {
-                    boolean menace = booleans[j][i];
-                    if (menace) {
-                        System.out.print(" 0 ");
-                    } else {
-                        System.out.print(" _ ");
-                    }
-                }
-                System.out.println();
-            }
-            System.out.println("\n\n\n");
-        }
+    void menacesPion() {
+        Case c = new Case("H2");
+        Pion p1 = new Pion(j1,c);
+        int[] coords = c.getCoordInt();
+
+        plateau.computeMenaces();
+        plateau.printCasesMenacees(j1);
+
+        boolean[][][] menaces = plateau.getCasesMenacees();
+
+        assert menaces[0][coords[1] - 1][coords[0] + 1];
+        assert !menaces[0][coords[1] - 1][coords[0]];
+        assert menaces[0][coords[1] - 1][coords[0] - 1];
     }
 }
