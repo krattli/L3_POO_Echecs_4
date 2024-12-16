@@ -3,7 +3,9 @@ package fr.pantheonsorbonne.miage.echiquierRelatedStuff;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
+import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 import java.util.ArrayList;
@@ -25,25 +27,43 @@ public class EchiquierMenace {
     private static boolean[][] allPlayerMenaces(Player player) {
         boolean[][] menaces = new boolean[stats[0]][stats[0]];
         ArrayList<Coup> coups = player.getAllPossibleMoves();
+        ArrayList<Piece> pieces = player.getAllPieces();
+        for (Piece piece : pieces) {
+            if (piece instanceof Pion) {
+                computeMenacesPiece(menaces, piece);
+            }
+            else if (piece instanceof Roi) {
+                computeMenacesPiece(menaces, piece);
+            }
+        }
         for (Coup coup : coups) {
             Case c = coup.getArrivee();
             int[] coords = c.getCoordInt();
-            if (coup.getPiece().getClass() == Pion.class){
-                Pion p = (Pion) coup.getPiece();
-                computeMenacesPion(menaces, p);
-            }
-            else {
+            if (coup.getPiece().getClass() != Pion.class && coup.getPiece().getClass() != Roi.class) {
                 menaces[coords[1]][coords[0]] = true;
             }
         }
         return menaces;
     }
 
-    private static void computeMenacesPion(boolean[][] menaces, Pion p) {
+    private static void computeMenacesPiece(boolean[][] menaces, Piece p) {
         int[][] directions = p.getDirections();
         Case position = p.getPosition();
         int[] coords = position.getCoordInt();
-        for (int i = 1; i < directions.length; i++) {
+        for ( int i = p instanceof Pion ? 1 : 0; i < directions.length; i++) {
+            int x = directions[i][0];
+            int y = directions[i][1];
+            if (position.getValidTranslatedCase(x,y) != null) {
+                menaces[coords[1] - y][coords[0] + x] = true;
+            }
+        }
+    }
+
+    private static void computeMenacesRoi(boolean[][] menaces, Roi roi) {
+        int[][] directions = roi.getDirections();
+        Case position = roi.getPosition();
+        int[] coords = position.getCoordInt();
+        for (int i = 0; i < directions.length; i++) {
             int x = directions[i][0];
             int y = directions[i][1];
             if (position.getValidTranslatedCase(x,y) != null) {

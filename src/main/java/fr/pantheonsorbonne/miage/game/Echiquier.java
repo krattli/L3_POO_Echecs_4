@@ -1,6 +1,10 @@
 package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.enums.Color;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
+import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
+import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
+import fr.pantheonsorbonne.miage.game.typeCoup.Promotion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierInitializer;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierMenace;
@@ -11,7 +15,7 @@ public class Echiquier {
     static final int NB_JOUEURS = 4;
     private Piece[][] plateau = new Piece[TAILLE][TAILLE];
     private Player[] players;
-    private boolean[][][] casesMenacees = new boolean[NB_JOUEURS][TAILLE][TAILLE];
+    private boolean[][][] casesMenacees;
 
     public Echiquier(Player [] players) {
         if (players.length != NB_JOUEURS) {
@@ -25,6 +29,7 @@ public class Echiquier {
                 players[i].setEchiquier(this);
             }
         }
+        casesMenacees = new boolean[NB_JOUEURS][TAILLE][TAILLE];
     }
 
     public void initBoard(){
@@ -55,6 +60,7 @@ public class Echiquier {
         if(piece.getPosition() != null) {
             int[] coordDepart = piece.getPosition().getCoordInt();
             plateau[coordDepart[0]][coordDepart[1]] = null;
+            piece.setPosition(position);
         }
         if(position == null){
             piece.setPosition(null);
@@ -66,8 +72,27 @@ public class Echiquier {
         }
     }
 
-    public static void jouerCoup(Coup coup) {
-        // Implémenter la logique pour jouer un coup
+    public void jouerCoup(Coup coup) {
+        Case caseDepart = coup.getDepart();
+        Case caseArrivee = coup.getArrivee();
+        Piece pieceJoueuse = coup.getPiece();
+        if (coup.getClass() == Deplacement.class) {
+            this.setPieceToPosition(pieceJoueuse, caseArrivee);
+        }
+        else if (coup.getClass() == Prise.class) {
+            this.getPieceAt(caseArrivee).kill();
+            this.setPieceToPosition(pieceJoueuse, caseArrivee);
+        }
+        else if (coup.getClass() == Promotion.class) {
+            coup.getPiece().kill();
+            Dame reinePromue = new Dame(coup.getPiece().getOwner(), coup.getArrivee());
+        }
+        else {
+            System.out.println("Autre type de coup");
+            System.out.println(coup.getClass());
+            System.out.println(coup.toString());
+            System.exit(0);
+        }
     }
 
     public void emptyCell(Case position) {

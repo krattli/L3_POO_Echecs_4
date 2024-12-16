@@ -28,5 +28,5 @@ public class SuperTour extends SuperPiece {
     }
 
     @Override
-    protected int[][] getDirections() {return new int[][]{};}
+    public int[][] getDirections() {return new int[][]{};}
 }

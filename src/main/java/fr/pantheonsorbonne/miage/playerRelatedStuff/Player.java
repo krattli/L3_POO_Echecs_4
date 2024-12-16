@@ -3,6 +3,7 @@ package fr.pantheonsorbonne.miage.playerRelatedStuff;
 import java.util.ArrayList;
 
 import fr.pantheonsorbonne.miage.enums.Color;
+import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
@@ -71,6 +72,28 @@ public abstract class Player{
             }
         }
         return pieces;
+    }
+
+    public boolean isChecked() {
+        Roi r = this.getHisKing();
+        int[] coords = r.getPosition().getCoordInt();
+        boolean[][][] menaces = this.getEchiquier().getCasesMenacees();
+        for (int i = 0 ; i < menaces.length ; i++) {
+            if (this.getColor().ordinal() != i){
+                if (menaces[i][coords[1]][coords[0]]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void suicide() {
+        this.isAlive = false;
+        ArrayList<Piece> pieces = this.getAllPieces();
+        for (Piece piece : pieces) {
+            piece.kill();
+        }
     }
 
     public Roi getHisKing() {

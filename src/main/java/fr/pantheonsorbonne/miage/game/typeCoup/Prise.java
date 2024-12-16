@@ -3,6 +3,7 @@ package fr.pantheonsorbonne.miage.game.typeCoup;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Piece;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
 
 public class Prise extends Coup {
     Piece prise;
