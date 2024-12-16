@@ -47,7 +47,36 @@ class RoiTest {
 
         ArrayList<Coup> moves = r.getAllPossibleMoves();
 
-        System.out.println(moves.toString());
+        assert moves.toString().contains("O-O-O");
+        assert moves.toString().contains("O-O");
+    }
 
+    @Test
+    void testRoquePieceInBetween() {
+        Roi r = new Roi(j1,"H1");
+        Tour tourPetitRoque = new Tour(j1, "K1");
+        Tour tourGrandRoque = new Tour(j1, "D1");
+        Pion separateur = new Pion(j1,"F1");
+
+        ArrayList<Coup> moves = r.getAllPossibleMoves();
+
+        assert !moves.toString().contains("O-O-O");
+        assert moves.toString().contains("O-O");
+    }
+
+    @Test
+    void testRoqueMenaceInBetween() {
+        Roi r = new Roi(j1,"H1");
+        Tour tourPetitRoque = new Tour(j1, "K1");
+        Tour tourGrandRoque = new Tour(j1, "D1");
+
+        Dame menacante = new Dame(j2,"F7");
+
+        echiquier.computeMenaces();
+
+        ArrayList<Coup> moves = r.getAllPossibleMoves();
+
+        assert !moves.toString().contains("O-O-O");
+        assert moves.toString().contains("O-O");
     }
 }
