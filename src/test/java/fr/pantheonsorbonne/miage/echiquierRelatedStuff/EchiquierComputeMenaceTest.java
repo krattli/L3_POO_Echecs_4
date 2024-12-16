@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-class EchiquierMenaceTest {
+class EchiquierComputeMenaceTest {
 
     static PlayerBot j1;
     static PlayerBot j2;

@@ -5,9 +5,10 @@ import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
 import fr.pantheonsorbonne.miage.game.typeCoup.Promotion;
+import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierInitializer;
-import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierMenace;
+import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierComputeMenace;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.PrintEchiquier;
 
 public class Echiquier {
@@ -53,7 +54,7 @@ public class Echiquier {
     }
 
     public void computeMenaces() {
-        this.casesMenacees = EchiquierMenace.computeAllMenaces(this);
+        this.casesMenacees = EchiquierComputeMenace.computeAllMenaces(this);
     }
 
     public void setPieceToPosition(Piece piece, Case position){
@@ -87,6 +88,13 @@ public class Echiquier {
             coup.getPiece().kill();
             Dame reinePromue = new Dame(coup.getPiece().getOwner(), coup.getArrivee());
         }
+        else if (coup.getClass() == Roque.class) {
+            System.out.println("roooque");
+            System.exit(0);
+            if (((Roque) coup).isGrandRoque()) {
+
+            }
+        }
         else {
             System.out.println("Autre type de coup");
             System.out.println(coup.getClass());
@@ -110,5 +118,4 @@ public class Echiquier {
         catch (Exception ignored) {}
         return null;
     }
-
 }

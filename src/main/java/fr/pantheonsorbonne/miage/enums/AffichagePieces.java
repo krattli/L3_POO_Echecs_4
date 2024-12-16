@@ -1,19 +1,13 @@
 package fr.pantheonsorbonne.miage.enums;
 
 public enum AffichagePieces {
-    WHITE_KING("♔","RoiB"),
-    WHITE_QUEEN("♕","DameB"),
-    WHITE_ROOK("♖","TourB"),
-    WHITE_BISHOP( "♗","FouB"),
-    WHITE_KNIGHT("♘","CavalierB"),
-    WHITE_PAWN( "♙","PionB"),
 
-    BLACK_KING("♚","RoiN"),
-    BLACK_QUEEN("♛","DameN"),
-    BLACK_ROOK( "♜","TourN"),
-    BLACK_BISHOP( "♝","FouN"),
-    BLACK_KNIGHT( "♞","CavalierN"),
-    BLACK_PAWN("♟","PionN");
+    KING("♚","Roi"),
+    QUEEN("♛","Dame"),
+    ROOK( "♜","Tour"),
+    BISHOP( "♝","Fou"),
+    KNIGHT( "♞","Cavalier"),
+    PAWN("♟","Pion");
 
     private final String symbol;
     private final String className;

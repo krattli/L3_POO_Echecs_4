@@ -52,7 +52,7 @@ class RoiTest {
     }
 
     @Test
-    void testRoquePieceInBetween() {
+    void isRoqueIfPieceInBetween() {
         Roi r = new Roi(j1,"H1");
         Tour tourPetitRoque = new Tour(j1, "K1");
         Tour tourGrandRoque = new Tour(j1, "D1");
@@ -65,7 +65,7 @@ class RoiTest {
     }
 
     @Test
-    void testRoqueMenaceInBetween() {
+    void isRoqueIfMenaceInBetween() {
         Roi r = new Roi(j1,"H1");
         Tour tourPetitRoque = new Tour(j1, "K1");
         Tour tourGrandRoque = new Tour(j1, "D1");
@@ -77,6 +77,17 @@ class RoiTest {
         ArrayList<Coup> moves = r.getAllPossibleMoves();
 
         assert !moves.toString().contains("O-O-O");
+        assert moves.toString().contains("O-O");
+    }
+
+    @Test
+    void jouerRoque () {
+        Roi r = new Roi(j1,"H1");
+        Tour tourPetitRoque = new Tour(j1, "K1");
+        Tour tourGrandRoque = new Tour(j1, "D1");
+        ArrayList<Coup> moves = r.getAllPossibleMoves();
+
+        assert moves.toString().contains("O-O-O");
         assert moves.toString().contains("O-O");
     }
 }

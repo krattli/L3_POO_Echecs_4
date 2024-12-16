@@ -1,18 +1,18 @@
-package fr.pantheonsorbonne.miage.game;
+package fr.pantheonsorbonne.miage.engine.local;
 
-import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
-import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
+import fr.pantheonsorbonne.miage.game.Coup;
+import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 import java.util.ArrayList;
 
-public class Partie {
+public class PartieLocal {
     Player[] players;
     int[] scoreBoard;
     Echiquier plateau;
     ArrayList<Coup> historiqueDesCoups;
 
-    public Partie(Player[] joueurs) {
+    public PartieLocal(Player[] joueurs) {
         this.players = joueurs;
         this.plateau = new Echiquier(players);
         scoreBoard = new int[players.length];
@@ -35,11 +35,18 @@ public class Partie {
             if (tour >100000) {
                 playing = false;
             }
-            //System.out.println("tour : "+tour);
             Player playerPlaying = players[tour % players.length];
             plateau.computeMenaces();
             Coup c = playerPlaying.getNextCoup();
             if (c == null) {
+                plateau.printPlateau();
+                for (Player p : players) {
+                    if (p != playerPlaying) {
+                        plateau.printCasesMenacees(p);
+                        System.out.println("====================================");
+                    }
+                }
+                System.exit(0);
                 playerPlaying.suicide();
                 tour++;
                 continue;
