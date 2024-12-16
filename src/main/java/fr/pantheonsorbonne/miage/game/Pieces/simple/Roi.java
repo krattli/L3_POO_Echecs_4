@@ -19,7 +19,7 @@ public class Roi extends PieceSimple {
 
     public boolean hasntMooved() {return this.hasntMooved;}
 
-    protected int[][] getDirections() {return new int[][] {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};}
+    public int[][] getDirections() {return new int[][] {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};}
 
     public ArrayList<Coup> getAllPossibleMoves() {
 

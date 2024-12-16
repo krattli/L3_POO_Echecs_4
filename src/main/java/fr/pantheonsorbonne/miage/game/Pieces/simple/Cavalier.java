@@ -20,7 +20,7 @@ public class Cavalier extends PieceSimple {
         return this.computeLinesOfMoves(getDirections(), 1);
     }
 
-    protected int[][] getDirections() {
+    public int[][] getDirections() {
         return new int[][]{{1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}};
     }
 

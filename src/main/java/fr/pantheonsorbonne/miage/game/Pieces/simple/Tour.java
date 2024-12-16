@@ -22,7 +22,7 @@ public class Tour extends PieceSimple {
         return this.computeLinesOfMoves(this.getDirections());
     }
 
-    protected int[][] getDirections() {
+    public int[][] getDirections() {
         return new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     }
 

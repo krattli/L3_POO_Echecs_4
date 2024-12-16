@@ -67,7 +67,7 @@ public class Pion extends PieceSimple {
         return false;
     }
 
-    protected int[][] getDirections() {
+    public int[][] getDirections() {
         return switch (this.getOwner().getColor()) {
             case RED -> new int[][]{{0, 1}, {-1, 1}, {1, 1}};
             case GREEN -> new int[][]{{-1, 0}, {-1, -1}, {-1, 1}};

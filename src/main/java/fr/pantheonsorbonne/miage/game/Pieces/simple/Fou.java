@@ -20,7 +20,7 @@ public class Fou extends PieceSimple {
         return this.computeLinesOfMoves(this.getDirections());
     }
 
-    protected int[][] getDirections() {
+    public int[][] getDirections() {
         return new int[][]{{1, 1}, {1, -1}, {-1, -1}, {-1, 1}};
     }
 }
