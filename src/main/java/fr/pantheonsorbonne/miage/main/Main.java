@@ -16,6 +16,8 @@ public class Main {
         game.initPlateau();
 
         game.play();
+
+        game.printWinners();
     }
 }
 
