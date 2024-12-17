@@ -25,7 +25,7 @@ public class PrintEchiquier {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 String bgColor = (i + j) % 2 == 0 ? BLACK_BG : WHITE_BG;
-                Piece piece = board[i][j];
+                Piece piece = board[j][i];
 
                 if (!Case.isValidCoord(i,j)){
                     System.out.print( "   " + RESET);
@@ -44,23 +44,32 @@ public class PrintEchiquier {
         System.out.println();
     }
 
-    public static void printMenaces(Echiquier plateau, Player player) {
-        int playerOrder = player.getColor().ordinal();
-        boolean[][] casesMenacees = plateau.getCasesMenacees()[playerOrder];
+    public static void printMenaces(Echiquier plateau, Player excludedPlayer) {
+        Player[] players = plateau.getPlayers();
+        boolean[][][] allMenaces = plateau.getCasesMenacees();
+        int boardSize = allMenaces[0].length; // Taille du plateau
 
-        for (int i = 0; i < casesMenacees.length; i++) {
-            for (int j = 0; j < casesMenacees[i].length; j++) {
-                String bgColor = (i + j) % 2 == 0 ? BLACK_BG : WHITE_BG;
+        for (int i = 0; i < boardSize; i++) {
+            for (Player currentPlayer : players) {
+                if (currentPlayer == excludedPlayer) continue;
 
-                if (!Case.isValidCoord(i,j)){
-                    System.out.print( "   " + RESET);
+                for (int j = 0; j < boardSize; j++) {
+                    String backgroundColor = (i + j) % 2 == 0 ? BLACK_BG : WHITE_BG;
+
+                    if (!Case.isValidCoord(i, j)) {
+                        System.out.print("   " + RESET);
+                    }
+                    else if (allMenaces[currentPlayer.getColor().ordinal()][i][j]) {
+                        System.out.print(backgroundColor + PLAYER_COLORS[currentPlayer.getColor().ordinal()]
+                                + " " + MENACE_CHAR + " " + RESET);
+                    } else {
+                        System.out.print(backgroundColor + "   " + RESET);
+                    }
                 }
-                else if (casesMenacees[i][j]) {
-                    System.out.print(bgColor + PLAYER_COLORS[0] + " " + MENACE_CHAR + " " + RESET);
-                } else {
-                    System.out.print(bgColor + "   " + RESET);
-                }
+                // Ajoute un espace entre chaque plateau
+                System.out.print("    ");
             }
+            // Nouvelle ligne après avoir affiché tous les plateaux de cette rangée
             System.out.println();
         }
     }
