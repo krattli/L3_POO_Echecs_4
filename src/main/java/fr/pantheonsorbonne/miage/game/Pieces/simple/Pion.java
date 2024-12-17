@@ -13,6 +13,7 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Pion extends PieceSimple {
+    private static final int VALUE_PIECE = 1;
 
     public Pion(Player owner, Case position) {
         super(owner, position);
@@ -20,6 +21,11 @@ public class Pion extends PieceSimple {
 
     public Pion(Player owner, String position) {
         super(owner, position);
+    }
+
+    @Override
+    public int getValuePiece() {
+        return VALUE_PIECE;
     }
 
     @Override

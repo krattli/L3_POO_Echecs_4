@@ -6,6 +6,7 @@ import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
+import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class EchiquierComputeMenace {
             }
         }
         for (Coup coup : coups) {
+            if (coup.getClass() == Roque.class) {continue;}
             Case c = coup.getArrivee();
             int[] coords = c.getCoordInt();
             if (coup.getPiece().getClass() != Pion.class && coup.getPiece().getClass() != Roi.class) {

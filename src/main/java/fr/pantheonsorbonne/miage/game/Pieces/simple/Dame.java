@@ -8,6 +8,10 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Dame extends PieceSimple {
+    private static final int VALUE_PIECE_NORMAL = 9;
+    private static final int VALUE_PIECE_PROMUE = 1;
+
+    private int value_Piece = VALUE_PIECE_NORMAL;
 
     public Dame(Player owner, Case position) {
         super(owner, position);
@@ -15,6 +19,13 @@ public class Dame extends PieceSimple {
 
     public Dame(Player owner, String position) {
         super(owner, position);
+    }
+
+    public void setValuePiecePromotion() {
+        this.value_Piece = VALUE_PIECE_PROMUE;
+    }
+    public int getValuePiece() {
+        return value_Piece;
     }
 
     public ArrayList<Coup> getAllPossibleMoves() {

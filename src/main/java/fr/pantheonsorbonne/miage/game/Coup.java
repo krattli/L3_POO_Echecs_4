@@ -11,7 +11,8 @@ public abstract class Coup {
         this.piece = piece;
     }
 
-    public Coup(String coup){
+    public Coup(Piece piece, String arrivee) {
+        this(piece, new Case(arrivee));
     }
 
     public Case getDepart() {return depart;}

@@ -7,6 +7,7 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class Tour extends FirstMovePiece {
+    private static final int VALUE_PIECE = 5;
 
     public Tour(Player owner, Case position) {
         super(owner, position);
@@ -14,6 +15,11 @@ public class Tour extends FirstMovePiece {
 
     public Tour(Player owner, String position) {
         super(owner, position);
+    }
+
+    @Override
+    public int getValuePiece() {
+        return VALUE_PIECE;
     }
 
     public ArrayList<Coup> getAllPossibleMoves() {

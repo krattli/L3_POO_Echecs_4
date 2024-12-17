@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
+import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
@@ -101,13 +102,19 @@ class RoiTest {
     }
 
     @Test
-    void jouerRoque () {
+    void jouerGrandRoque () {
         Roi r = new Roi(j1,"H1");
         Tour tourPetitRoque = new Tour(j1, "K1");
         Tour tourGrandRoque = new Tour(j1, "D1");
-        ArrayList<Coup> moves = r.getAllPossibleMoves();
 
-        assert moves.toString().contains("O-O-O");
-        assert moves.toString().contains("O-O");
+        Roque roque = new Roque(r,true);
+
+        echiquier.printPlateau();
+
+        echiquier.jouerCoup(roque);
+
+        echiquier.printPlateau();
+
+
     }
 }

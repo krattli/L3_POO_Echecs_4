@@ -78,7 +78,6 @@ public class Echiquier {
     }
 
     public void jouerCoup(Coup coup) {
-        Case caseDepart = coup.getDepart();
         Case caseArrivee = coup.getArrivee();
         Piece pieceJoueuse = coup.getPiece();
         if (coup.getClass() == Deplacement.class) {
@@ -91,25 +90,42 @@ public class Echiquier {
         else if (coup.getClass() == Promotion.class) {
             coup.getPiece().kill();
             Dame reinePromue = new Dame(coup.getPiece().getOwner(), coup.getArrivee());
+            reinePromue.setValuePiecePromotion();
         }
         else if (coup.getClass() == Roque.class) {
+            jouerRoque((Roque) coup);
             System.out.println("roooque");
-            System.exit(0);
-            if (((Roque) coup).isGrandRoque()) {
-
-            }
+            //System.exit(0);
         }
         else {
             System.out.println("Autre type de coup");
-            System.out.println(coup.getClass());
-            System.out.println(coup.toString());
+            System.out.print(coup.getClass() +"     ");
+            System.out.println(coup);
             System.exit(0);
         }
-
         if ( pieceJoueuse instanceof FirstMovePiece && ((FirstMovePiece) pieceJoueuse).hasntMooved()) {
             ((FirstMovePiece) pieceJoueuse).hasMooved();
         }
+    }
 
+    private void jouerRoque(Roque roque) {
+        Roi roi = roque.getPiece();
+        Tour t = roque.getTourARoquer();
+        int[] sens = roque.getSensDuRoqueRoi();
+        int[] translationRoi;int[] translationTour;
+        if (roque.isGrandRoque()) {
+            translationRoi = new int[] {sens[0]*2, sens[1]*2};
+            translationTour = new int[] {-sens[0]*3, -sens[1]*3};
+        }
+        else {
+            translationRoi = new int[] { - sens[0]*2, - sens[1]*2};
+            translationTour = new int[] {sens[0]*2, sens[1]*2};
+        }
+        this.setPieceToPosition(roi, roi.getPosition().getValidTranslatedCase(translationRoi[0], translationRoi[1]));
+        this.setPieceToPosition(t, t.getPosition().getValidTranslatedCase (translationTour[0], translationTour[1]));
+        System.out.println("Un roque à été joué !" + roque.getPiece().getOwner().getColor());
+        this.printPlateau();
+        System.exit(13);
     }
 
     public Player isSomeOneMatted () {

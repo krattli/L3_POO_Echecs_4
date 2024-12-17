@@ -19,6 +19,11 @@ public class Roi extends FirstMovePiece {
         super(owner, position);
     }
 
+    @Override
+    public int getValuePiece() {
+        return 0;
+    }
+
     public int[][] getDirections() {return new int[][] {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};}
 
 
@@ -65,17 +70,21 @@ public class Roi extends FirstMovePiece {
         for (int i = 0; i < directions.length; i++) {
             int[] direction = directions[i];
             ArrayList<Coup> tempStockageCoups = this.getTraceLine(direction , PORTEE_MAX);
-            for (Coup coup : tempStockageCoups) {
-                if (coup instanceof Prise) {
-                    Piece prise = ((Prise) coup).getPiecePrise();
-                    if (prise.getOwner() != this.getOwner()) {
-                        boolean isRightTypePiece = isIsRightTypePiece((Prise) coup, prise, i);
-                        if (isRightTypePiece) {
-                            int[] oppositeDirection = new int[] {-direction[0], -direction[1]};
-                            Coup opposite = this.getTraceLine(oppositeDirection,1).getFirst();
-                            if (opposite instanceof Deplacement) {
-                                coups.add(opposite);
-                            }
+            if (tempStockageCoups.isEmpty()) { continue; }
+            Coup lastCoup = tempStockageCoups.getLast();
+            if (lastCoup instanceof Prise) {
+                Piece prise = ((Prise) lastCoup).getPiecePrise();
+                if (prise.getOwner() != this.getOwner()) {
+                    boolean isRightTypePiece = isIsRightTypePiece((Prise) lastCoup, prise, i);
+                    if (isRightTypePiece) {
+                        int[] oppositeDirection = new int[] {-direction[0], -direction[1]};
+                        ArrayList<Coup> ac = this.getTraceLine(oppositeDirection,1);
+                        if (ac.isEmpty()) {
+                            continue;
+                        }
+                        Coup opposite = ac.getFirst();
+                        if (opposite instanceof Deplacement) {
+                            coups.add(opposite);
                         }
                     }
                 }

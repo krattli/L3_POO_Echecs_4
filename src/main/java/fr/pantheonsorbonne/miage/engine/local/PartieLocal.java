@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.miage.engine.local;
 
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
+import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class PartieLocal {
             if (playerPlaying.isAlive()){
 
                 jouerCoup(c);
+                addPoints(c);
                 historiqueDesCoups.add(c);
                 plateau.computeMenaces();
 
@@ -78,6 +80,13 @@ public class PartieLocal {
 
     public void jouerCoup (Coup c){
         plateau.jouerCoup(c);
+    }
+
+    public void addPoints(Coup c){
+        if (c.getClass() != Prise.class) {return;}
+        Player joueur = c.getPiece().getOwner();
+        int points = ((Prise) c).getPiecePrise().getValuePiece();
+        joueur.addPoints(points);
     }
 
     private boolean endCondition() {
