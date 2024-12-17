@@ -2,6 +2,9 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
+import fr.pantheonsorbonne.miage.game.pieces.simple.FirstMovePiece;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Tour;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
 import fr.pantheonsorbonne.miage.game.typeCoup.Promotion;
@@ -52,6 +55,7 @@ public class Echiquier {
     public void printCasesMenacees(Player p) {
         PrintEchiquier.printMenaces(this, p);
     }
+    public void printCasesMenacees() {PrintEchiquier.printMenaces(this, null);}
 
     public void computeMenaces() {
         this.casesMenacees = EchiquierComputeMenace.computeAllMenaces(this);
@@ -101,6 +105,42 @@ public class Echiquier {
             System.out.println(coup.toString());
             System.exit(0);
         }
+
+        if ( pieceJoueuse instanceof FirstMovePiece && ((FirstMovePiece) pieceJoueuse).hasntMooved()) {
+            ((FirstMovePiece) pieceJoueuse).hasMooved();
+        }
+
+    }
+
+    public Player isSomeOneMatted () {
+        for (Player p : players) {
+            if (p.isAlive()) {
+                Roi hisKing = p.getHisKing();
+                if (hisKing == null) {
+                    printPlateau();
+                    printCasesMenacees();
+                    System.out.println(p.getColor());
+                    System.exit(20);
+                }
+                if (isMenaced(hisKing)) {
+                    if (hisKing.getAllPossibleMoves().isEmpty()) {
+                        return p;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean isMenaced(Piece p) {
+        boolean[][][] menaces = this.getCasesMenacees();
+        int[] coords = p.getPosition().getCoordInt();
+        for (boolean[][] m : menaces) {
+            if (m[coords[1]][coords[0]]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void emptyCell(Case position) {
@@ -111,6 +151,7 @@ public class Echiquier {
         int[] coord = position.getCoordInt();
         return plateau[coord[0]][coord[1]];
     }
+
     public Piece getPieceAt(String position) {
         try {
             return this.getPieceAt(new Case(position));
