@@ -7,14 +7,14 @@ import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 import java.util.ArrayList;
 
-public abstract class firstMovePiece extends PieceSimple {
+public abstract class FirstMovePiece extends PieceSimple {
     private boolean hasntMooved = true;
 
-    public firstMovePiece(Player owner, Case position) {
+    public FirstMovePiece(Player owner, Case position) {
         super(owner, position);
     }
 
-    public firstMovePiece(Player owner, String position) {
+    public FirstMovePiece(Player owner, String position) {
         super(owner, position);
     }
 

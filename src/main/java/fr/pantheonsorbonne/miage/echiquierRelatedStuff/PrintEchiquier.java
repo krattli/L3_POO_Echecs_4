@@ -9,7 +9,7 @@ import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 public class PrintEchiquier {
     private static final String RESET = "\u001B[0m";
     private static final String BLACK_BG = "\u001B[40m";
-    private static final String WHITE_BG = "\u001B[47m";
+    private static final String WHITE_BG = "\u001B[0m";
     private static final String[] PLAYER_COLORS = {
             "\u001B[31m",
             "\u001B[32m",

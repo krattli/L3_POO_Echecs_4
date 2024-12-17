@@ -52,16 +52,6 @@ public class PartieLocal {
 
             Coup c = playerPlaying.getNextCoup();
 
-//            if (c == null) {
-//                Player win = whoMated(playerPlaying);
-//                win.addPoints(10);
-//                System.out.println("echec et mat de  " +win.getColor() + " sur " + playerPlaying.getColor());
-//                playerPlaying.suicide();
-//                System.out.println(playerPlaying.getColor()+" "+playerPlaying.isAlive());
-//                tour++;
-//                continue;
-//            }
-
             if (playerPlaying.isAlive()){
 
                 jouerCoup(c);

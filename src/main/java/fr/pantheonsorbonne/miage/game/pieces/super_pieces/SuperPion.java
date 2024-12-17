@@ -7,9 +7,15 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
 public class SuperPion extends SuperPiece {
+    private static final int VALUE_PIECE = 2;
 
     public SuperPion(Player owner, Case position) {
         super(owner, position);
+    }
+
+    @Override
+    public int getValuePiece() {
+        return VALUE_PIECE;
     }
 
     @Override

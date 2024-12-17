@@ -24,6 +24,7 @@ public abstract class Piece {
     public Player getOwner() {
         return owner;
     }
+    public abstract int getValuePiece();
 
     public abstract ArrayList<Coup> getAllPossibleMoves();
     public abstract int[][] getDirections();
