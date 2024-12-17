@@ -117,7 +117,6 @@ public class PartieLocal {
             }
         }
         if (alivePlayers == numberPiecesOnBoard) {
-            System.out.println("meme nb de pieces que de joueurs");
             return true;
         }
         return alivePlayers == 1;
