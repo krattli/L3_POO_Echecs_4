@@ -22,25 +22,22 @@ public class PlayerBot extends Player{
         }
         ArrayList<Coup> allCoupsRoi = this.getHisKing().getAllPossibleMoves();
         if (this.isChecked()){
-            int i = 0;
-            if (allCoupsRoi.isEmpty()){
-                ArrayList<Coup> allCoups = this.getHisKing().getAllPossibleMoves();
-                Roi r = this.getHisKing();
-                return null;
-            }
-            else{
+            if (!allCoupsRoi.isEmpty()){
                 int index = random.nextInt(allCoupsRoi.size());
                 return allCoupsRoi.get(index);
             }
+            else{
+                return null;
+            }
         }
         ArrayList<Coup> coups = this.getAllPossibleMoves();
-        int index = random.nextInt(coups.size());
-        if (index < 0) {
-            System.out.println(index + " l'index est plus bas que terre");
-            System.out.println(this.getColor() + "  " + this.isAlive());
-            System.out.println(coups);
+        if (coups.isEmpty()){
+            this.getEchiquier().printPlateau();
+            this.getEchiquier().printCasesMenacees();
+            System.out.println("plus de coups dispo"+ this.getColor());
             System.exit(0);
         }
+        int index = random.nextInt(coups.size());
         return coups.get(index);
     }
 }
