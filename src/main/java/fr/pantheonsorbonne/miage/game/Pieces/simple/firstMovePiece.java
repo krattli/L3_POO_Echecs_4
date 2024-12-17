@@ -19,7 +19,7 @@ public abstract class FirstMovePiece extends PieceSimple {
     }
 
     public boolean hasntMooved() {return this.hasntMooved;}
-    public void hasMooved() {hasntMooved = true;}
+    public void hasMooved() {hasntMooved = false;}
 
     @Override
     public abstract  ArrayList<Coup> getAllPossibleMoves();
