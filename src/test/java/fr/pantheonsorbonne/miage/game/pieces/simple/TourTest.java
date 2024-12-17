@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 class TourTest {
     static PlayerBot j1 = new PlayerBot("Joueur1");
@@ -36,9 +37,15 @@ class TourTest {
     }
 
     @Test
-    void hasentMooved() {
-        Tour t = new Tour(j1,"F8");
+    void hasMoved() {
+        Tour tour = new Tour(j1,"H1");
 
-        assert t.hasntMooved();
+        ArrayList<Coup> moves = tour.getAllPossibleMoves();
+        Random rand = new Random();
+        Coup coup = moves.get(rand.nextInt(moves.size()));
+
+        echiquier.jouerCoup(coup);
+
+        assert !tour.hasntMooved();
     }
 }

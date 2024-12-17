@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
+import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 class RoiTest {
     static PlayerBot j1 = new PlayerBot("Joueur1");
@@ -95,10 +97,16 @@ class RoiTest {
     }
 
     @Test
-    void firstMove() {
+    void hasMoved() {
         Roi r = new Roi(j1,"H1");
 
-        assert r.hasntMooved();
+        ArrayList<Coup> moves = r.getAllPossibleMoves();
+        Random rand = new Random();
+        Coup coup = moves.get(rand.nextInt(moves.size()));
+
+        echiquier.jouerCoup(coup);
+
+        assert !r.hasntMooved();
     }
 
     @Test

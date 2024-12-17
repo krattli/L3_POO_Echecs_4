@@ -17,7 +17,7 @@ public class SuperCavalier extends SuperPiece {
     public int getValuePiece() {
         return VALUE_PIECE;
     }
-
+    
     @Override
     public boolean isOccupiedByThisPiece(Case position) {
         return false;

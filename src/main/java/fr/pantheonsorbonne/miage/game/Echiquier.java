@@ -84,6 +84,13 @@ public class Echiquier {
             this.setPieceToPosition(pieceJoueuse, caseArrivee);
         }
         else if (coup.getClass() == Prise.class) {
+            if (((Prise) coup).getPiecePrise().getClass() == Roi.class) {
+                this.printPlateau();
+                this.printCasesMenacees();
+                System.out.print(coup.toString() + "   "+ coup.getPiece().getOwner().getColor());
+                System.out.println("   : "+((Prise) coup).getPiecePrise().getOwner().getColor());
+                System.exit(14);
+            }
             this.getPieceAt(caseArrivee).kill();
             this.setPieceToPosition(pieceJoueuse, caseArrivee);
         }
@@ -94,8 +101,6 @@ public class Echiquier {
         }
         else if (coup.getClass() == Roque.class) {
             jouerRoque((Roque) coup);
-            System.out.println("roooque");
-            //System.exit(0);
         }
         else {
             System.out.println("Autre type de coup");
@@ -109,6 +114,9 @@ public class Echiquier {
     }
 
     private void jouerRoque(Roque roque) {
+        System.out.println("Un roque à été joué !" + roque.getPiece().getOwner().getColor());
+        this.printPlateau();
+
         Roi roi = roque.getPiece();
         Tour t = roque.getTourARoquer();
         int[] sens = roque.getSensDuRoqueRoi();
@@ -118,12 +126,11 @@ public class Echiquier {
             translationTour = new int[] {-sens[0]*3, -sens[1]*3};
         }
         else {
-            translationRoi = new int[] { - sens[0]*2, - sens[1]*2};
-            translationTour = new int[] {sens[0]*2, sens[1]*2};
+            translationRoi = new int[] {  sens[0]*2, - sens[1]*2};
+            translationTour = new int[] { - sens[0]*2, sens[1]*2};
         }
         this.setPieceToPosition(roi, roi.getPosition().getValidTranslatedCase(translationRoi[0], translationRoi[1]));
         this.setPieceToPosition(t, t.getPosition().getValidTranslatedCase (translationTour[0], translationTour[1]));
-        System.out.println("Un roque à été joué !" + roque.getPiece().getOwner().getColor());
         this.printPlateau();
         System.exit(13);
     }
