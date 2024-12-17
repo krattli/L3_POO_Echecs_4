@@ -14,7 +14,7 @@ public class Case {
 
     public Case(String notation) {
         if (notation == null || notation.length() < 2) {
-            System.out.println("mauvais format de caes : " + notation);
+            System.out.println("mauvais format de case : " + notation);
         }
         assert notation != null;
         String colonneStr = notation.substring(0, 1).toUpperCase();
