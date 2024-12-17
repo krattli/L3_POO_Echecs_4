@@ -65,24 +65,33 @@ public class Roi extends FirstMovePiece {
     }
 
     private ArrayList<Coup> getIllegalCoups() {
+
         ArrayList<Coup> coups = new ArrayList<>();
         int[][] directions = getDirections();
+
         for (int i = 0; i < directions.length; i++) {
             int[] direction = directions[i];
             ArrayList<Coup> tempStockageCoups = this.getTraceLine(direction , PORTEE_MAX);
+
             if (tempStockageCoups.isEmpty()) { continue; }
+
             Coup lastCoup = tempStockageCoups.getLast();
+
             if (lastCoup instanceof Prise) {
                 Piece prise = ((Prise) lastCoup).getPiecePrise();
+
                 if (prise.getOwner() != this.getOwner()) {
                     boolean isRightTypePiece = isIsRightTypePiece((Prise) lastCoup, prise, i);
+
                     if (isRightTypePiece) {
                         int[] oppositeDirection = new int[] {-direction[0], -direction[1]};
                         ArrayList<Coup> ac = this.getTraceLine(oppositeDirection,1);
+
                         if (ac.isEmpty()) {
                             continue;
                         }
                         Coup opposite = ac.getFirst();
+
                         if (opposite instanceof Deplacement) {
                             coups.add(opposite);
                         }

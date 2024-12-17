@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.miage.game;
 
+import fr.pantheonsorbonne.miage.engine.local.PartieLocal;
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
 import fr.pantheonsorbonne.miage.game.pieces.simple.FirstMovePiece;
@@ -14,12 +15,19 @@ import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierInitializer;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierComputeMenace;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.PrintEchiquier;
 
+import java.util.Scanner;
+
 public class Echiquier {
     private static final int TAILLE = 14;
     static final int NB_JOUEURS = 4;
     private Piece[][] plateau = new Piece[TAILLE][TAILLE];
     private Player[] players;
     private boolean[][][] casesMenacees;
+    //useless
+    PartieLocal partieLocal;
+    public void setPartieLocal(PartieLocal partieLocal) {
+        this.partieLocal = partieLocal;
+    }
 
     public Echiquier(Player [] players) {
         if (players.length != NB_JOUEURS) {
@@ -62,17 +70,20 @@ public class Echiquier {
     }
 
     public void setPieceToPosition(Piece piece, Case position){
-        if(piece.getPosition() != null) {
+
+        if (piece.position != null) {
             int[] coordDepart = piece.getPosition().getCoordInt();
             plateau[coordDepart[0]][coordDepart[1]] = null;
-            piece.setPosition(position);
         }
         if(position == null){
             piece.setPosition(null);
         }
         else {
+            piece.setPosition(position);
             int[] coordDestination = position.getCoordInt();
             plateau[coordDestination[0]][coordDestination[1]] = piece;
+
+            //this.printPlateau();
             piece.setPosition(position);
         }
     }
@@ -89,7 +100,9 @@ public class Echiquier {
                 this.printCasesMenacees();
                 System.out.print(coup.toString() + "   "+ coup.getPiece().getOwner().getColor());
                 System.out.println("   : "+((Prise) coup).getPiecePrise().getOwner().getColor());
-                System.exit(14);
+                System.out.print(" entrer nombre : ");
+                int i = new Scanner(System.in).nextInt();
+                this.partieLocal.jouerAPartirDuCoup(i);
             }
             this.getPieceAt(caseArrivee).kill();
             this.setPieceToPosition(pieceJoueuse, caseArrivee);
@@ -106,7 +119,7 @@ public class Echiquier {
             System.out.println("Autre type de coup");
             System.out.print(coup.getClass() +"     ");
             System.out.println(coup);
-            System.exit(0);
+            System.exit(101);
         }
         if ( pieceJoueuse instanceof FirstMovePiece && ((FirstMovePiece) pieceJoueuse).hasntMooved()) {
             ((FirstMovePiece) pieceJoueuse).hasMooved();
@@ -114,13 +127,12 @@ public class Echiquier {
     }
 
     private void jouerRoque(Roque roque) {
-        System.out.println("Un roque à été joué !" + roque.getPiece().getOwner().getColor());
-        this.printPlateau();
-
         Roi roi = roque.getPiece();
         Tour t = roque.getTourARoquer();
+
         int[] sens = roque.getSensDuRoqueRoi();
         int[] translationRoi;int[] translationTour;
+
         if (roque.isGrandRoque()) {
             translationRoi = new int[] {sens[0]*2, sens[1]*2};
             translationTour = new int[] {-sens[0]*3, -sens[1]*3};
@@ -129,10 +141,12 @@ public class Echiquier {
             translationRoi = new int[] {  sens[0]*2, - sens[1]*2};
             translationTour = new int[] { - sens[0]*2, sens[1]*2};
         }
+
         this.setPieceToPosition(roi, roi.getPosition().getValidTranslatedCase(translationRoi[0], translationRoi[1]));
         this.setPieceToPosition(t, t.getPosition().getValidTranslatedCase (translationTour[0], translationTour[1]));
         this.printPlateau();
-        System.exit(13);
+        System.out.println("Grand roque " + roque.isGrandRoque() + "|  " + roque.getPiece().getOwner().getColor());
+        System.exit(102);
     }
 
     public Player isSomeOneMatted () {
@@ -143,7 +157,7 @@ public class Echiquier {
                     printPlateau();
                     printCasesMenacees();
                     System.out.println(p.getColor());
-                    System.exit(20);
+                    System.exit(103);
                 }
                 if (isMenaced(hisKing)) {
                     if (hisKing.getAllPossibleMoves().isEmpty()) {
@@ -158,9 +172,11 @@ public class Echiquier {
     public boolean isMenaced(Piece p) {
         boolean[][][] menaces = this.getCasesMenacees();
         int[] coords = p.getPosition().getCoordInt();
-        for (boolean[][] m : menaces) {
-            if (m[coords[1]][coords[0]]) {
-                return true;
+        for (int i = 0; i < menaces.length; i++) {
+            if (p.getOwner().getColor().ordinal() != i) {
+                if (menaces[i][coords[1]][coords[0]]) {
+                    return true;
+                }
             }
         }
         return false;

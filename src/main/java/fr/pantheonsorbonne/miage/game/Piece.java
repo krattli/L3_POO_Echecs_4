@@ -10,8 +10,8 @@ public abstract class Piece {
 
     public Piece(Player owner, Case position) {
         this.owner = owner;
-        this.position = position;
         owner.getEchiquier().setPieceToPosition(this, position);
+        this.position = position;
     }
 
     public Piece(Player owner, String position) throws WrongCaseFormatException {

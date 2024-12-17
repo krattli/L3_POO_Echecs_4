@@ -35,7 +35,7 @@ public class PlayerBot extends Player{
             this.getEchiquier().printPlateau();
             this.getEchiquier().printCasesMenacees();
             System.out.println("plus de coups dispo"+ this.getColor());
-            System.exit(0);
+            System.exit(100);
         }
         int index = random.nextInt(coups.size());
         return coups.get(index);
