@@ -7,8 +7,7 @@ import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
 
-public class Roi extends PieceSimple {
-    private boolean hasntMooved = true;
+public class Roi extends firstMovePiece {
 
     public Roi(Player owner, Case position) {
         super(owner, position);
@@ -16,8 +15,6 @@ public class Roi extends PieceSimple {
     public Roi(Player owner, String position){
         super(owner, position);
     }
-
-    public boolean hasntMooved() {return this.hasntMooved;}
 
     public int[][] getDirections() {return new int[][] {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};}
 

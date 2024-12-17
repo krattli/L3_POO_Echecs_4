@@ -81,6 +81,13 @@ class RoiTest {
     }
 
     @Test
+    void firstMove() {
+        Roi r = new Roi(j1,"H1");
+
+        assert r.hasntMooved();
+    }
+
+    @Test
     void jouerRoque () {
         Roi r = new Roi(j1,"H1");
         Tour tourPetitRoque = new Tour(j1, "K1");

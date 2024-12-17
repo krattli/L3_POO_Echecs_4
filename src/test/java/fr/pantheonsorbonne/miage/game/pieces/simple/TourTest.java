@@ -34,4 +34,11 @@ class TourTest {
 
         assert moves.toString().contains("TF8-F1");
     }
+
+    @Test
+    void hasentMooved() {
+        Tour t = new Tour(j1,"F8");
+
+        assert t.hasntMooved();
+    }
 }
