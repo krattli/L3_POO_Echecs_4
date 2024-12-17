@@ -58,17 +58,4 @@ public class EchiquierComputeMenace {
             }
         }
     }
-
-    private static void computeMenacesRoi(boolean[][] menaces, Roi roi) {
-        int[][] directions = roi.getDirections();
-        Case position = roi.getPosition();
-        int[] coords = position.getCoordInt();
-        for (int i = 0; i < directions.length; i++) {
-            int x = directions[i][0];
-            int y = directions[i][1];
-            if (position.getValidTranslatedCase(x,y) != null) {
-                menaces[coords[1] - y][coords[0] + x] = true;
-            }
-        }
-    }
 }
