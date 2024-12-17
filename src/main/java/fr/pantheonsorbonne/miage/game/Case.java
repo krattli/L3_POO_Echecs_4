@@ -55,6 +55,10 @@ public class Case {
         return valid;
     }
 
+    public boolean equals(Case c) {
+        return this.X.equals(c.X) && this.Y.equals(c.Y);
+    }
+
     public static boolean isValidCoord(int Y, int X) {
         if (Y < 14 && X < 14 && Y >= 0 && X >= 0) {
             return new Case(Y, X).isValid();

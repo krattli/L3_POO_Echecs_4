@@ -1,5 +1,6 @@
 package fr.pantheonsorbonne.miage.game;
 
+import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
@@ -43,5 +44,15 @@ class EchiquierTest {
         Pion p = new Pion(j1, c);
         plateau.setPieceToPosition(p, null);
         assertTrue(plateau.getPieceAt(c) == null && p.getPosition() == null);
+    }
+
+    @Test
+    void menacedPiece() {
+        Pion p = new Pion(j1, new Case("D1"));
+        Pion p2 = new Pion(j3, new Case("E2"));
+
+        plateau.computeMenaces();
+
+        assert plateau.isMenaced(p);
     }
 }

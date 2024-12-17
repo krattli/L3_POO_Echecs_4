@@ -58,4 +58,13 @@ class CasesPlateauTest {
         assert null == c.getValidTranslatedCase(6, -5);
 
     }
+
+    @Test
+    void Equals() {
+        Case c1 = new Case("F8");
+        Case c2 = new Case("F8");
+
+        assert !(c1 == c2);
+        assert c1.equals(c2);
+    }
 }
