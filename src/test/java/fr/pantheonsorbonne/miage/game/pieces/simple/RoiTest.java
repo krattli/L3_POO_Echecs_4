@@ -2,7 +2,6 @@ package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
-import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
@@ -117,12 +116,9 @@ class RoiTest {
 
         Roque roque = new Roque(r,true);
 
-        echiquier.printPlateau();
-
         echiquier.jouerCoup(roque);
 
-        echiquier.printPlateau();
-
-
+        assert echiquier.getPieceAt("F1") == r;
+        assert echiquier.getPieceAt("G1") == tourGrandRoque;
     }
 }

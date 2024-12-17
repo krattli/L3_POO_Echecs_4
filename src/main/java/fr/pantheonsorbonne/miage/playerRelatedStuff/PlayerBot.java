@@ -1,7 +1,6 @@
 package fr.pantheonsorbonne.miage.playerRelatedStuff;
 
 import fr.pantheonsorbonne.miage.game.Coup;
-import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class PlayerBot extends Player{
             this.getEchiquier().printPlateau();
             this.getEchiquier().printCasesMenacees();
             System.out.println("plus de coups dispo"+ this.getColor());
-            System.exit(100);
+            return null;
         }
         int index = random.nextInt(coups.size());
         return coups.get(index);

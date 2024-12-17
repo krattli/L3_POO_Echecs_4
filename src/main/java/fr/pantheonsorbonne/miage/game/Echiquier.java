@@ -82,9 +82,7 @@ public class Echiquier {
             piece.setPosition(position);
             int[] coordDestination = position.getCoordInt();
             plateau[coordDestination[0]][coordDestination[1]] = piece;
-
             //this.printPlateau();
-            piece.setPosition(position);
         }
     }
 
@@ -98,7 +96,7 @@ public class Echiquier {
             if (((Prise) coup).getPiecePrise().getClass() == Roi.class) {
                 this.printPlateau();
                 this.printCasesMenacees();
-                System.out.print(coup.toString() + "   "+ coup.getPiece().getOwner().getColor());
+                System.out.print(coup + "   "+ coup.getPiece().getOwner().getColor());
                 System.out.println("   : "+((Prise) coup).getPiecePrise().getOwner().getColor());
                 System.out.print(" entrer nombre : ");
                 int i = new Scanner(System.in).nextInt();
@@ -144,9 +142,8 @@ public class Echiquier {
 
         this.setPieceToPosition(roi, roi.getPosition().getValidTranslatedCase(translationRoi[0], translationRoi[1]));
         this.setPieceToPosition(t, t.getPosition().getValidTranslatedCase (translationTour[0], translationTour[1]));
-        this.printPlateau();
-        System.out.println("Grand roque " + roque.isGrandRoque() + "|  " + roque.getPiece().getOwner().getColor());
-        System.exit(102);
+        //System.out.println("Grand roque " + roque.isGrandRoque() + "|  " + roque.getPiece().getOwner().getColor());
+        //System.exit(102);
     }
 
     public Player isSomeOneMatted () {

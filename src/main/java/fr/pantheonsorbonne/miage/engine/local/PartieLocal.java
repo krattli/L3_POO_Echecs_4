@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PartieLocal {
-    private Player[] players;
+    private final Player[] players;
     private int[] scoreBoard;
     private final Echiquier plateau;
-    private ArrayList<Coup> historiqueDesCoups;
+    private final ArrayList<Coup> historiqueDesCoups;
+    private int tour = 0;
 
     public PartieLocal(Player[] joueurs) {
         this.players = joueurs;
@@ -30,7 +31,7 @@ public class PartieLocal {
     }
 
     public Echiquier getPlateau() {return plateau;}
-    public int[] getScoreBoard() {return new int[] {
+    public int[] getScoreBoardUpdated() {return new int[] {
             players[0].getPoints(),
             players[1].getPoints(),
             players[2].getPoints(),
@@ -38,9 +39,9 @@ public class PartieLocal {
     }
     public String scoreBoardToString() {
         StringBuilder stringScoreBoard = new StringBuilder();
-        int[] individualScore = getScoreBoard();
+        int[] individualScore = getScoreBoardUpdated();
         for (int s : individualScore) {
-            stringScoreBoard.append(s + " ");
+            stringScoreBoard.append(s).append(" ");
         }
         return stringScoreBoard.toString();
     }
@@ -49,7 +50,6 @@ public class PartieLocal {
 
         boolean playing = true;
         Player[] players = this.players;
-        int tour = 0;
 
         while (playing) {
 
@@ -69,7 +69,10 @@ public class PartieLocal {
     private void jouerTour(Player playerPlaying) {
 
         Coup c = playerPlaying.getNextCoup();
-
+        if (c == null) {
+            playerPlaying.addPoints(10);
+            playerPlaying.suicide();
+        }
         jouerCoup(c);
         addPoints(c);
         historiqueDesCoups.add(c);
@@ -78,19 +81,26 @@ public class PartieLocal {
         Player matedPlayer = plateau.isSomeOneMatted();
 
         if (matedPlayer != null) {
-            matedPlayer.kill();
+            matedPlayer.suicide();
             playerPlaying.addPoints(12);
+            plateau.computeMenaces();
         }
 
-        System.out.println(playerPlaying.getColor() + "   " + "   " + c + " Score : " +  this.scoreBoardToString());
-
+        //System.out.println( tour +"  : "+playerPlaying.getColor() + "   " + c + " Score : " +  this.scoreBoardToString());
     }
 
     public void jouerCoup (Coup c){
+        if (c == null) {return;}
         plateau.jouerCoup(c);
     }
 
     public void addPoints(Coup c){
+        if (c == null) {
+            for (Player p : players) {
+                p.addPoints(10);
+            }
+            return;
+        }
         if (c.getClass() != Prise.class) {return;}
         Player joueur = c.getPiece().getOwner();
         int points = ((Prise) c).getPiecePrise().getValuePiece();
@@ -107,24 +117,14 @@ public class PartieLocal {
             }
         }
         if (alivePlayers == numberPiecesOnBoard) {
+            System.out.println("meme nb de pieces que de joueurs");
             return true;
         }
         return alivePlayers == 1;
     }
 
-    private static Player whoMated(Player player) {
-        int[] position = player.getHisKing().getPosition().getCoordInt();
-        Echiquier thisBoard = player.getEchiquier();
-        boolean[][][] menaces = thisBoard.getCasesMenacees();
-        for (int i = 0; i < menaces.length; i++) {
-            if (menaces[i][position[0]][position[1]]) {
-                return thisBoard.getPlayers()[i];
-            }
-        }
-        return null;
-    }
-
     public void printWinners(){
+        scoreBoard = getScoreBoardUpdated();
         for (int i = 0; i < players.length; i++) {
             System.out.println(players[i].getNom() + " à " + scoreBoard[i] + " points");
         }

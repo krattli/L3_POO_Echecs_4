@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-class FouTest {
+class rFouTest {
     static PlayerBot j1 = new PlayerBot("Joueur1");
     static PlayerBot j2 = new PlayerBot("Joueur2");
     static PlayerBot j3 = new PlayerBot("Joueur3");
