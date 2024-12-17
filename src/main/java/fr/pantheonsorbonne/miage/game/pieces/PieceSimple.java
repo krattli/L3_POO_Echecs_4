@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public abstract class PieceSimple extends Piece {
 
+    protected static int PORTEE_MAX = 14;
+
     public PieceSimple(Player owner, Case position) {
         super(owner, position);
     }
@@ -24,9 +26,9 @@ public abstract class PieceSimple extends Piece {
         return ALlPossibleMoves;
     }
 
-    protected ArrayList<Coup> computeLinesOfMoves(int[][] directions) {return computeLinesOfMoves(directions, 14);}
+    protected ArrayList<Coup> computeLinesOfMoves(int[][] directions) {return computeLinesOfMoves(directions, PORTEE_MAX);}
 
-    private ArrayList<Coup> getTraceLine(int[] direction, int porteePiece) {
+    protected ArrayList<Coup> getTraceLine(int[] direction, int porteePiece) {
         ArrayList<Coup> traceLine = new ArrayList<>();
         for (int i = 1; i <= porteePiece; i++) {
             Case caseStep = this.position.getValidTranslatedCase(i*direction[0],i*direction[1]);
