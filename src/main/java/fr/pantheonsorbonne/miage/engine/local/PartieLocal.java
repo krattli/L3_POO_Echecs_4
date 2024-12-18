@@ -58,7 +58,7 @@ public class PartieLocal {
                 .toArray(String[]::new));
     }
 
-    public void play() {
+    public Player play() {
         boolean playing = true;
 
         while (playing) {
@@ -73,6 +73,7 @@ public class PartieLocal {
             }
             tour++;
         }
+        return this.getHighestScore();
     }
 
     private void jouerTour(Player playerActif) {
@@ -126,6 +127,19 @@ public class PartieLocal {
         long alivePlayersCount = Arrays.stream(players).filter(Player::isAlive).count();
         int totalPiecesOnBoard = Arrays.stream(players).mapToInt(p -> p.getAllPieces().size()).sum();
         return alivePlayersCount <= 1 || alivePlayersCount == totalPiecesOnBoard;
+    }
+
+    public Player getHighestScore() {
+        int[] updatedScoreBoard = getUpdatedScoreBoard();
+        int max = updatedScoreBoard[0];
+        int index = 0;
+        for (int i = 0; i < updatedScoreBoard.length; i++) {
+            if (updatedScoreBoard[i] > max) {
+                max = updatedScoreBoard[i];
+                index = i;
+            }
+        }
+        return players[index];
     }
 
     public void printWinners() {
