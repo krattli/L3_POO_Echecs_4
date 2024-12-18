@@ -66,21 +66,7 @@ public class PartieLocal {
             if (currentPlayer.isAlive()) {
                 jouerTour(currentPlayer);
             } if (tour > 100000) {
-                plateau.printPlateau();
-                plateau.printCasesMenacees();
-                System.out.println("Tour " + tour);
-                for (Player p : players) {
-                    ArrayList<Piece> a = p.getAllPieces();
-                    for (Piece piece : a) {
-                        System.out.println(piece.getAllPossibleMoves());
-                        if (piece.getClass() == Dame.class) {
-                            System.out.println("Dame : " + piece.getValuePiece());
-                        }
-                    }
-                }
-                System.out.println("Score : " + scoreBoardToString());
-                System.out.println("---------------------------------------");
-                System.exit(22);
+                handleInfiniteLoop();
             }
             if (endConditionMet()) {
                 playing = false;
@@ -152,6 +138,24 @@ public class PartieLocal {
     public void jouerAPartirDuCoup(int index) {
         Echiquier simulation = initializeSimulation();
         rejouerCoupsDepuis(index, simulation);
+    }
+
+    private void handleInfiniteLoop() {
+        plateau.printPlateau();
+        plateau.printCasesMenacees();
+        System.out.println("Tour " + tour);
+        for (Player p : players) {
+            ArrayList<Piece> a = p.getAllPieces();
+            for (Piece piece : a) {
+                System.out.println(piece.getAllPossibleMoves());
+                if (piece.getClass() == Dame.class) {
+                    System.out.println("Dame : " + piece.getValuePiece());
+                }
+            }
+        }
+        System.out.println("Score : " + scoreBoardToString());
+        System.out.println("---------------------------------------");
+        System.exit(22);
     }
 
     private Echiquier initializeSimulation() {
