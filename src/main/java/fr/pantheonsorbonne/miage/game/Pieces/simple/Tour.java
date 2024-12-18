@@ -12,7 +12,6 @@ public class Tour extends FirstMovePiece {
     public Tour(Player owner, Case position) {
         super(owner, position);
     }
-
     public Tour(Player owner, String position) {
         super(owner, position);
     }

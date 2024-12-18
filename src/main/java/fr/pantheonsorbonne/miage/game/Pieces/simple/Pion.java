@@ -18,7 +18,6 @@ public class Pion extends PieceSimple {
     public Pion(Player owner, Case position) {
         super(owner, position);
     }
-
     public Pion(Player owner, String position) {
         super(owner, position);
     }
@@ -40,7 +39,7 @@ public class Pion extends PieceSimple {
             if(coup.getClass() == Prise.class){break;}
             else{
                 if (isPromoted()){
-                    coups.add( new Promotion(this, coup.getArrivee()));
+                    coups.add( new Promotion(this, coup.getCaseArrivee()));
                 }
                 else {coups.add(coup);}
             }

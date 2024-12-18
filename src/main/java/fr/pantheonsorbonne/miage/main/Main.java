@@ -8,9 +8,9 @@ import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerSmarter;
 public class Main {
     public static void main(String[] args) {
 
-        PlayerSmarter j1 = new PlayerSmarter("Gary Kasparov");
+        PlayerBot j1 = new PlayerBot("Gary Kasparov");
         PlayerSmarter j2 = new PlayerSmarter("Hikaru Nakamura");
-        PlayerSmarter j3 = new PlayerSmarter("Alireza Firouzja");
+        PlayerBot j3 = new PlayerBot("Alireza Firouzja");
         PlayerSmarter j4 = new PlayerSmarter("Magnus Carlsen");
 
         float[] stats = getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);

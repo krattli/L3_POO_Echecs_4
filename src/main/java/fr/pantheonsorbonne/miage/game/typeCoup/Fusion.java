@@ -11,6 +11,6 @@ public class Fusion extends Coup {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName().charAt(0) + this.getDepart().toString() + "o" + this.getArrivee().toString();
+        return this.getClass().getSimpleName().charAt(0) + this.getCaseDepart().toString() + "o" + this.getCaseArrivee().toString();
     }
 }

@@ -13,7 +13,7 @@ public class Promotion extends Coup {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName().charAt(0) + this.getDepart().toString() + "-" + this.getArrivee().toString() + "D";
+        return this.getClass().getSimpleName().charAt(0) + this.getCaseDepart().toString() + "-" + this.getCaseArrivee().toString() + "D";
     }
 
     public Promotion(Piece piece, Case arrivee, Piece prise) {

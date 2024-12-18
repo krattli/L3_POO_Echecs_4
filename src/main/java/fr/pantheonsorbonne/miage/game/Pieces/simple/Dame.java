@@ -16,7 +16,6 @@ public class Dame extends PieceSimple {
     public Dame(Player owner, Case position) {
         super(owner, position);
     }
-
     public Dame(Player owner, String position) {
         super(owner, position);
     }

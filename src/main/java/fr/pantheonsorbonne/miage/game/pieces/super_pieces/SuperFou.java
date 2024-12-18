@@ -12,6 +12,10 @@ public class SuperFou extends SuperPiece {
     public SuperFou(Player owner, Case position) {
         super(owner, position);
     }
+    public SuperFou(Player owner, String position) {
+        super(owner,position);
+    }
+
 
     @Override
     public int getValuePiece() {

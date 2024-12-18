@@ -12,6 +12,9 @@ public class SuperPion extends SuperPiece {
     public SuperPion(Player owner, Case position) {
         super(owner, position);
     }
+    public SuperPion(Player owner, String position) {
+        super(owner,position);
+    }
 
     @Override
     public int getValuePiece() {

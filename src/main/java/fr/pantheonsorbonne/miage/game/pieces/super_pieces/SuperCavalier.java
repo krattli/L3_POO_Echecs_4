@@ -12,6 +12,7 @@ public class SuperCavalier extends SuperPiece {
     public SuperCavalier(Player owner, Case position) {
         super(owner, position);
     }
+    public SuperCavalier(Player owner, String position) { super(owner,position);}
 
     @Override
     public int getValuePiece() {

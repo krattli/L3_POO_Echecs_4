@@ -39,7 +39,7 @@ public class ComputeMenace {
         }
         for (Coup coup : coups) {
             if (coup.getClass() == Roque.class) {continue;}
-            Case c = coup.getArrivee();
+            Case c = coup.getCaseArrivee();
             int[] coords = c.getCoordInt();
             if (coup.getPiece().getClass() != Pion.class && coup.getPiece().getClass() != Roi.class) {
                 menaces[coords[1]][coords[0]] = true;

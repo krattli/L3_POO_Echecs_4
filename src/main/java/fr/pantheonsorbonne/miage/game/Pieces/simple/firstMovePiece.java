@@ -13,7 +13,6 @@ public abstract class FirstMovePiece extends PieceSimple {
     public FirstMovePiece(Player owner, Case position) {
         super(owner, position);
     }
-
     public FirstMovePiece(Player owner, String position) {
         super(owner, position);
     }

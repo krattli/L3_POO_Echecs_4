@@ -13,7 +13,6 @@ public class Cavalier extends PieceSimple {
     public Cavalier(Player owner, Case position) {
         super(owner, position);
     }
-
     public Cavalier(Player owner, String position) {
         super(owner, position);
     }

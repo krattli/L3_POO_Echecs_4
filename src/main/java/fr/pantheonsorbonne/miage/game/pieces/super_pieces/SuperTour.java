@@ -12,6 +12,9 @@ public class SuperTour extends SuperPiece {
     public SuperTour(Player owner, Case position) {
         super(owner, position);
     }
+    public SuperTour(Player owner, String position) {
+        super(owner,position);
+    }
 
     @Override
     public int getValuePiece() {

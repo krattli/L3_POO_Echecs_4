@@ -13,6 +13,6 @@ public class Deplacement extends Coup {
     }
     @Override
     public String toString() {
-        return this.getPiece().getClass().getSimpleName().charAt(0) + this.getDepart().toString() + "-" + this.getArrivee().toString();
+        return this.getPiece().getClass().getSimpleName().charAt(0) + this.getCaseDepart().toString() + "-" + this.getCaseArrivee().toString();
     }
 }

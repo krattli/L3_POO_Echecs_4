@@ -13,7 +13,6 @@ public class Fou extends PieceSimple {
     public Fou(Player owner, Case position) {
         super(owner, position);
     }
-
     public Fou(Player owner, String position) {
         super(owner, position);
     }

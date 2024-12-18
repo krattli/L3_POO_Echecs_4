@@ -13,6 +13,10 @@ public class SuperDeplacement extends Coup {
         super(piece, arrivee);
     }
 
+    public ArrayList<Piece> getAllPiecesMangees() {
+        return this.piecesMangees;
+    }
+
     @Override
     public String toString() {
         String nombreDePrises;
@@ -23,8 +27,8 @@ public class SuperDeplacement extends Coup {
         }
         return "S"
                 + this.getPiece().getClass().getSimpleName().charAt(5)
-                + this.getDepart().toString()
+                + this.getCaseDepart().toString()
                 + nombreDePrises
-                + this.getArrivee().toString();
+                + this.getCaseArrivee().toString();
     }
 }

@@ -9,6 +9,9 @@ public abstract class SuperPiece extends Piece {
     public SuperPiece(Player owner, Case position) {
         super(owner, position);
     }
+    public SuperPiece(Player owner, String position) {
+        super(owner, position);
+    }
 
     public abstract boolean isOccupiedByThisPiece(Case position);
 

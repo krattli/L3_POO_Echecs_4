@@ -12,6 +12,9 @@ public class SuperDame extends SuperPiece {
     public SuperDame(Player owner, Case position) {
         super(owner, position);
     }
+    public SuperDame(Player owner, String position) {
+        super(owner,position);
+    }
 
     @Override
     public int getValuePiece() {

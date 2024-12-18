@@ -65,7 +65,7 @@ public class PlayerSmarter extends Player{
 
     private static int handleMenaces(Coup coup) {
         if (coup.getClass() == Roque.class) {return 0;}
-        int[] arrivee = coup.getArrivee().getCoordInt();
+        int[] arrivee = coup.getCaseArrivee().getCoordInt();
         int delta = 0;
         boolean[][][] menaces = coup.getPiece().getOwner().getEchiquier().getCasesMenacees();
         int hisPlayerOrdinal = coup.getPiece().getOwner().getOrderInGame();

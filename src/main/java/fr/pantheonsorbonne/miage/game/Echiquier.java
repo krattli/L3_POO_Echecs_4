@@ -111,20 +111,20 @@ public class Echiquier {
     }
 
     private void handleDeplacement(Deplacement coup) {
-        setPieceToPosition(coup.getPiece(), coup.getArrivee());
+        setPieceToPosition(coup.getPiece(), coup.getCaseArrivee());
     }
 
     private void handlePrise(Prise coup) {
         if (coup.getPiecePrise() instanceof Roi) {
             coup.getPiece().getOwner().killPlayer();
         }
-        getPieceAt(coup.getArrivee()).kill();
-        setPieceToPosition(coup.getPiece(), coup.getArrivee());
+        getPieceAt(coup.getCaseArrivee()).kill();
+        setPieceToPosition(coup.getPiece(), coup.getCaseArrivee());
     }
 
     private void handlePromotion(Promotion coup) {
         coup.getPiece().kill();
-        new Dame(coup.getPiece().getOwner(), coup.getArrivee()).setValuePiecePromotion();
+        new Dame(coup.getPiece().getOwner(), coup.getCaseArrivee()).setValuePiecePromotion();
     }
 
     private void handleUnknownMove(Coup coup) {
