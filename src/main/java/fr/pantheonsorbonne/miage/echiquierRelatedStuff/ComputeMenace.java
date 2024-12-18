@@ -12,9 +12,9 @@ import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import java.util.ArrayList;
 
 
-public class EchiquierComputeMenace {
+public class ComputeMenace {
     private static final int[] stats = Echiquier.getBoardInfo();
-    private EchiquierComputeMenace() {}
+    private ComputeMenace() {}
 
     public static boolean[][][] computeAllMenaces(Echiquier echiquier) {
         boolean[][][] menaces = new boolean[stats[1]][stats[0]][stats[0]];
