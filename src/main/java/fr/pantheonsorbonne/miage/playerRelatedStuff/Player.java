@@ -1,9 +1,9 @@
 package fr.pantheonsorbonne.miage.playerRelatedStuff;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import fr.pantheonsorbonne.miage.enums.Color;
-import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
@@ -15,11 +15,13 @@ public abstract class Player{
     private Color color;
     private Boolean isAlive;
     private Echiquier echiquier;
+    private final Random random;
 
     public Player (String nom) {
         this.nom = nom;
         this.points = 0;
         this.isAlive = true;
+        this.random = new Random();
     }
 
     public String getNom(){
@@ -46,7 +48,6 @@ public abstract class Player{
     public void setEchiquier(Echiquier echiquier) {
         this.echiquier = echiquier;
     }
-
     public Boolean isAlive(){
         return this.isAlive;
     }
@@ -57,7 +58,30 @@ public abstract class Player{
         this.isAlive = true;
     }
 
-    public abstract Coup getNextCoup();
+    public Coup getNextCoup() {
+        Roi myKing = this.getHisKing();
+        if (myKing == null) {
+            return null;
+        }
+
+        if (this.isChecked()) {
+            return this.getNextCoupKingChecked();
+        }
+
+        return this.getNextCoupNormal();
+    }
+
+    public abstract Coup getNextCoupKingChecked();
+
+    public abstract Coup getNextCoupNormal();
+
+    protected Coup getRandomMove(ArrayList<Coup> moves) {
+        if (moves == null || moves.isEmpty()) {
+            return null;
+        }
+        int randomIndex = random.nextInt(moves.size());
+        return moves.get(randomIndex);
+    }
 
     public ArrayList<Coup> getAllPossibleMoves(){
         ArrayList<Coup> coups = new ArrayList<>();

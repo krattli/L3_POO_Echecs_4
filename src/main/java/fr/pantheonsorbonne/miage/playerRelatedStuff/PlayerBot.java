@@ -7,42 +7,28 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayerBot extends Player {
-    private final Random random;
 
     public PlayerBot(String name) {
         super(name);
-        this.random = new Random();
     }
 
-    public Coup getNextCoup() {
+    @Override
+    public Coup getNextCoupKingChecked() {
         Roi myKing = this.getHisKing();
-        if (myKing == null) {
-            return null;
-        }
+        return getRandomMove(myKing.getAllPossibleMoves());
+    }
 
-        if (this.isChecked()) {
-            return getRandomMove(myKing.getAllPossibleMoves());
-        }
-
+    @Override
+    public Coup getNextCoupNormal() {
         ArrayList<Coup> allMoves = this.getAllPossibleMoves();
         if (allMoves.isEmpty()) {
-            handleNoAvailableMoves();
+            //handleNoAvailableMoves();
             return null;
         }
 
         return getRandomMove(allMoves);
     }
 
-    // Extracted helper method to randomly select a move from a list
-    private Coup getRandomMove(ArrayList<Coup> moves) {
-        if (moves == null || moves.isEmpty()) {
-            return null;
-        }
-        int randomIndex = random.nextInt(moves.size());
-        return moves.get(randomIndex);
-    }
-
-    // Extracted helper method to handle the case where there are no available moves
     private void handleNoAvailableMoves() {
         this.getEchiquier().printPlateau();
         this.getEchiquier().printCasesMenacees();
