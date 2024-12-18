@@ -66,7 +66,7 @@ public class Roque extends Coup {
 
     private static boolean areIntermediateCasesSafe(String[] cases, Piece roiARoquer) {
         Player player = roiARoquer.getOwner();
-        int ordinalPlayer = player.getColor().ordinal();
+        int ordinalPlayer = player.getOrderInGame();
         boolean[][][] threats = player.getEchiquier().getCasesMenacees();
 
         for (String caseName : cases) {
@@ -94,7 +94,7 @@ public class Roque extends Coup {
     }
 
     public int[] getSensDuRoqueRoi() {
-        int colorIndex = this.getPiece().getOwner().getColor().ordinal();
+        int colorIndex = this.getPiece().getOwner().getOrderInGame();
         return isGrandRoque ? DIRECTIONS_GRAND_ROQUE[colorIndex] : DIRECTIONS_PETIT_ROQUE[colorIndex];
     }
 }

@@ -68,7 +68,7 @@ public class PlayerSmarter extends Player{
         int[] arrivee = coup.getArrivee().getCoordInt();
         int delta = 0;
         boolean[][][] menaces = coup.getPiece().getOwner().getEchiquier().getCasesMenacees();
-        int hisPlayerOrdinal = coup.getPiece().getOwner().getColor().ordinal();
+        int hisPlayerOrdinal = coup.getPiece().getOwner().getOrderInGame();
 
         for (int i = 0 ; i < menaces.length ; i++) {
             boolean isArriveeMenaced = menaces[i][arrivee[1]][arrivee[0]];

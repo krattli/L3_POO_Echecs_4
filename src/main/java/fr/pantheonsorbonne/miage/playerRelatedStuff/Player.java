@@ -54,6 +54,7 @@ public abstract class Player{
     public void revive(){
         this.isAlive = true;
     }
+    public int getOrderInGame() {return this.getColor().ordinal();}
 
     public Coup getNextCoup() {
         Roi myKing = this.getHisKing();
@@ -108,7 +109,7 @@ public abstract class Player{
         int[] coords = r.getPosition().getCoordInt();
         boolean[][][] menaces = this.getEchiquier().getCasesMenacees();
         for (int i = 0 ; i < menaces.length ; i++) {
-            if (this.getColor().ordinal() != i){
+            if (this.getOrderInGame() != i){
                 if (menaces[i][coords[1]][coords[0]]) {
                     return true;
                 }

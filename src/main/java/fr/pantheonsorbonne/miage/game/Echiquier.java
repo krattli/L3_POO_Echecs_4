@@ -181,7 +181,7 @@ public class Echiquier {
     public boolean isMenaced(Piece piece) {
         int[] coords = piece.getPosition().getCoordInt();
         for (int i = 0; i < casesMenacees.length; i++) {
-            if (piece.getOwner().getColor().ordinal() != i && casesMenacees[i][coords[1]][coords[0]]) {
+            if (piece.getOwner().getOrderInGame() != i && casesMenacees[i][coords[1]][coords[0]]) {
                 return true;
             }
         }

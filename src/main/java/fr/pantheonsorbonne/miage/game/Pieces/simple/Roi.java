@@ -30,7 +30,7 @@ public class Roi extends FirstMovePiece {
     public ArrayList<Coup> getAllPossibleMoves() {
 
         ArrayList<Coup> coupsPossiblesWithoutCheckChecking =  this.computeLinesOfMoves(this.getDirections(),1);
-        int thisPlayerOrdinal = this.getOwner().getColor().ordinal();
+        int thisPlayerOrdinal = this.getOwner().getOrderInGame();
 
         boolean[][][] casesMenacees = this.getOwner().getEchiquier().getCasesMenacees();
         ArrayList<Coup> coupsReels = new ArrayList<>();

@@ -35,7 +35,7 @@ public class PrintEchiquier {
                 } else {
                     String nomComplet = piece.getClass().toString();
                     String nomClasse = nomComplet.substring(nomComplet.lastIndexOf('.') + 1);
-                    String pieceColor = PLAYER_COLORS[piece.getOwner().getColor().ordinal()];
+                    String pieceColor = PLAYER_COLORS[piece.getOwner().getOrderInGame()];
                     System.out.print(bgColor + pieceColor + " " + AffichagePieces.getByAlias(nomClasse).getSymbol() + " " + RESET);
                 }
             }
@@ -59,8 +59,8 @@ public class PrintEchiquier {
                     if (!Case.isValidCoord(i, j)) {
                         System.out.print("   " + RESET);
                     }
-                    else if (allMenaces[currentPlayer.getColor().ordinal()][i][j]) {
-                        System.out.print(backgroundColor + PLAYER_COLORS[currentPlayer.getColor().ordinal()]
+                    else if (allMenaces[currentPlayer.getOrderInGame()][i][j]) {
+                        System.out.print(backgroundColor + PLAYER_COLORS[currentPlayer.getOrderInGame()]
                                 + " " + MENACE_CHAR + " " + RESET);
                     } else {
                         System.out.print(backgroundColor + "   " + RESET);

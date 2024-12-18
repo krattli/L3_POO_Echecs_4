@@ -66,7 +66,6 @@ public class PartieLocal {
 
     public Player play() {
         boolean playing = true;
-
         while (playing) {
             Player currentPlayer = players[tour % players.length];
             if (currentPlayer.isAlive()) {
@@ -84,12 +83,12 @@ public class PartieLocal {
 
     private void jouerTour(Player playerActif) {
         if (!playerActif.isAlive() || playerActif.getAllPieces().isEmpty()) {
-            handleSuicide(playerActif);
+            handlePat(playerActif);
             return;
         }
         Coup coup = playerActif.getNextCoup();
         if (coup == null) {
-            handleSuicide(playerActif);
+            handlePat(playerActif);
             return;
         }
         jouerUnCoup(coup);
@@ -108,7 +107,7 @@ public class PartieLocal {
         }
     }
 
-    private void handleSuicide(Player player) {
+    private void handlePat(Player player) {
         player.addPoints(POINTS_SUICIDE);
         player.kill();
     }
@@ -174,7 +173,7 @@ public class PartieLocal {
             for (Piece piece : a) {
                 System.out.println(piece.getAllPossibleMoves());
                 if (piece.getClass() == Dame.class) {
-                    System.out.println("Dame : " + piece.getValuePiece());
+                    System.out.println("Dame : " + piece.getOwner().getAllPieces()  + "   " + piece.getPosition());
                 }
             }
         }
