@@ -12,12 +12,37 @@ public class Main {
         PlayerBot j3 = new PlayerBot("Alireza Firouzja");
         PlayerBot j4 = new PlayerBot("Magnus Carlsen");
 
-        PartieLocal game = new PartieLocal(new Player[]{j1, j2, j3, j4});
-        game.initPlateau();
+//        PartieLocal game = new PartieLocal(new Player[]{j1, j2, j3, j4});
+//        game.initPlateau();
+//
+//        game.play();
+//
+//        game.printWinners();
 
-        game.play();
+        float[] stats = getStatsAbout(new Player[] {j1,j2,j3,j4}, 1000);
+        for (float stat : stats) {
+            System.out.println(stat);
+        }
+    }
 
-        game.printWinners();
+    public static float[] getStatsAbout(Player[] players, int nbSimulations) {
+        float[] stats = new float[players.length];
+        for (int i = 0; i < nbSimulations; i++) {
+            PartieLocal game = new PartieLocal(players);
+            game.initPlateau();
+            game.play();
+            int[] winners = game.getUpdatedScoreBoard();
+            for (int j = 0; j < 4; j++) {
+                players[j].resetPoints();
+                System.out.print(winners[j] + "  ");
+                stats[j] += winners[j];
+            }
+            System.out.println();
+        }
+        for (int i = 0; i < players.length; i++) {
+            stats[i] /= nbSimulations;
+        }
+        return stats;
     }
 }
 

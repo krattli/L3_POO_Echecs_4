@@ -24,7 +24,7 @@ class rFouTest {
 
     @BeforeEach
     void reset() {
-        echiquier.emptyPlateau();
+        echiquier.clearPlateau();
     }
 
     @Test

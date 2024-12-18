@@ -24,7 +24,7 @@ class CavalierTest {
 
     @BeforeEach
     void reset() {
-        echiquier.emptyPlateau();
+        echiquier.clearPlateau();
     }
 
     @Test

@@ -6,37 +6,46 @@ import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PlayerBot extends Player{
-
-    static Random random = new Random();
+public class PlayerBot extends Player {
+    private final Random random;
 
     public PlayerBot(String name) {
         super(name);
+        this.random = new Random();
     }
 
-    public Coup getNextCoup(){
-        Roi hisKing = this.getHisKing();
-        if (hisKing == null) {
+    public Coup getNextCoup() {
+        Roi myKing = this.getHisKing();
+        if (myKing == null) {
             return null;
         }
-        ArrayList<Coup> allCoupsRoi = this.getHisKing().getAllPossibleMoves();
-        if (this.isChecked()){
-            if (!allCoupsRoi.isEmpty()){
-                int index = random.nextInt(allCoupsRoi.size());
-                return allCoupsRoi.get(index);
-            }
-            else{
-                return null;
-            }
+
+        if (this.isChecked()) {
+            return getRandomMove(myKing.getAllPossibleMoves());
         }
-        ArrayList<Coup> coups = this.getAllPossibleMoves();
-        if (coups.isEmpty()){
-            this.getEchiquier().printPlateau();
-            this.getEchiquier().printCasesMenacees();
-            System.out.println("plus de coups dispo"+ this.getColor());
+
+        ArrayList<Coup> allMoves = this.getAllPossibleMoves();
+        if (allMoves.isEmpty()) {
+            handleNoAvailableMoves();
             return null;
         }
-        int index = random.nextInt(coups.size());
-        return coups.get(index);
+
+        return getRandomMove(allMoves);
+    }
+
+    // Extracted helper method to randomly select a move from a list
+    private Coup getRandomMove(ArrayList<Coup> moves) {
+        if (moves == null || moves.isEmpty()) {
+            return null;
+        }
+        int randomIndex = random.nextInt(moves.size());
+        return moves.get(randomIndex);
+    }
+
+    // Extracted helper method to handle the case where there are no available moves
+    private void handleNoAvailableMoves() {
+        this.getEchiquier().printPlateau();
+        this.getEchiquier().printCasesMenacees();
+        System.out.println("No moves available for color: " + this.getColor());
     }
 }

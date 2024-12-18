@@ -26,7 +26,7 @@ class RoiTest {
 
     @BeforeEach
     void reset() {
-        echiquier.emptyPlateau();
+        echiquier.clearPlateau();
     }
 
     @Test

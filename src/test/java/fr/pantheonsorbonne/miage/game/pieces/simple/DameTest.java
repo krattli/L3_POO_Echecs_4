@@ -24,7 +24,7 @@ class DameTest {
 
     @BeforeEach
     void reset() {
-        echiquier.emptyPlateau();
+        echiquier.clearPlateau();
     }
 
     @Test

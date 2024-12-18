@@ -2,160 +2,184 @@ package fr.pantheonsorbonne.miage.engine.local;
 
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
+import fr.pantheonsorbonne.miage.game.Piece;
+import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class PartieLocal {
+    private static final int POINTS_SUICIDE = 10;
+    private static final int POINTS_ECHEC_ET_MAT = 12;
+
     private final Player[] players;
-    private int[] scoreBoard;
+    private final int[] scoreBoard;
     private final Echiquier plateau;
-    private final ArrayList<Coup> historiqueDesCoups;
-    private int tour = 0;
+    private final List<Coup> historiqueDesCoups;
+    private int tour;
 
     public PartieLocal(Player[] joueurs) {
         this.players = joueurs;
         this.plateau = new Echiquier(players);
-        scoreBoard = new int[players.length];
-        historiqueDesCoups = new ArrayList<>();
-
-        this.plateau.setPartieLocal(this);
+        this.tour = 0;
+        this.scoreBoard = new int[players.length];
+        this.historiqueDesCoups = new ArrayList<>();
+        //this.plateau.setPartieLocal(this);
     }
 
     public void initPlateau() {
+        revivePlayers();
         plateau.initBoard();
         plateau.computeMenaces();
     }
 
-    public Echiquier getPlateau() {return plateau;}
-    public int[] getScoreBoardUpdated() {return new int[] {
-            players[0].getPoints(),
-            players[1].getPoints(),
-            players[2].getPoints(),
-            players[3].getPoints(),};
-    }
-    public String scoreBoardToString() {
-        StringBuilder stringScoreBoard = new StringBuilder();
-        int[] individualScore = getScoreBoardUpdated();
-        for (int s : individualScore) {
-            stringScoreBoard.append(s).append(" ");
+    private void revivePlayers () {
+        for (Player p : players) {
+            p.revive();
         }
-        return stringScoreBoard.toString();
     }
 
-    public void play(){
+    public Echiquier getPlateau() {
+        return plateau;
+    }
 
+    public int[] getUpdatedScoreBoard() {
+        return Arrays.stream(players).mapToInt(Player::getPoints).toArray();
+    }
+
+    public String scoreBoardToString() {
+        return String.join(" ", Arrays.stream(getUpdatedScoreBoard())
+                .mapToObj(String::valueOf)
+                .toArray(String[]::new));
+    }
+
+    public void play() {
         boolean playing = true;
-        Player[] players = this.players;
 
         while (playing) {
-
-            Player playerPlaying = players[tour % players.length];
-
-            if (playerPlaying.isAlive()){
-                jouerTour(playerPlaying);
+            Player currentPlayer = players[tour % players.length];
+            if (currentPlayer.isAlive()) {
+                jouerTour(currentPlayer);
+            } if (tour > 100000) {
+                plateau.printPlateau();
+                plateau.printCasesMenacees();
+                System.out.println("Tour " + tour);
+                for (Player p : players) {
+                    ArrayList<Piece> a = p.getAllPieces();
+                    for (Piece piece : a) {
+                        System.out.println(piece.getAllPossibleMoves());
+                        if (piece.getClass() == Dame.class) {
+                            System.out.println("Dame : " + piece.getValuePiece());
+                        }
+                    }
+                }
+                System.out.println("Score : " + scoreBoardToString());
+                System.out.println("---------------------------------------");
+                System.exit(22);
             }
-
-            if (this.endCondition()) {
+            if (endConditionMet()) {
                 playing = false;
             }
             tour++;
         }
     }
 
-    private void jouerTour(Player playerPlaying) {
-
-        Coup c = playerPlaying.getNextCoup();
-        if (c == null) {
-            playerPlaying.addPoints(10);
-            playerPlaying.suicide();
+    private void jouerTour(Player playerActif) {
+        if (!playerActif.isAlive() || playerActif.getAllPieces().isEmpty()) {
+            handleSuicide(playerActif);
+            return;
         }
-        jouerCoup(c);
-        addPoints(c);
-        historiqueDesCoups.add(c);
+        Coup coup = playerActif.getNextCoup();
+        if (coup == null) {
+            handleSuicide(playerActif);
+            return;
+        }
+        jouerUnCoup(coup);
+        addPointsForCoup(coup);
+        historiqueDesCoups.add(coup);
         plateau.computeMenaces();
 
         Player matedPlayer = plateau.isSomeOneMatted();
-
         if (matedPlayer != null) {
-            matedPlayer.suicide();
-            playerPlaying.addPoints(12);
-            plateau.computeMenaces();
+            handleEchecEtMat(playerActif, matedPlayer);
         }
-
-        //System.out.println( tour +"  : "+playerPlaying.getColor() + "   " + c + " Score : " +  this.scoreBoardToString());
     }
 
-    public void jouerCoup (Coup c){
-        if (c == null) {return;}
-        plateau.jouerCoup(c);
+    private void handleSuicide(Player player) {
+        player.addPoints(POINTS_SUICIDE);
+        player.suicide();
     }
 
-    public void addPoints(Coup c){
-        if (c == null) {
-            for (Player p : players) {
-                p.addPoints(10);
-            }
-            return;
-        }
-        if (c.getClass() != Prise.class) {return;}
-        Player joueur = c.getPiece().getOwner();
-        int points = ((Prise) c).getPiecePrise().getValuePiece();
-        joueur.addPoints(points);
+    private void handleEchecEtMat(Player winner, Player loser) {
+        loser.suicide();
+        winner.addPoints(POINTS_ECHEC_ET_MAT);
+        plateau.computeMenaces();
     }
 
-    private boolean endCondition() {
-        int alivePlayers = 0;
-        int numberPiecesOnBoard = 0;
-        for (Player player : players) {
-            if (player.isAlive()) {
-                alivePlayers++;
-                numberPiecesOnBoard += player.getAllPieces().size();
-            }
+    public void jouerUnCoup(Coup coup) {
+        if (coup != null) {
+            plateau.jouerCoup(coup);
         }
-        if (alivePlayers == numberPiecesOnBoard) {
-            return true;
-        }
-        return alivePlayers == 1;
     }
 
-    public void printWinners(){
-        scoreBoard = getScoreBoardUpdated();
+    public void addPointsForCoup(Coup coup) {
+        if (coup == null) {
+            Arrays.stream(players).forEach(p -> p.addPoints(POINTS_SUICIDE));
+        } else if (coup instanceof Prise) {
+            Prise prise = (Prise) coup;
+            prise.getPiece().getOwner().addPoints(prise.getPiecePrise().getValuePiece());
+        }
+    }
+
+    private boolean endConditionMet() {
+        long alivePlayersCount = Arrays.stream(players).filter(Player::isAlive).count();
+        int totalPiecesOnBoard = Arrays.stream(players).mapToInt(p -> p.getAllPieces().size()).sum();
+        return alivePlayersCount <= 1 || alivePlayersCount == totalPiecesOnBoard;
+    }
+
+    public void printWinners() {
+        int[] updatedScoreBoard = getUpdatedScoreBoard();
         for (int i = 0; i < players.length; i++) {
-            System.out.println(players[i].getNom() + " à " + scoreBoard[i] + " points");
+            System.out.println(players[i].getNom() + " a " + updatedScoreBoard[i] + " points");
         }
     }
 
     public void jouerAPartirDuCoup(int index) {
-        PlayerBot j1 = new PlayerBot("a");
-        PlayerBot j2 = new PlayerBot("a");
-        PlayerBot j3 = new PlayerBot("a");
-        PlayerBot j4 = new PlayerBot("a");
+        Echiquier simulation = initializeSimulation();
+        rejouerCoupsDepuis(index, simulation);
+    }
+
+    private Echiquier initializeSimulation() {
+        PlayerBot j1 = new PlayerBot("SimBot1");
+        PlayerBot j2 = new PlayerBot("SimBot2");
+        PlayerBot j3 = new PlayerBot("SimBot3");
+        PlayerBot j4 = new PlayerBot("SimBot4");
 
         Echiquier simulation = new Echiquier(new Player[]{j1, j2, j3, j4});
         simulation.initBoard();
         simulation.computeMenaces();
-        ArrayList<Coup> historique = this.historiqueDesCoups;
-        int i;
-        for (i = 0; i < index; i++) {
-
-            Coup c = historique.get(i);
-            simulation.jouerCoup(c);
-            simulation.computeMenaces();
-        }
-        while ( i < historique.size()) {
-            simulation.printPlateau();
-            simulation.printCasesMenacees();
-            Coup c = historique.get(i);
-            simulation.jouerCoup(c);
-            simulation.computeMenaces();
-            System.out.println( c + " ");
-            new Scanner(System.in).nextLine();
-            i++;
-        }
+        return simulation;
     }
 
+    private void rejouerCoupsDepuis(int index, Echiquier simulation) {
+        for (int i = 0; i < index; i++) {
+            Coup coup = historiqueDesCoups.get(i);
+            simulation.jouerCoup(coup);
+            simulation.computeMenaces();
+        }
+        for (int i = index; i < historiqueDesCoups.size(); i++) {
+            simulation.printPlateau();
+            simulation.printCasesMenacees();
+            Coup coup = historiqueDesCoups.get(i);
+            simulation.jouerCoup(coup);
+            simulation.computeMenaces();
+            System.out.println(coup + " ");
+            new Scanner(System.in).nextLine();
+        }
+    }
 }

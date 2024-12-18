@@ -22,9 +22,9 @@ public class EchiquierInitializer {
     }
 
     public static void initialiser(Echiquier echiquier) {
-        echiquier.emptyPlateau();
+        echiquier.clearPlateau();
         Player[] players = echiquier.getPlayers();
-        for (int i = 0; i < Echiquier.getInfosAboutThat()[1]; i++) {
+        for (int i = 0; i < Echiquier.getBoardInfo()[1]; i++) {
             try {
                 initialiserPlayer(players[i]);
             } catch (WrongCaseFormatException ignored) {}
@@ -33,7 +33,7 @@ public class EchiquierInitializer {
 
     private static void initialiserPlayer(Player player) throws WrongCaseFormatException {
 
-        int numberOfRotation = (3 - player.getColor().ordinal())%4;
+        int numberOfRotation = 4 - player.getColor().ordinal();
 
         Case posRoiInit = new Case(H_1).getCoordRotatedBy90(numberOfRotation);
         Roi roi = new Roi(player, posRoiInit);

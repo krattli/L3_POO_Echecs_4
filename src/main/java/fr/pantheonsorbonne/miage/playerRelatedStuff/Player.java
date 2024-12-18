@@ -28,6 +28,9 @@ public abstract class Player{
     public int getPoints(){
         return this.points;
     }
+    public void resetPoints(){
+        this.points = 0;
+    }
     public void setColor (Color color){
         this.color = color;
     }
@@ -49,6 +52,9 @@ public abstract class Player{
     }
     public void kill(){
         this.isAlive = false;
+    }
+    public void revive(){
+        this.isAlive = true;
     }
 
     public abstract Coup getNextCoup();
