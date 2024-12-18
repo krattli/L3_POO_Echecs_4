@@ -10,15 +10,8 @@ public class Main {
 
         PlayerSmarter j1 = new PlayerSmarter("Gary Kasparov");
         PlayerSmarter j2 = new PlayerSmarter("Hikaru Nakamura");
-        PlayerBot j3 = new PlayerBot("Alireza Firouzja");
-        PlayerBot j4 = new PlayerBot("Magnus Carlsen");
-
-//        PartieLocal game = new PartieLocal(new Player[]{j1, j2, j3, j4});
-//        game.initPlateau();
-//
-//        game.play();
-//
-//        game.printWinners();
+        PlayerSmarter j3 = new PlayerSmarter("Alireza Firouzja");
+        PlayerSmarter j4 = new PlayerSmarter("Magnus Carlsen");
 
         float[] stats = getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
         for (float stat : stats) {
@@ -30,6 +23,9 @@ public class Main {
         float[] stats = new float[players.length];
         int[] countVictories = new int[players.length];
         for (int i = 0; i < nbSimulations; i++) {
+            if (i%10 == 0) {
+                System.out.println("Simulation " + i);
+            }
             PartieLocal game = new PartieLocal(players);
             game.initPlateau();
             Player winner = game.play();
