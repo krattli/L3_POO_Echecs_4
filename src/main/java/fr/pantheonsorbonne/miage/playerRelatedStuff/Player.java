@@ -51,9 +51,6 @@ public abstract class Player{
     public Boolean isAlive(){
         return this.isAlive;
     }
-    public void kill(){
-        this.isAlive = false;
-    }
     public void revive(){
         this.isAlive = true;
     }
@@ -120,7 +117,7 @@ public abstract class Player{
         return false;
     }
 
-    public void suicide() {
+    public void kill() {
         this.isAlive = false;
         ArrayList<Piece> pieces = this.getAllPieces();
         for (Piece piece : pieces) {

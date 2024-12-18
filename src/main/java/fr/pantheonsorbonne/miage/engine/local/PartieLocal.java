@@ -99,11 +99,11 @@ public class PartieLocal {
 
     private void handleSuicide(Player player) {
         player.addPoints(POINTS_SUICIDE);
-        player.suicide();
+        player.kill();
     }
 
     private void handleEchecEtMat(Player winner, Player loser) {
-        loser.suicide();
+        loser.kill();
         winner.addPoints(POINTS_ECHEC_ET_MAT);
         plateau.computeMenaces();
     }

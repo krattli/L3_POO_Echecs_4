@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.game;
 
-import fr.pantheonsorbonne.miage.engine.local.PartieLocal;
 import fr.pantheonsorbonne.miage.enums.Color;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
 import fr.pantheonsorbonne.miage.game.pieces.simple.FirstMovePiece;
@@ -12,10 +11,8 @@ import fr.pantheonsorbonne.miage.game.typeCoup.Promotion;
 import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierInitializer;
-import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierComputeMenace;
+import fr.pantheonsorbonne.miage.echiquierRelatedStuff.ComputeMenace;
 import fr.pantheonsorbonne.miage.echiquierRelatedStuff.PrintEchiquier;
-
-import java.util.Scanner;
 
 public class Echiquier {
     private static final int TAILLE = 14;
@@ -77,7 +74,7 @@ public class Echiquier {
     }
 
     public void computeMenaces() {
-        this.casesMenacees = EchiquierComputeMenace.computeAllMenaces(this);
+        this.casesMenacees = ComputeMenace.computeAllMenaces(this);
     }
 
     public void setPieceToPosition(Piece piece, Case position) {
@@ -119,7 +116,7 @@ public class Echiquier {
 
     private void handlePrise(Prise coup) {
         if (coup.getPiecePrise() instanceof Roi) {
-            coup.getPiece().getOwner().suicide();
+            coup.getPiece().getOwner().kill();
         }
         getPieceAt(coup.getArrivee()).kill();
         setPieceToPosition(coup.getPiece(), coup.getArrivee());
