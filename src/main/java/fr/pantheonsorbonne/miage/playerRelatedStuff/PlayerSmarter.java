@@ -139,12 +139,4 @@ public class PlayerSmarter extends Player{
         }
         return probabilities.length - 1;
     }
-
-    public static void main(String[] args) {
-        int[] input = {1, 2, 3, 4, 5};
-        double[] probabilities = returnLogSoftMaxedTab(input);
-        for (double prob : probabilities) {
-            System.out.println(prob);
-        }
-    }
 }

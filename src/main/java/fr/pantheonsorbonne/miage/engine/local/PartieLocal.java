@@ -17,11 +17,13 @@ public class PartieLocal {
     private static final int POINTS_SUICIDE = 10;
     private static final int POINTS_ECHEC_ET_MAT = 12;
 
+    private final Scanner scanner = new Scanner(System.in);
     private final Player[] players;
     private final int[] scoreBoard;
     private final Echiquier plateau;
     private final List<Coup> historiqueDesCoups;
     private int tour;
+    private boolean showEachCoup = false;
 
     public PartieLocal(Player[] joueurs) {
         this.players = joueurs;
@@ -29,7 +31,11 @@ public class PartieLocal {
         this.tour = 0;
         this.scoreBoard = new int[players.length];
         this.historiqueDesCoups = new ArrayList<>();
-        //this.plateau.setPartieLocal(this);
+    }
+
+    public PartieLocal(Player[] joueurs, boolean showEachCoup) {
+        this(joueurs);
+        this.showEachCoup = showEachCoup;
     }
 
     public void initPlateau() {
@@ -88,6 +94,11 @@ public class PartieLocal {
         }
         jouerUnCoup(coup);
         addPointsForCoup(coup);
+        if (showEachCoup) {
+            System.out.println(playerActif.getColor() + " a joué le coup  : " + coup);
+            plateau.printPlateau();
+            scanner.nextLine();
+        }
         historiqueDesCoups.add(coup);
         plateau.computeMenaces();
 
