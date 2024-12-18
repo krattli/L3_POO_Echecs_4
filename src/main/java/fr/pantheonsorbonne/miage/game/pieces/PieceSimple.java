@@ -15,7 +15,7 @@ public abstract class PieceSimple extends Piece {
         super(owner, position);
     }
     public PieceSimple(Player owner, String position) {
-        super(owner, new Case(position));
+        super(owner, position);
     }
 
     protected ArrayList<Coup> computeLinesOfMoves(int[][] directions, int porteePiece) {

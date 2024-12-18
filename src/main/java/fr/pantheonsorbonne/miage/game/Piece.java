@@ -14,9 +14,8 @@ public abstract class Piece {
         owner.getEchiquier().setPieceToPosition(this, position);
     }
 
-    public Piece(Player owner, String position) throws WrongCaseFormatException {
-        this.owner = owner;
-        this.position = new Case(position);
+    public Piece(Player owner, String position) {
+        this(owner, new Case(position));
     }
 
     public Case getPosition() {return position;}
