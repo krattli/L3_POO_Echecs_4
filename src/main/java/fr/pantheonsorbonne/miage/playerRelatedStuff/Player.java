@@ -118,7 +118,7 @@ public abstract class Player{
         return false;
     }
 
-    public void kill() {
+    public void killPlayer() {
         this.isAlive = false;
         ArrayList<Piece> pieces = this.getAllPieces();
         for (Piece piece : pieces) {

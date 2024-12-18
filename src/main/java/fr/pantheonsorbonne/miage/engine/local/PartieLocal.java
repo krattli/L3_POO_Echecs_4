@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PartieLocal {
-    private static final int POINTS_SUICIDE = 10;
+
+    private static final int POINTS_PAT = 10;
     private static final int POINTS_ECHEC_ET_MAT = 12;
 
     private final Scanner scanner = new Scanner(System.in);
@@ -108,12 +109,12 @@ public class PartieLocal {
     }
 
     private void handlePat(Player player) {
-        player.addPoints(POINTS_SUICIDE);
-        player.kill();
+        player.addPoints(POINTS_PAT);
+        player.killPlayer();
     }
 
     private void handleEchecEtMat(Player winner, Player loser) {
-        loser.kill();
+        loser.killPlayer();
         winner.addPoints(POINTS_ECHEC_ET_MAT);
         plateau.computeMenaces();
     }
@@ -126,7 +127,7 @@ public class PartieLocal {
 
     public void addPointsForCoup(Coup coup) {
         if (coup == null) {
-            Arrays.stream(players).forEach(p -> p.addPoints(POINTS_SUICIDE));
+            Arrays.stream(players).forEach(p -> p.addPoints(POINTS_PAT));
         } else if (coup instanceof Prise) {
             Prise prise = (Prise) coup;
             prise.getPiece().getOwner().addPoints(prise.getPiecePrise().getValuePiece());

@@ -116,7 +116,7 @@ public class Echiquier {
 
     private void handlePrise(Prise coup) {
         if (coup.getPiecePrise() instanceof Roi) {
-            coup.getPiece().getOwner().kill();
+            coup.getPiece().getOwner().killPlayer();
         }
         getPieceAt(coup.getArrivee()).kill();
         setPieceToPosition(coup.getPiece(), coup.getArrivee());
