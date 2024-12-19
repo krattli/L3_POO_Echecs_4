@@ -18,18 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CoupTest {
 
-    private static final int START_INDEX_POSITION_PIECE_NORMAL = 0;
-    private static final int END_INDEX_POSITION_PIECE_NORMAL = 1;
-
-    private static final int START_INDEX_CASE_COUP_NORMAL = 1;
-    private static final int END_INDEX_CASE_COUP_NORMAL = 3;
-
-    private static final int START_INDEX_PIECE_TYPE_SUPER = 1;
-    private static final int START_INDEX_CASE_SUPER_DEP = 3;
-    private static final int END_INDEX_CASE_SUPER_DEP = 2;
-
-    private static final int MINIMUM_SUPER_STRING_LENGTH = 6;
-
     static PlayerBot j1 = new PlayerBot("Joueur1");
     static PlayerBot j2 = new PlayerBot("Joueur2");
     static PlayerBot j3 = new PlayerBot("Joueur3");
@@ -89,6 +77,8 @@ class CoupTest {
             for (Coup c : list) {
                 String s = c.toString();
                 Coup test = Coup.stringToCoup(c.getPiece().getOwner(),s);
+                assert (c.toString().equals(test.toString()));
+                System.out.println(test +"   "+ s);
             }
         }
     }

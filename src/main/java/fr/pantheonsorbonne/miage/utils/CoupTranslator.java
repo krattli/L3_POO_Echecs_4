@@ -6,10 +6,14 @@ import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
+import java.util.regex.*;
 import fr.pantheonsorbonne.miage.game.typeCoup.*;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 public class CoupTranslator {
+
+    private static final String REGULAR_EXPRESSION_FOR_COUP = "([A-Z])([A-Z]\\d+)([x\\-])([A-Z]\\d+)([A-Z]?)";
+    private static final Pattern PATTERNS = Pattern.compile(REGULAR_EXPRESSION_FOR_COUP);
 
     private static final int START_INDEX_POSITION_PIECE_NORMAL = 0;
     private static final int END_INDEX_POSITION_PIECE_NORMAL = 1;
@@ -25,32 +29,55 @@ public class CoupTranslator {
 
 
     public static Coup stringToCoup(Player joueur, String input) throws WrongCaseFormatException, WrongCoupFormatException {
+        Matcher matcher = PATTERNS.matcher(input);
         if (input.startsWith("S")) {
             return handleSuperDeplacement(joueur, input);
+        }
+        else if (input.contains("O")) {
+            return handleRoque(joueur, input);
         } else {
-            return handleOtherTypesOfCoups(joueur, input);
+            return handleOtherTypesOfCoups(joueur, matcher);
         }
     }
 
-    private static Coup handleOtherTypesOfCoups(Player joueur, String input) throws WrongCaseFormatException, WrongCoupFormatException {
-        if (input.contains("O")) {
-            return handleRoque(joueur, input);
+    private static Coup handleOtherTypesOfCoups(Player joueur, Matcher input) throws WrongCaseFormatException, WrongCoupFormatException {
+        if (input.matches()) {
+            String pieceStr = input.group(1);
+            String caseDepartStr = input.group(2);
+            String typeCoupStr = input.group(3);
+            String caseArriveeStr = input.group(4);
+            String promotionStr = input.group(5);
+
+            Case caseDepart = parseCase(caseDepartStr);
+            Case caseArrivee = parseCase(caseArriveeStr);
+            Piece piece = validatePieceAtCase(joueur, caseDepart, pieceStr);
+
+            if (promotionStr.equals("D")) {
+                if(((Pion) piece).isPromoted()) {
+                    return new Promotion(piece, caseArrivee);
+                }
+                throw new WrongCoupFormatException("Le Pion à la position "+piece.getPosition().toString() +
+                        " n'a pas apparement le droit d'effectuer une promotion \n " +
+                        "Liste des coups disponibles du joueur de couleur " +joueur.getColor() +" : \n "
+                        + joueur.getAllPossibleMoves() + "\n" +
+                        "String Coup fournis : " + input);
+            }
+            else if (typeCoupStr.equals("-")) {
+                return new Deplacement(piece,caseArrivee);
+            }
+            else if (typeCoupStr.equals("x")) {
+                Piece piecePrise = validatePieceAtCase(joueur, caseArrivee, pieceStr, false, false);
+                if (piecePrise.getOwner() == joueur) {
+                    throw new WrongCoupFormatException("La pièce prise appartiens au joueur qui joue");
+                }
+                return new Prise(piece,caseArrivee);
+            }
+            else if (typeCoupStr.equals("o")) {
+                // o = fusion, on a pas encore implémenté
+                return handleFusion(joueur, input);
+            }
         }
-        else if (input.contains("-")) {
-            return handleDeplacement(joueur, input);
-        }
-        else if (input.contains("x")) {
-            return handlePrise(joueur, input);
-        }
-        else if (input.endsWith("D")) {
-            return handlePromotion(joueur, input);
-        }
-        else if (input.contains("o")) {
-            return handleFusion(joueur, input);
-        }
-        throw new WrongCoupFormatException("Pas de coup trouvé pour le coup : " + input + "\n" +
-                "Le joueur " + joueur.getColor() + " a comme coups : \n" +
-                joueur.getAllPossibleMoves());
+        return null;
     }
 
     private static Roque handleRoque(Player joueur, String input) throws  WrongCoupFormatException {
@@ -63,39 +90,11 @@ public class CoupTranslator {
                 "Coups disponibles pour ce joueur: " + joueur.getAllPossibleMoves());
     }
 
-    private static Fusion handleFusion(Player joueur, String input) throws WrongCaseFormatException, WrongCoupFormatException {
+    private static Fusion handleFusion(Player joueur, Matcher input) throws WrongCaseFormatException, WrongCoupFormatException {
         return null;
     }
 
-    private static Promotion handlePromotion(Player joueur, String input) throws WrongCaseFormatException, WrongCoupFormatException {
-        Case startCase = parseCase(input, START_INDEX_CASE_COUP_NORMAL, END_INDEX_CASE_COUP_NORMAL);
-        Case endCase = parseCase(input, input.length() - 3, input.length()-1);
-        Pion pion = (Pion) validatePieceAtCase(joueur, startCase, input.substring(START_INDEX_POSITION_PIECE_NORMAL, END_INDEX_POSITION_PIECE_NORMAL));
-        if(pion.isPromoted()) {
-            return new Promotion(pion, endCase);
-        }
-        throw new WrongCoupFormatException("Le Pion à la position "+pion.getPosition().toString() +
-                " n'a pas apparement le droit d'effectuer une promotion \n " +
-                "Liste des coups disponibles du joueur de couleur " +joueur.getColor() +" : \n "
-                + joueur.getAllPossibleMoves() + "\n" +
-                "String Coup fournis : " + input);
-    }
-
-    private static Prise handlePrise(Player joueur, String input) throws WrongCaseFormatException, WrongCoupFormatException {
-        Case startCase = parseCase(input, START_INDEX_CASE_COUP_NORMAL, END_INDEX_CASE_COUP_NORMAL);
-        Piece piece = validatePieceAtCase(joueur, startCase, input.substring(START_INDEX_POSITION_PIECE_NORMAL, END_INDEX_POSITION_PIECE_NORMAL));
-        Piece piecePrise = validatePieceAtCase(joueur, piece.getPosition(), input.substring(START_INDEX_PIECE_TYPE_SUPER, START_INDEX_CASE_SUPER_DEP));
-        return null;
-    }
-
-    public static Deplacement handleDeplacement(Player joueur, String input) throws WrongCaseFormatException, WrongCoupFormatException {
-        Case startCase = parseCase(input, START_INDEX_CASE_COUP_NORMAL, END_INDEX_CASE_COUP_NORMAL);
-        Case endCase = parseCase(input, input.length() - 2, input.length());
-        Piece piece = validatePieceAtCase(joueur, startCase, input.substring(START_INDEX_POSITION_PIECE_NORMAL, END_INDEX_POSITION_PIECE_NORMAL));
-        return new Deplacement(piece, endCase);
-    }
-
-
+    //Pas du touuut au point
     private static SuperDeplacement handleSuperDeplacement(Player player, String input) throws WrongCaseFormatException, WrongCoupFormatException {
         Case startCase = parseCase(input, START_INDEX_CASE_COUP_NORMAL, START_INDEX_CASE_COUP_NORMAL + 2);
         Case endCase = parseCase(input, input.length() - END_INDEX_CASE_SUPER_DEP, input.length());
@@ -113,15 +112,26 @@ public class CoupTranslator {
         }
     }
 
-    private static Piece validatePieceAtCase(Player player, Case startCase, String expectedPieceType, boolean ennablePlayerValidation) throws WrongCoupFormatException {
+    private static Case parseCase(String input) throws WrongCaseFormatException {
+        try {
+            return new Case(input);
+        }
+        catch (Exception e) {
+            throw new WrongCaseFormatException("Invalid case format: " + input);
+        }
+    }
+
+    private static Piece validatePieceAtCase(Player player, Case startCase, String expectedPieceType, boolean ennablePlayerValidation, boolean enablePieceTypeVerification) throws WrongCoupFormatException {
         Piece piece = player.getEchiquier().getPieceAt(startCase);
         if (piece == null) {
             throw new WrongCoupFormatException("No piece found at: " + startCase);
         }
 
-        String pieceType = piece.getClass().getSimpleName().substring(0, 1);
-        if (!pieceType.equals(expectedPieceType)) {
-            throw new WrongCoupFormatException("Mismatched piece type. Expected: " + expectedPieceType + ", but found: " + pieceType);
+        if (enablePieceTypeVerification) {
+            String pieceType = piece.getClass().getSimpleName().substring(0, 1);
+            if (!pieceType.equals(expectedPieceType)) {
+                throw new WrongCoupFormatException("Mismatched piece type. Expected: " + expectedPieceType + ", but found: " + pieceType);
+            }
         }
 
         if (ennablePlayerValidation) {
@@ -137,7 +147,7 @@ public class CoupTranslator {
     }
 
     private static Piece validatePieceAtCase(Player player, Case startCase, String expectedPieceType) throws WrongCoupFormatException {
-        return validatePieceAtCase( player,  startCase, expectedPieceType, true);
+        return validatePieceAtCase( player,  startCase, expectedPieceType, true, true);
     }
 
     private static SuperDeplacement createSuperDeplacement(String input, Piece piece, Case endCase) throws WrongCoupFormatException {
