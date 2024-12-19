@@ -8,6 +8,7 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
+import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 
 public abstract class Player{
     private final String nom;
@@ -88,6 +89,10 @@ public abstract class Player{
             coups.addAll(piece.getAllPossibleMoves());
         }
         return coups;
+    }
+
+    public Roque[] getRoques() {
+        return Roque.getRoques(this);
     }
 
     public ArrayList<Piece> getAllPieces(){
