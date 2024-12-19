@@ -45,23 +45,23 @@ public class Roque extends Coup {
         return isGrandRoque;
     }
 
-    public static ArrayList<Roque> getRoques(Player player) {
-        ArrayList<Roque> roques = new ArrayList<>();
+    public static Roque[] getRoques(Player player) {
+        Roque[] roques = new Roque[2];
         Roi roiARoquer = player.getHisKing();
 
         if (roiARoquer != null && roiARoquer.hasntMooved()) {
-            addRoqueIfValid(roques, roiARoquer, false, CASES_TO_CHECK_PETIT_ROQUE);
-            addRoqueIfValid(roques, roiARoquer, true, CASES_TO_CHECK_GRAND_ROQUE);
+            roques[0] = addRoqueIfValid(roiARoquer, false, CASES_TO_CHECK_PETIT_ROQUE);
+            roques[1] = addRoqueIfValid(roiARoquer, true, CASES_TO_CHECK_GRAND_ROQUE);
         }
-
         return roques;
     }
 
-    private static void addRoqueIfValid(ArrayList<Roque> roques, Roi roiARoquer, boolean isGrandRoque, String[] casesToCheck) {
+    private static Roque addRoqueIfValid(Roi roiARoquer, boolean isGrandRoque, String[] casesToCheck) {
         Tour tour = getTourARoquer(roiARoquer, isGrandRoque);
         if (tour != null && tour.hasntMooved() && areIntermediateCasesSafe(casesToCheck, roiARoquer)) {
-            roques.add(new Roque(roiARoquer, isGrandRoque));
+            return new Roque(roiARoquer, isGrandRoque);
         }
+        return null;
     }
 
     private static boolean areIntermediateCasesSafe(String[] cases, Piece roiARoquer) {
