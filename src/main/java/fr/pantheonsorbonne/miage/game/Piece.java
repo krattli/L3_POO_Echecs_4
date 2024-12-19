@@ -1,7 +1,6 @@
 package fr.pantheonsorbonne.miage.game;
-import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
 import java.util.ArrayList;
 
 public abstract class Piece {

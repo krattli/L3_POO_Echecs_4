@@ -4,17 +4,14 @@ import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.exception.WrongCoupFormatException;
 import fr.pantheonsorbonne.miage.game.pieces.simple.*;
 import fr.pantheonsorbonne.miage.game.pieces.super_pieces.SuperPion;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
-import fr.pantheonsorbonne.miage.utils.CoupTranslator;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CoupTest {
 

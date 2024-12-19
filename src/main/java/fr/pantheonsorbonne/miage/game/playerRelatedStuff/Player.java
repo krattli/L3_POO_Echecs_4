@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.playerRelatedStuff;
+package fr.pantheonsorbonne.miage.game.playerRelatedStuff;
 
 import java.util.ArrayList;
 import java.util.Random;

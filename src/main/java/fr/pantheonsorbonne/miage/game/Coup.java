@@ -2,9 +2,7 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.exception.WrongCoupFormatException;
-import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
-import fr.pantheonsorbonne.miage.game.typeCoup.*;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.utils.CoupTranslator;
 
 public abstract class Coup {

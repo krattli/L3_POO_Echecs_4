@@ -1,7 +1,7 @@
 package fr.pantheonsorbonne.miage.game.pieces;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Piece;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
 import java.util.ArrayList;
 
 public abstract class SuperPiece extends Piece {

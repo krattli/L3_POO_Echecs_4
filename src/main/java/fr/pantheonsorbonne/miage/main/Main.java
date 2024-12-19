@@ -1,9 +1,9 @@
 package fr.pantheonsorbonne.miage.main;
 
 import fr.pantheonsorbonne.miage.engine.local.PartieLocal;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerSmarter;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.PlayerBot;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.PlayerSmarter;
 
 public class Main {
     public static void main(String[] args) {

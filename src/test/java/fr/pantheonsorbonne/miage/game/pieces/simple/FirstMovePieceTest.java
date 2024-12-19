@@ -2,13 +2,11 @@ package fr.pantheonsorbonne.miage.game.pieces.simple;
 
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FirstMovePieceTest {
     static PlayerBot j1 = new PlayerBot("Joueur1");

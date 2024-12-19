@@ -3,7 +3,6 @@ package fr.pantheonsorbonne.miage.game.typeCoup;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Piece;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 
 public class Promotion extends Coup {
 
