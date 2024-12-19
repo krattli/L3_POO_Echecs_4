@@ -36,7 +36,7 @@ public class Roi extends FirstMovePiece {
         ArrayList<Coup> coupsReels = new ArrayList<>();
         parcourirLesCoups:
         for (Coup coup : coupsPossiblesWithoutCheckChecking) {
-            int[] coord = coup.getArrivee().getCoordInt();
+            int[] coord = coup.getCaseArrivee().getCoordInt();
             for (int i = 0 ; i < casesMenacees.length ; i++) {
                 if ( i != thisPlayerOrdinal){
                     if (casesMenacees[i][coord[1]][coord[0]]) {
@@ -51,7 +51,7 @@ public class Roi extends FirstMovePiece {
 
         for (int i = 0; i < coupsReels.size(); i++) {
             for (Coup coupIll : illegalCoups) {
-                if (coupsReels.get(i).getArrivee().equals(coupIll.getArrivee())) {
+                if (coupsReels.get(i).getCaseArrivee().equals(coupIll.getCaseArrivee())) {
                     coupsReels.remove(i);
                     i--;
                     break;
@@ -59,7 +59,11 @@ public class Roi extends FirstMovePiece {
             }
         }
 
-        coupsReels.addAll(Roque.getRoques(this.getOwner()));
+        for (Roque roque : this.getOwner().getRoques()) {
+            if (roque != null) {
+                coupsReels.add(roque);
+            }
+        }
 
         return coupsReels;
     }
