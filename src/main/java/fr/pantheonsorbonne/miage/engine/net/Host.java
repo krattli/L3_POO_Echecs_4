@@ -77,6 +77,7 @@ public class Host {
         int totalPiecesOnBoard = Arrays.stream(plateau.getPlayers()).mapToInt(p -> p.getAllPieces().size()).sum();
         return alivePlayersCount <= 1 || alivePlayersCount == totalPiecesOnBoard;
     }
+
     public static String getFirstCommand(Game game) {
         return String.join(":",game.getPlayers());
     }

@@ -20,7 +20,6 @@ public class CoupTranslator {
     private static final int END_INDEX_CASE_SUPER_DEP = 2;
     private static final int MINIMUM_SUPER_STRING_LENGTH = 6;
 
-
     public static Coup stringToCoup(Player joueur, String input) throws WrongCaseFormatException, WrongCoupFormatException {
         Matcher matcher = PATTERNS.matcher(input);
         if (input.startsWith("S")) {

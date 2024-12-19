@@ -16,7 +16,7 @@ public class Main {
         //PartieLocal game = new PartieLocal(new Player[] {j1,j2,j3,j4}, true);
         //game.play();
 
-        //getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
+        getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
     }
 
     public static void getStatsAbout(Player[] players, int nbSimulations) {

@@ -20,12 +20,12 @@ public class ComputeMenace {
         boolean[][][] menaces = new boolean[stats[1]][stats[0]][stats[0]];
         Player[] players = echiquier.getPlayers();
         for (int i = 0; i < players.length; i++) {
-            menaces[i] = allPlayerMenaces(players[i]);
+            menaces[i] = thisPlayerMenaces(players[i]);
          }
         return menaces;
     }
 
-    private static boolean[][] allPlayerMenaces(Player player) {
+    private static boolean[][] thisPlayerMenaces(Player player) {
         boolean[][] menaces = new boolean[stats[0]][stats[0]];
         ArrayList<Coup> coups = player.getAllPossibleMoves();
         ArrayList<Piece> pieces = player.getAllPieces();
