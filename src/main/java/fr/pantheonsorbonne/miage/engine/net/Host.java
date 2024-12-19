@@ -70,7 +70,6 @@ public class Host {
 
             tour++;
         }
-        System.out.println("la game se joue");
     }
 
     private static boolean handleFinPartie(Echiquier plateau) {

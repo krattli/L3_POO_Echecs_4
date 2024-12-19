@@ -125,8 +125,9 @@ public class PartieLocal {
         }
     }
 
-    public void addPointsForCoup(Coup coup) {
+    public static void addPointsForCoup(Coup coup) {
         if (coup == null) {
+            Player[] players = coup.getPiece().getOwner().getEchiquier().getPlayers();
             Arrays.stream(players).forEach(p -> p.addPoints(POINTS_PAT));
         } else if (coup instanceof Prise) {
             Prise prise = (Prise) coup;
