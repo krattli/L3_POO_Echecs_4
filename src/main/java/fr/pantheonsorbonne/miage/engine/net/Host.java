@@ -13,6 +13,8 @@ import fr.pantheonsorbonne.miage.game.playersAI.PlayerBot;
 import fr.pantheonsorbonne.miage.model.Game;
 import fr.pantheonsorbonne.miage.model.GameCommand;
 
+import java.util.Arrays;
+
 public class Host {
 
     private static final int PLAYER_COUNT = 4;
@@ -26,15 +28,13 @@ public class Host {
 
     private static final PlayerFacade playerFacade = Facade.getFacade();
     private static final HostFacade hostFacade = Facade.getFacade();
-    private static final Game game = hostFacade.createNewGame("tictactoe2");
+    private static final Game game = hostFacade.createNewGame("Echecs");
 
     public static void main(String[] args) throws WrongCoupFormatException, WrongCaseFormatException {
 
         hostFacade.waitReady();
 
         hostFacade.createNewPlayer("Host");
-
-        Game echecs = hostFacade.createNewGame("Echecs");
 
         System.out.println("facade host créée, game créée");
 
@@ -47,37 +47,39 @@ public class Host {
 
         Echiquier plateau = new Echiquier(new Player[]{simulatedPlayer1, simulatedPlayer2, simulatedPlayer3, simulatedPlayer4});
 
-        char myMark = 'X';
+        playerFacade.sendGameCommandToAll(game, new GameCommand(Command.YOU_ARE.name(), getFirstCommand(game)));
+
         int tour = 0;
         Coup coup =null;
 
         while (true) {
 
-            if (handleGameOver(playerFacade, game, plateau, myMark))
+            if (handleFinPartie(plateau))
                 break;
 
-            if (coup == null) {
-                playerFacade.sendGameCommandToAll(game, new GameCommand(Command.COUP.name(),"initGame"));
-            }
-            else {
-                playerFacade.sendGameCommandToAll(game, new GameCommand(Command.COUP.name(), tour +":"+coup));
-            }
-
-            // get the other player's move and retreive the board
             GameCommand command = playerFacade.receiveGameCommand(game);
+
             String[] commands = command.toString().split(":");
             String coupStr = commands[1];
             coup = Coup.stringToCoup(players[tour%4],coupStr);
 
             plateau.jouerCoup(coup);
+            plateau.computeMenaces();
+
+            playerFacade.sendGameCommandToAll(game, new GameCommand(Command.COUP.name(), tour +":"+coup));
+
+            tour++;
         }
         System.out.println("la game se joue");
     }
 
-    private static boolean handleGameOver(PlayerFacade playerFacade, Game game, Echiquier plateau, char myMark) {
-        return false;
+    private static boolean handleFinPartie(Echiquier plateau) {
+        long alivePlayersCount = Arrays.stream(plateau.getPlayers()).filter(Player::isAlive).count();
+        int totalPiecesOnBoard = Arrays.stream(plateau.getPlayers()).mapToInt(p -> p.getAllPieces().size()).sum();
+        return alivePlayersCount <= 1 || alivePlayersCount == totalPiecesOnBoard;
     }
-
-
+    public static String getFirstCommand(Game game) {
+        return String.join(":",game.getPlayers());
+    }
 
 }
