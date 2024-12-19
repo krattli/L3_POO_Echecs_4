@@ -2,16 +2,33 @@ package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.exception.WrongCoupFormatException;
+import fr.pantheonsorbonne.miage.game.pieces.simple.*;
 import fr.pantheonsorbonne.miage.game.pieces.super_pieces.SuperPion;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
+import fr.pantheonsorbonne.miage.utils.CoupTranslator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CoupTest {
+
+    private static final int START_INDEX_POSITION_PIECE_NORMAL = 0;
+    private static final int END_INDEX_POSITION_PIECE_NORMAL = 1;
+
+    private static final int START_INDEX_CASE_COUP_NORMAL = 1;
+    private static final int END_INDEX_CASE_COUP_NORMAL = 3;
+
+    private static final int START_INDEX_PIECE_TYPE_SUPER = 1;
+    private static final int START_INDEX_CASE_SUPER_DEP = 3;
+    private static final int END_INDEX_CASE_SUPER_DEP = 2;
+
+    private static final int MINIMUM_SUPER_STRING_LENGTH = 6;
 
     static PlayerBot j1 = new PlayerBot("Joueur1");
     static PlayerBot j2 = new PlayerBot("Joueur2");
@@ -33,6 +50,46 @@ class CoupTest {
     void stringToCoup() throws WrongCaseFormatException, WrongCoupFormatException {
         new SuperPion(j1,"D1");
         String superDep = "SPD1xxxD2";
-        Coup.stringToCoup(echiquier, superDep);
+        Coup.stringToCoup(j1, superDep);
+    }
+
+    @Test
+    void grandTestCoup() throws WrongCaseFormatException, WrongCoupFormatException {
+        Random rand = new Random();
+        int nbSimulations = rand.nextInt(100);
+        int nbPieces = 10;
+        int boundPlateau = 14;
+        for (int i = 0; i < nbSimulations; i++) {
+            ArrayList<Coup> list = new ArrayList<>();
+            for (int j = 0; j < nbPieces; j++) {
+                Case c = new Case(rand.nextInt(boundPlateau), rand.nextInt(boundPlateau));
+                int pieceType = rand.nextInt(5);
+                int playerOrdinal = rand.nextInt(4);
+                switch (pieceType) {
+                    case 0:
+                        Pion p = new Pion(echiquier.getPlayers()[playerOrdinal],c);
+                        break;
+                    case 1:
+                        Dame d = new Dame(echiquier.getPlayers()[playerOrdinal],c);
+                        break;
+                    case 2:
+                        Tour t = new Tour(echiquier.getPlayers()[playerOrdinal],c);
+                        break;
+                    case 3:
+                        Fou f = new Fou(echiquier.getPlayers()[playerOrdinal],c);
+                        break;
+                    case 4:
+                        Cavalier cav = new Cavalier(echiquier.getPlayers()[playerOrdinal],c);
+                        break;
+                }
+            }
+            for (int j = 0; j < 4; j++) {
+                list.addAll(echiquier.getPlayers()[j].getAllPossibleMoves());
+            }
+            for (Coup c : list) {
+                String s = c.toString();
+                Coup test = Coup.stringToCoup(c.getPiece().getOwner(),s);
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.echiquierRelatedStuff;
+package fr.pantheonsorbonne.miage.utils;
 
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Echiquier;
@@ -9,8 +9,6 @@ import fr.pantheonsorbonne.miage.playerRelatedStuff.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 class EchiquierComputeMenaceTest {
 
