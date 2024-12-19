@@ -39,7 +39,8 @@ public class PartieLocal {
         this.showEachCoup = showEachCoup;
     }
 
-    public void initPlateau() {
+    public void initPartie() {
+        killPlayers();
         revivePlayers();
         plateau.initBoard();
         plateau.computeMenaces();
@@ -48,6 +49,12 @@ public class PartieLocal {
     private void revivePlayers () {
         for (Player p : players) {
             p.revive();
+        }
+    }
+
+    private void killPlayers () {
+        for (Player p : players) {
+            p.killPlayer();
         }
     }
 
@@ -66,12 +73,13 @@ public class PartieLocal {
     }
 
     public Player play() {
+        this.initPartie();
         boolean playing = true;
         while (playing) {
             Player currentPlayer = players[tour % players.length];
             if (currentPlayer.isAlive()) {
                 jouerTour(currentPlayer);
-            } if (tour > 100000) {
+            } if (tour > 500000) {
                 handleInfiniteLoop();
             }
             if (endConditionMet()) {

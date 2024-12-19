@@ -11,36 +11,34 @@ public class Main {
         PlayerBot j1 = new PlayerBot("Gary Kasparov");
         PlayerSmarter j2 = new PlayerSmarter("Hikaru Nakamura");
         PlayerBot j3 = new PlayerBot("Alireza Firouzja");
-        PlayerSmarter j4 = new PlayerSmarter("Magnus Carlsen");
+        PlayerBot j4 = new PlayerBot("Magnus Carlsen");
 
-        float[] stats = getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
-        for (float stat : stats) {
-            System.out.println(stat);
-        }
+        getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
     }
 
-    public static float[] getStatsAbout(Player[] players, int nbSimulations) {
+    public static void getStatsAbout(Player[] players, int nbSimulations) {
         float[] stats = new float[players.length];
         int[] countVictories = new int[players.length];
+
         for (int i = 0; i < nbSimulations; i++) {
             if (i%10 == 0) {
                 System.out.println("Simulation " + i);
             }
             PartieLocal game = new PartieLocal(players);
-            game.initPlateau();
+            game.initPartie();
             Player winner = game.play();
-            int winnerIndex = -1;
             for (int j = 0; j < players.length; j++) {
                 if (players[j].equals(winner)) {
-                    winnerIndex = j;
+                    countVictories[j]++;
                 }
             }
-            countVictories[winnerIndex]++;
         }
         for (int i = 0; i < players.length; i++) {
             stats[i] = (float) countVictories[i] / nbSimulations;
         }
-        return stats;
+        for (int i = 0; i < players.length; i++) {
+            System.out.println("Joueur de type " + players[i].getClass().toString().split("\\.")[5] +" gagne dans "+ stats[i]*100 +"% des cas");
+        }
     }
 }
 
