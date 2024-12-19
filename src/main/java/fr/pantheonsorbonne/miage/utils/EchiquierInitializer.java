@@ -5,7 +5,7 @@ import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.pieces.simple.*;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
 
 public class EchiquierInitializer {
 

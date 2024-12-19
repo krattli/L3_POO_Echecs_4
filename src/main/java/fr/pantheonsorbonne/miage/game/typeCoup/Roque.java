@@ -6,7 +6,7 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Tour;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
 
 public class Roque extends Coup {
     private static final String[] CASES_TO_CHECK_PETIT_ROQUE = {"J1", "I1"};

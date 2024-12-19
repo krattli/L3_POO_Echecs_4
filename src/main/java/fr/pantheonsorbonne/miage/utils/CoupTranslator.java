@@ -8,7 +8,7 @@ import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
 import java.util.regex.*;
 import fr.pantheonsorbonne.miage.game.typeCoup.*;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
 
 public class CoupTranslator {
 

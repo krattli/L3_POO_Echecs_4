@@ -1,6 +1,6 @@
 package fr.pantheonsorbonne.miage.game;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
 import java.util.ArrayList;
 
 public abstract class Piece {

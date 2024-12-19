@@ -32,6 +32,11 @@ public class Host {
 
         Host host = new Host(hostFacade, echecs.getPlayers(), echecs);
 
+        host.playGame();
+    }
+
+    private void playGame() {
+
     }
 
 }

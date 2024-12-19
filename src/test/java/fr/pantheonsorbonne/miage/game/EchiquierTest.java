@@ -1,8 +1,8 @@
 package fr.pantheonsorbonne.miage.game;
 
 import fr.pantheonsorbonne.miage.game.pieces.simple.Pion;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.PlayerBot;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.PlayerBot;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -3,8 +3,8 @@ package fr.pantheonsorbonne.miage.engine.net;
 import fr.pantheonsorbonne.miage.Facade;
 import fr.pantheonsorbonne.miage.model.Game;
 import fr.pantheonsorbonne.miage.model.GameCommand;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.PlayerBot;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.PlayerBot;
 import fr.pantheonsorbonne.miage.PlayerFacade;
 
 import java.util.Random;

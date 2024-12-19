@@ -5,8 +5,8 @@ import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Dame;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.PlayerBot;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.PlayerBot;
 
 import java.util.ArrayList;
 import java.util.Arrays;

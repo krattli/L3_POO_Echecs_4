@@ -1,7 +1,7 @@
 package fr.pantheonsorbonne.miage.game.pieces.super_pieces;
 
 import fr.pantheonsorbonne.miage.game.pieces.SuperPiece;
-import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playersAI.Player;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.game.playerRelatedStuff;
+package fr.pantheonsorbonne.miage.game.playersAI;
 
 import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.pieces.simple.Roi;
