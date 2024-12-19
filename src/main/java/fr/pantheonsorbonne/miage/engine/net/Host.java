@@ -10,11 +10,8 @@ import fr.pantheonsorbonne.miage.game.Coup;
 import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.playersAI.Player;
 import fr.pantheonsorbonne.miage.game.playersAI.PlayerBot;
-import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.model.Game;
 import fr.pantheonsorbonne.miage.model.GameCommand;
-
-import java.util.Set;
 
 public class Host {
 
@@ -27,8 +24,8 @@ public class Host {
 
     private static final Player[] players = new Player[]{simulatedPlayer1, simulatedPlayer2, simulatedPlayer3, simulatedPlayer4};
 
-    private static final PlayerFacade playerFacade = (PlayerFacade) Facade.getFacade();
-    private static final HostFacade hostFacade = (HostFacade) Facade.getFacade();
+    private static final PlayerFacade playerFacade = Facade.getFacade();
+    private static final HostFacade hostFacade = Facade.getFacade();
     private static final Game game = hostFacade.createNewGame("tictactoe2");
 
     public static void main(String[] args) throws WrongCoupFormatException, WrongCaseFormatException {
@@ -72,7 +69,7 @@ public class Host {
             String coupStr = commands[1];
             coup = Coup.stringToCoup(players[tour%4],coupStr);
 
-
+            plateau.jouerCoup(coup);
         }
         System.out.println("la game se joue");
     }
