@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.echiquierRelatedStuff;
+package fr.pantheonsorbonne.miage.utils;
 
 import fr.pantheonsorbonne.miage.enums.Colonne;
 import fr.pantheonsorbonne.miage.exception.WrongCaseFormatException;

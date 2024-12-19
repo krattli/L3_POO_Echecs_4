@@ -10,9 +10,9 @@ import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
 import fr.pantheonsorbonne.miage.game.typeCoup.Promotion;
 import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
 import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
-import fr.pantheonsorbonne.miage.echiquierRelatedStuff.EchiquierInitializer;
-import fr.pantheonsorbonne.miage.echiquierRelatedStuff.ComputeMenace;
-import fr.pantheonsorbonne.miage.echiquierRelatedStuff.PrintEchiquier;
+import fr.pantheonsorbonne.miage.utils.EchiquierInitializer;
+import fr.pantheonsorbonne.miage.utils.ComputeMenace;
+import fr.pantheonsorbonne.miage.utils.PrintEchiquier;
 
 public class Echiquier {
     private static final int TAILLE = 14;
