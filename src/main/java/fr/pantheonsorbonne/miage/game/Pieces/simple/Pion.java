@@ -6,7 +6,7 @@ import fr.pantheonsorbonne.miage.game.pieces.PieceSimple;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
 import fr.pantheonsorbonne.miage.game.typeCoup.Promotion;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 

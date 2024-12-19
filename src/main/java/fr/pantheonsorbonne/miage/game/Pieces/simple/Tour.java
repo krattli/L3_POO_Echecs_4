@@ -1,6 +1,6 @@
 package fr.pantheonsorbonne.miage.game.pieces.simple;
 
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 

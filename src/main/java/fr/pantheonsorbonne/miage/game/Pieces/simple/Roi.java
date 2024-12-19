@@ -1,11 +1,10 @@
 package fr.pantheonsorbonne.miage.game.pieces.simple;
 
-import fr.pantheonsorbonne.miage.game.Echiquier;
 import fr.pantheonsorbonne.miage.game.Piece;
 import fr.pantheonsorbonne.miage.game.typeCoup.Deplacement;
 import fr.pantheonsorbonne.miage.game.typeCoup.Prise;
 import fr.pantheonsorbonne.miage.game.typeCoup.Roque;
-import fr.pantheonsorbonne.miage.playerRelatedStuff.Player;
+import fr.pantheonsorbonne.miage.game.playerRelatedStuff.Player;
 import fr.pantheonsorbonne.miage.game.Case;
 import fr.pantheonsorbonne.miage.game.Coup;
 import java.util.ArrayList;
