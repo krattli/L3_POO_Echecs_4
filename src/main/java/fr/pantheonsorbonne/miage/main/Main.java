@@ -13,7 +13,10 @@ public class Main {
         PlayerBot j3 = new PlayerBot("Alireza Firouzja");
         PlayerBot j4 = new PlayerBot("Magnus Carlsen");
 
-        getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
+        //PartieLocal game = new PartieLocal(new Player[] {j1,j2,j3,j4}, true);
+        //game.play();
+
+        //getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
     }
 
     public static void getStatsAbout(Player[] players, int nbSimulations) {
@@ -25,7 +28,6 @@ public class Main {
                 System.out.println("Simulation " + i);
             }
             PartieLocal game = new PartieLocal(players);
-            game.initPartie();
             Player winner = game.play();
             for (int j = 0; j < players.length; j++) {
                 if (players[j].equals(winner)) {

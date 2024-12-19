@@ -47,7 +47,7 @@ public class PrintEchiquier {
     public static void printMenaces(Echiquier plateau, Player excludedPlayer) {
         Player[] players = plateau.getPlayers();
         boolean[][][] allMenaces = plateau.getCasesMenacees();
-        int boardSize = allMenaces[0].length; // Taille du plateau
+        int boardSize = allMenaces[0].length;
 
         for (int i = 0; i < boardSize; i++) {
             for (Player currentPlayer : players) {
@@ -66,10 +66,8 @@ public class PrintEchiquier {
                         System.out.print(backgroundColor + "   " + RESET);
                     }
                 }
-                // Ajoute un espace entre chaque plateau
                 System.out.print("    ");
             }
-            // Nouvelle ligne après avoir affiché tous les plateaux de cette rangée
             System.out.println();
         }
     }
