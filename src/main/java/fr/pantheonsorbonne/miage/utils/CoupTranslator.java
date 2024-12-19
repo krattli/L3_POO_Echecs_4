@@ -15,16 +15,9 @@ public class CoupTranslator {
     private static final String REGULAR_EXPRESSION_FOR_COUP = "([A-Z])([A-Z]\\d+)([x\\-])([A-Z]\\d+)([A-Z]?)";
     private static final Pattern PATTERNS = Pattern.compile(REGULAR_EXPRESSION_FOR_COUP);
 
-    private static final int START_INDEX_POSITION_PIECE_NORMAL = 0;
-    private static final int END_INDEX_POSITION_PIECE_NORMAL = 1;
-
+    //Temporaire, attends d'être supp
     private static final int START_INDEX_CASE_COUP_NORMAL = 1;
-    private static final int END_INDEX_CASE_COUP_NORMAL = 3;
-
-    private static final int START_INDEX_PIECE_TYPE_SUPER = 1;
-    private static final int START_INDEX_CASE_SUPER_DEP = 3;
     private static final int END_INDEX_CASE_SUPER_DEP = 2;
-
     private static final int MINIMUM_SUPER_STRING_LENGTH = 6;
 
 
