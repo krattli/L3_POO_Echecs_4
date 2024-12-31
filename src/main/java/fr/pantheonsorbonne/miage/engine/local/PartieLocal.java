@@ -20,7 +20,6 @@ public class PartieLocal {
 
     private final Scanner scanner = new Scanner(System.in);
     private final Player[] players;
-    private final int[] scoreBoard;
     private final Echiquier plateau;
     private final List<Coup> historiqueDesCoups;
     private int tour;
@@ -30,7 +29,6 @@ public class PartieLocal {
         this.players = joueurs;
         this.plateau = new Echiquier(players);
         this.tour = 0;
-        this.scoreBoard = new int[players.length];
         this.historiqueDesCoups = new ArrayList<>();
     }
 
@@ -137,8 +135,7 @@ public class PartieLocal {
         if (coup == null) {
             Player[] players = coup.getPiece().getOwner().getEchiquier().getPlayers();
             Arrays.stream(players).forEach(p -> p.addPoints(POINTS_PAT));
-        } else if (coup instanceof Prise) {
-            Prise prise = (Prise) coup;
+        } else if (coup instanceof Prise prise) {
             prise.getPiece().getOwner().addPoints(prise.getPiecePrise().getValuePiece());
         }
     }

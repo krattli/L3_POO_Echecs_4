@@ -52,21 +52,18 @@ public class Host {
         int tour = 0;
         Coup coup =null;
 
-        while (true) {
-
-            if (handleFinPartie(plateau))
-                break;
+        while (!handleFinPartie(plateau)) {
 
             GameCommand command = playerFacade.receiveGameCommand(game);
 
             String[] commands = command.toString().split(":");
             String coupStr = commands[1];
-            coup = Coup.stringToCoup(players[tour%4],coupStr);
+            coup = Coup.stringToCoup(players[tour % 4], coupStr);
 
             plateau.jouerCoup(coup);
             plateau.computeMenaces();
 
-            playerFacade.sendGameCommandToAll(game, new GameCommand(Command.COUP.name(), tour +":"+coup));
+            playerFacade.sendGameCommandToAll(game, new GameCommand(Command.COUP.name(), tour + ":" + coup));
 
             tour++;
         }
