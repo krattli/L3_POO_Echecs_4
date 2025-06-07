@@ -5,6 +5,8 @@ import fr.pantheonsorbonne.miage.game.playersAI.Player;
 import fr.pantheonsorbonne.miage.game.playersAI.PlayerBot;
 import fr.pantheonsorbonne.miage.game.playersAI.PlayerSmarter;
 
+import java.util.stream.LongStream;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -15,6 +17,10 @@ public class Main {
 
         //PartieLocal game = new PartieLocal(new Player[] {j1,j2,j3,j4}, true);
         //game.play();
+
+        long resultat = LongStream.range(0, 50).sum();
+
+        String str = "{" + resultat + "}";
 
         getStatsAbout(new Player[] {j1,j2,j3,j4}, 100);
     }
